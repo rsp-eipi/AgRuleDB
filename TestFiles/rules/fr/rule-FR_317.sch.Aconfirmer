@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://purl.oclc.org/dsdl/schematron"
+		xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+        xmlns:doc="http://doc"
+        queryBinding="xslt2">
+   <ns uri="urn:gs1:gdsn:catalogue_item_confirmation:xsd:3"
+       prefix="catalogue_item_confirmation"/>
+   <ns uri="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader"
+       prefix="sh"/>
+   <ns uri="http://data" prefix="data"/> 
+   <let name="gpc" value="doc('../data/data.xml')//data:gpc"/>    
+   <pattern>
+      <title>Rule FR_317</title>
+       <doc:description>If one iteration of targetMarketCountryCode equals '250' (France) and gpcCategoryCode belongs to ('10000614', '10000021', '10000019', '10000020', '10000258', '10000257', '10000256', '10000150', '10000149', '10000148', '10000146', '10000145', '10000631', '10000630', '10000629', '10000628', '10000627', '10000626', '10000283', '10000282', '10000281', '10000018', '10000016' or '10000017') then packagingMarkedLabelAccreditationCodeReference SHALL equal 'AQUACULTURE_STEWARDSHIP_COUNCIL' or localPackagingMarkedLabelAccreditationCodeReference SHALL equal 'NO_ASC'</doc:description>
+       <doc:attribute1>targetMarketCountryCode,gpcCategoryCode,isTradeItemAConsumerUnit</doc:attribute1>
+       <doc:attribute2>localPackagingMarkedLabelAccreditationCodeReference</doc:attribute2>
+       <rule context="tradeItem">
+          <assert test="if((targetMarket/targetMarketCountryCode = '250')
+         				 	and (isTradeItemAConsumerUnit = 'true')                                                                    									 					
+        					and (gdsnTradeItemClassification/gpcCategoryCode =  ('10000614', '10000021', '10000019', '10000020', '10000258', '10000257', '10000256', '10000150', 
+        					                                                     '10000149', '10000148', '10000146', '10000145', '10000631', '10000630', '10000629', '10000628', 
+        					                                                     '10000627', '10000626', '10000283', '10000282', '10000281', '10000018', '10000016' , '10000017'))) 	 
+                      		then ((exists(tradeItemInformation/extension/*:packagingMarkingModule/packagingMarking/localPackagingMarkedLabelAccreditationCodeReference)) 
+                      		and (every $node in (tradeItemInformation/extension/*:packagingMarkingModule/packagingMarking/localPackagingMarkedLabelAccreditationCodeReference)
+                      	  	satisfies  ( $node = ('AQUACULTURE_STEWARDSHIP_COUNCIL' , 'NO_ASC')) ))   				    					 
+          				  
+          					else true()">
+          	 
+          	 	
+		          	 	       <errorMessage>Pour le marché cible France, pour les produits appartenant aux briques GPC concernées, il est obligatoire de renseigner le label ASC ou NO_ASC.</errorMessage>
+				           
+					           <location>
+											<!-- Fichier SDBH -->
+											<messageId><xsl:value-of select="/*/sh:StandardBusinessDocumentHeader/sh:DocumentIdentification/sh:InstanceIdentifier"/></messageId>
+											<messageOwner><xsl:value-of select="/*/sh:StandardBusinessDocumentHeader/sh:Sender/sh:Identifier"/></messageOwner>
+																	
+											<transactionId><xsl:value-of select="ancestor::transaction/transactionIdentification/entityIdentification"/></transactionId>
+											<transactionOwner><xsl:value-of select="ancestor::transaction/transactionIdentification/contentOwner/gln"/></transactionOwner>
+											<commandId><xsl:value-of select="ancestor::documentCommand/documentCommandHeader/documentCommandIdentification/entityIdentification"/></commandId>
+											<commandOwner><xsl:value-of select="ancestor::documentCommand/documentCommandHeader/documentCommandIdentification/contentOwner/gln"/></commandOwner>
+											<!-- Fichier CIN -->
+											<documentId><xsl:value-of select="ancestor::*:catalogueItemNotification/catalogueItemNotificationIdentification/entityIdentification"/></documentId>
+											<documentOwner><xsl:value-of select="ancestor::*:catalogueItemNotification/catalogueItemNotificationIdentification/contentOwner/gln"/></documentOwner>
+											<!--  Le 1er tradeItem . 1 seul car les autres sont imbriqués -->
+											<gtinHigh><xsl:value-of select="ancestor::*:catalogueItemNotification/catalogueItem/tradeItem/gtin"/></gtinHigh>
+											<!-- Context = TradeItem -->
+											<gtin><xsl:value-of select="gtin"/></gtin>
+											<glnProvider><xsl:value-of select="informationProviderOfTradeItem/gln"/></glnProvider>
+											<targetMarket><xsl:value-of select="targetMarket/targetMarketCountryCode"/></targetMarket>	
+											
+						   </location> 
+	          	 	
+  	 	  </assert>
+      </rule>
+   </pattern>
+</schema>

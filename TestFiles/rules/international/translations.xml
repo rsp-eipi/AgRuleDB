@@ -1,0 +1,2810 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<codes>
+
+<!-- Le code erreur doit être sous la forme rNOMBRE -->
+<!-- Afin de faire apparaître le message d'erreur, la règle doit avoir une balise contenant un code pays -->
+
+	<r2>
+		<en>cancelDateTime must be equal to or larger than Today's Date.</en>
+	</r2>
+	<r30>
+		<en>targetMarketSubDivisionCode is not valid with the targetMarketCountryCode.</en>
+	</r30>
+	<r36>
+		<en>GLN of information provider/data source does not exist in global registry.</en>
+	</r36>
+	<r41>
+		<en>GTIN number cannot be changed or corrected</en>
+	</r41>
+	<r42>
+		<en>The dataSource must not change after the Registry Catalogue Item is in the Global Registry.</en>
+	</r42>
+	<r44>
+		<en>Cancel date cannot change; must be corrected</en>
+	</r44>
+	<r45>
+		<en>Discontinued date cannot change; must be corrected</en>
+	</r45>
+	<r47>
+		<en>GLN, GTIN, Target Market Key does not exist in the Global Registry</en>
+	</r47>
+	<r74>
+		<en>Cancel DateTime must be after Registration DateTime</en>
+	</r74>
+	<r76>
+		<en>Discontinued Date must be after Registration Date</en>
+	</r76>
+	<r82>
+		<en>Data Recipient GLN does not exist</en>
+	</r82>
+	<r86>
+		<en>Data Recipient needs to provide at least one key attribute (GTIN, Category, Target Market or Data Source GLN)</en>
+	</r86>
+	<r87>
+		<en>Category code and gtin cannot be an input together</en>
+	</r87>
+	<r96>
+		<en>A parent item with a tradeItemUnitDescriptorCode of BASE_UNIT_OR_EACH may not contain a child item.</en>
+	</r96>
+	<r98>
+		<en>If net weight is populated on both parent and child items, then net weight of the parent must be greater than or equal to the  sum of the net weight of all the children except when special item code = "DYNAMIC_ASSORTMENT". </en>
+	</r98>
+	<r104>
+		<en>attribute value does not comply with attribute value as defined in the current Business Requirements Document</en>
+	</r104>
+	<r105>
+		<en>Values do not comply with attribute data type as defined in the current standard.</en>
+	</r105>
+	<r106>
+		<en>You can pass a null value when using a 'CORRECT' or 'CHANGE_BY_REFRESH' command to reset discontinuedDatetime or cancelDateTime.</en>
+	</r106>
+	<r107>
+		<en>The discontinuedDateTime and the cancelDateTime were both set for the same item  or the CatalogueItem and TradeItem discontinuedDatesTime and cancelDateTime were not the same.</en>
+	</r107>
+	<r115>
+		<en>Only an originating Data Pool for that party record should be able to change it</en>
+	</r115>
+	<r200>
+		<en>If isTradeItemAnOrderableUnit = true, grossWeight must be populated with a value greater than zero</en>
+	</r200>
+	<r201>
+		<en>If grossWeight and netWeight are provided on the same record, grossWeight must be greater than or equal to netWeight</en>
+	</r201>
+	<r202>
+		<en>Sum of quantityofNextLowerLevelTradeItem must equal totalQuantityOfNextLowerLevelTradeItem except when special item code = 'dynamic_assortment'.  See the approved validations rule document for certification</en>
+	</r202>
+	<r203>
+		<en>Attribute dataRecipient is required to be populated in a Catalogue Item Notification message.</en>
+	</r203>
+	<r204>
+		<en>Gross weight (tradeItemWeight/grossWeight) must be used and have a value greater than zero when Shipping Unit Indicator (isTradeItemADespatchUnit ) equals ‘true’. </en>
+	</r204>
+	<r300>
+		<en>Value for contentOwner shall be the GLN of the dataSource and informationProvider and shall be consistent in all levels of the item hierarchy within the message</en>
+	</r300>
+	<r312>
+		<en>isTradeItemAnOrderableUnit must be true for at least one GTIN within a hierarchical configuration.</en>
+	</r312>
+	<r314>
+		<en>minimumTradeItemLifespanFromTimeOfProduction must be greater than or equal to minimumTradeItemLifespanFromTimeOfArrival.</en>
+	</r314>
+	<r325>
+		<en>Alcohol Percentage (percentageOfAlcoholByVolume) is not used. For Country Of Sale Code (targetMarketCountryCode), This attribute is required for all items on the lowest level of the hierarchy for Global Product Category Code.</en>
+	</r325>
+	<r338>
+		<en>If the target market equals '528' (Netherlands) and the class HazardousInformationDetail is populated , then the  dangerousGoodsRegulationCode in at least 1 of those iterations must equal 'ADR' or 'ZZZ'</en>
+	</r338>
+	<r339>
+		<en>If dangerousGoodsRegulationCode equals 'ADR' and dangerousGoodsPackingGroup is not empty then dangerousGoodsPackingGroup must equal  ('NA','I', 'II' or 'III').</en>
+	</r339>
+	<r341>
+		<en>Start dates cannot occur after their corresponding end dates if both dates are populated</en>
+	</r341>
+	<r345>
+		<en>   The ‘Authority’ value in Sender and Receiver  must be set to GS1.</en>
+	</r345>
+	<r346>
+		<en>The  Document Identification Standard value must be set to GS1.</en>
+	</r346>
+	<r348>
+		<en>The value of Type  must be set to a valid GS1 document name.</en>
+	</r348>
+	<r350>
+		<en>Business Scope must be present in the response or exception  message</en>
+	</r350>
+	<r351>
+		<en>The value of Business Scope type must be set to GDSN</en>
+	</r351>
+	<r352>
+		<en>Value of  CorrelationInformation RequestingDocumentInstanceIdentifier is not recognized, it must be original message instance identifier</en>
+	</r352>
+	<r354>
+		<en>The same Document ID may not be repeated within the same Command</en>
+	</r354>
+	<r355>
+		<en>The same  Command ID may not be repeated within the same Transaction</en>
+	</r355>
+	<r356>
+		<en>The same Transaction ID may not be repeated within the same Message</en>
+	</r356>
+	<r357>
+		<en>The same Document Identification InstanceIdentifier  may not be repeated on multiple messages</en>
+	</r357>
+	<r361>
+		<en>General XSD failure - not well formed, not referencing correct namespaces</en>
+	</r361>
+	<r362>
+		<en>Minimums cannot be greater than their corresponding maximums: AttributeException/attributeName</en>
+	</r362>
+	<r363>
+		<en>Must limit to 1 document type per message and 1 command type per transaction.</en>
+	</r363>
+	<r382>
+		<en>If the item does not have a child item, the value of isTradeItemABaseUnit must be true.</en>
+	</r382>
+	<r383>
+		<en>If the trade item has a child item the value of isTradeItemABaseUnit must be false.</en>
+	</r383>
+	<r385>
+		<en>The priceSynchronisationDocumentIdentification is not unique for this relationship in Price Synchronisation.</en>
+	</r385>
+	<r386>
+		<en>The priceSynchronisationDocumentIdentification is not sequential for this Price Synchronisation relationship.</en>
+	</r386>
+	<r387>
+		<en>The  priceSynchronisationRelationshipIdentification is not unique within this data source in Price Synchronisation.</en>
+	</r387>
+	<r388>
+		<en>Attribute value must use code list values associated with the data type in Business Message Standard.</en>
+	</r388>
+	<r389>
+		<en>The priceSynchronisationRelationshipIdentification in the Relationship Segment and the Relationship ID in the price synchronization header are not equal.</en>
+	</r389>
+	<r390>
+		<en>CurrencyCode dataType shall be the 3 character representation found in the ISO 4217 codelist</en>
+	</r390>
+	<r391>
+		<en>The LanguageCode shall be the 2-5 character representation found in the ISO 639 list.</en>
+	</r391>
+	<r392>
+		<en>If incotermCodeLocation is populated, the incotermCode must also be populated.</en>
+	</r392>
+	<r393>
+		<en>The  priceSynchronisationConditionIdentification is not unique within this data source in Price Synchronisation.</en>
+	</r393>
+	<r395>
+		<en>If conditionType  equals 'BRACKET', you must provide both bracketTierMinimum and bracketRangeQualifierCode.</en>
+	</r395>
+	<r398>
+		<en>If populated, the GPC Category Code  must be a valid GPC value that has been implemented in GDSN.</en>
+	</r398>
+	<r401>
+		<en>If conditionApplicationSequence is not empty then the conditionType must equal  'ALLOWANCE'  or 'CHARGE'.</en>
+	</r401>
+	<r402>
+		<en>If the conditionApplicationSequence is not empty, it must be greater than 1.</en>
+	</r402>
+	<r403>
+		<en>The priceSynchronisationConditionIdentification  must be unique within an information provider in Price Synchronization.</en>
+	</r403>
+	<r405>
+		<en>If multiple business location ship froms exist, there can be only 1 business location ship to. </en>
+	</r405>
+	<r406>
+		<en>If multiple business location ship tos exist, there can be only 1 business location ship  from. </en>
+	</r406>
+	<r407>
+		<en>The Target Condition must be unique within an information provider in Price Synchronization. </en>
+	</r407>
+	<r408>
+		<en>If populated, the Target Condition must have an effective end date value that is not in the past.</en>
+	</r408>
+	<r409>
+		<en>The Target Condition must be in the accept, synchronize or review status in the price sync list except for First Initial Load.</en>
+	</r409>
+	<r410>
+		<en>If the Target Condition Type is populated, then PriceCommentaryInformation/priceType cannot be populated.</en>
+	</r410>
+	<r411>
+		<en>If the  Target Condition is referenced, it must be of type = bracket.</en>
+	</r411>
+	<r412>
+		<en>If the PriceSynchronisationCondition  is populated, the bracket tier minimum,  bracket tier maximum, bracket range qualifier and bracket operator for the Item Price Type cannot be populated.</en>
+	</r412>
+	<r413>
+		<en>The TargetPriceType must be unique within a information provider in Price Synchronization. </en>
+	</r413>
+	<r414>
+		<en>If populated, the effectiveEndDate in the TargetPriceType cannot have a date that is in the past.</en>
+	</r414>
+	<r415>
+		<en>The TargetPriceType must be in the accept, synchronize or review status in the price sync list except for First Initial Load.</en>
+	</r415>
+	<r416>
+		<en>If the TargetPriceType is populated, the  Price Type Code must be equal to Allowance, Charge, Promotional Price or any of the Transaction Price Types identified by the word TRANSACTION in the code list value.</en>
+	</r416>
+	<r417>
+		<en>If the TargetPriceType is referenced, the PriceType code of that TargetPriceType must not be Allowance or Charge.</en>
+	</r417>
+	<r420>
+		<en>All PriceTypes, other than PriceType = ‘Allowance’ or ‘Charge’, must be assigned a PriceTypeApplicationSequence = 1.</en>
+	</r420>
+	<r421>
+		<en>ConditionApplicationSequence = 1 is not a valid Application Sequence for Summary Conditions.</en>
+	</r421>
+	<r422>
+		<en>The  priceSynchronisationDocumentIdentificationmust be present and unique within a information provider in Price Synchronization. </en>
+	</r422>
+	<r423>
+		<en>Within the header, the  priceSynchronisationRelationshipIdentification  must be present and unique within a information provider in Price Synchronization. </en>
+	</r423>
+	<r424>
+		<en>If priceSynchronisationConfirmationStatusReason is Review,  both Reason Code and ActionNeeded must be provided.</en>
+	</r424>
+	<r425>
+		<en>The PriceSynchronisationRelationshipIdentification included in the PriceSynchronisationConfirmation must reference an existing Price Synchronisation Relationship identified by a priceSynchronsiationRelationshipIdentification.</en>
+	</r425>
+	<r426>
+		<en>The PriceSynchronisationConditionIdentification included in the PriceSynchronisationConfirmation must reference an existing Price Synchronisation Condition identified by a priceSynchronsiationConditionIdentification.</en>
+	</r426>
+	<r427>
+		<en>The itemPriceTypeSegmentIdentification included in the PriceSynchronisationConfirmation must reference an existing Item Price Type Segment identified by a itemPriceTypeSegmentIdentification.</en>
+	</r427>
+	<r428>
+		<en>If populated, percentageOfAlcoholByVolume  must be greater than or equal to 0.00 and smaller than or equal to 100.00 by definition.</en>
+	</r428>
+	<r429>
+		<en>The receiving DP is failing this message because it does not support this optional functionality.</en>
+	</r429>
+	<r431>
+		<en>If condition type = 'BRACKET', then Condition Value, Condition Value Type, Qualifier, Basis Quantity, Basis Quantity UOM, and Application Sequence cannot be populated.</en>
+	</r431>
+	<r432>
+		<en>If Condition Type = 'BRACKET', then at least one bracket qualifier sub-class must be provided.</en>
+	</r432>
+	<r434>
+		<en>If the priceTypecode is populated, then conditionType cannot be populated.</en>
+	</r434>
+	<r435>
+		<en>If you provide more than one bracket qualifier in a Condition segment, then the bracket operators must either be all 'AND' or all 'OR'.</en>
+	</r435>
+	<r436>
+		<en>If you provide more than one bracket qualifier in a Item Price Type segment, then the bracket operators must either be all 'AND' or all 'OR'.</en>
+	</r436>
+	<r437>
+		<en>If classOfDangerousGoods is populated and dangerousGoodsRegulationCode equals 'ADR', then classOfDangerousGoods must be one of the following values: '1', '2', '3', '4.1', '4.2', '4.3', '5.1', '5.2', '6.1', '6.2', '7', '8', '9'.</en>
+	</r437>
+	<r438>
+		<en>Content Owner GLN must be same as relationship segment GLN</en>
+	</r438>
+	<r439>
+		<en>The price data is not valid for price synchronization because the recipient previously rejected the relationship and it is in reject state. </en>
+	</r439>
+	<r440>
+		<en>The trade item is not valid for price synchronization because the recipient previously rejected a price type segment for the trade item.  </en>
+	</r440>
+	<r441>
+		<en> A reject segment cannot be sent on a condition segment </en>
+	</r441>
+	<r442>
+		<en>If the Price Document Type is 'RESTART', the Synchronisation Header Action Code must equal ‘CHANGE_BY_REFRESH’ and all Item Price Types sent must have a Segment Action Code equal to 'ADD'.</en>
+	</r442>
+	<r443>
+		<en>If a Price Synchronisation confirmationStatusReasonCode or actionNeeded is provided priceSynchronisationConfirmationStatus must be in the status of 'REVIEW'.</en>
+	</r443>
+	<r444>
+		<en>If a Price SynchronisationConfirmation is received from a data recipient after a previous confirmation has been sent for the segment with priceSynchronisationConfirmationStatus of 'REJECTED', the newly received PriceSynchronisationConfirmation is invalid</en>
+	</r444>
+	<r446>
+		<en>If isTradeItemPackedIrregularly equals ‘FALSE’ and tradeItemCompositionWidth, tradeItemCompositionDepth and quantityOfCompleteLayersContainedInATradeItem are all supplied and tradeItemCompositionWidth/measurementUnitCode and tradeItemCompositionDepth/measurementUnitCode equal ‘EA’ then the product of the three attributes should equal the totalQuantityOfNextLowerLevelTradeItem.</en>
+	</r446>
+	<r447>
+		<en>This GTIN has an incorrect check digit.  </en>
+	</r447>
+	<r448>
+		<en>This GLN: #gln# has an incorrect check digit and or has incorrect length and values</en>
+		<fr>Ce GLN: #gln# a une clé de contrôle incorrecte et-ou a une taille et une valeur incorrecte</fr>
+	</r448>
+	<r449>
+		<en>If preliminaryItemStatusCode does not equal 'PRELIMINARY' then if the Document Command is equal to  'CHANGE_BY_REFRESH' then netContent must not be updated.</en>
+	</r449>
+	<r450>
+		<en>If preliminaryItemStatusCode does not equal 'PRELIMINARY' then if the Document Command is equal to 'CHANGE_BY_REFRESH' then priceComparisonMeasurement must not be updated.</en>
+	</r450>
+	<r451>
+		<en>The value for brandName is not allowed to be changed according to GTIN allocation rules.</en>
+	</r451>
+	<r452>
+		<en>If preliminaryItemStatusCode does not equal 'PRELIMINARY' then if the Document Command is equal to 'CHANGE_BY_REFRESH' then totalQuantityOfNextLowerLevelTradeItem must not be updated.</en>
+	</r452>
+	<r453>
+		<en>childTradeItem GTIN is not allowed to be changed according to GTIN allocation rules</en>
+	</r453>
+	<r454>
+		<en>The  GTIN cannot be a child of itself.</en>
+	</r454>
+	<r455>
+		<en>A GTIN cannot be repeated under the same parent. </en>
+	</r455>
+	<r456>
+		<en>isPriceOnPack may only be true for consumer units. </en>
+	</r456>
+	<r457>
+		<en>One or more of the GTINs in each hierarchy must be marked as an INVOICE UNIT</en>
+	</r457>
+	<r458>
+		<en>Price Type Effective Start or End Date Contexts may only repeat using a previously un-used code value</en>
+	</r458>
+	<r459>
+		<en>If TargetMarket/targetMarketCountryCode is equal to ('036' (Australia) or '554' (New Zealand)), then the SegmentEffectiveEndDateInformation/effectiveEndDateTime must be a date equal to or after Today's date</en>
+	</r459>
+	<r460>
+		<en>If TargetMarket/targetMarketCountryCode is equal to ('036' (Australia) or '554' (New Zealand)), then you must populate a Price Value; this value must be greater than or equal to zero.</en>
+	</r460>
+	<r461>
+		<en>If TargetMarket/targetMarketCountryCode is equal to ('036' (Australia) or '554' (New Zealand)) then, if the Alternate Location Grouping is populated, then the priceTargetMarketSubdivision and shipTo locations must be empty.</en>
+	</r461>
+	<r462>
+		<en>You must populate a Price Value Type as either 'VALUE' or 'PERCENTAGE'</en>
+	</r462>
+	<r463>
+		<en>If TargetMarket/targetMarketCountryCode is equal to ('036' (Australia) or '554' (New Zealand))  then the reason for Price Action Reason Code must be provided</en>
+	</r463>
+	<r464>
+		<en>If TargetMarket/targetMarketCountryCode is equal to ('036' (Australia) or '554' (New Zealand)) then the Trade Item Group ID Description must be the same for all GTINs within a Trade Item Group ID</en>
+	</r464>
+	<r466>
+		<en>Zero or negative values are not allowed for Packaging Material Composition Quantity where provided</en>
+	</r466>
+	<r469>
+		<en> For Target Market '528' (Netherlands) codes  starting with 0020-0029, 0040-0049, 0200-0299 are not allowed.</en>
+	</r469>
+	<r471>
+		<en>If data type is equal to  gtin then attribute value must be a  valid GTIN-8, GTIN-12, GTIN-13 or GTIN-14 number.</en>
+	</r471>
+	<r472>
+		<en>For each GTIN in the hierarchy, populated in the next lower level trade item information  the GTIN must have a corresponding item record.</en>
+	</r472>
+	<r473>
+		<en>if isTradeItemPacked Irregularly = False then Value in quantityofNextLowerLevelTradeItem must be equal to value in quantityOfCompleteLayersContainedInATradeItem multiplied by value in quantityOfTradeItemsContainedInACompleteLayer </en>
+	</r473>
+	<r474>
+		<en>If dataCarrierTypeCode is equal to 'EAN_8' then the first six digits of the TradeItem/GTIN shall equal '000000'.</en>
+	</r474>
+	<r475>
+		<en>The Target Market Country Code and targetMarketSubdivisionCode when populated,  will be consistent for all GTINs within a given hierarchy</en>
+	</r475>
+	<r477>
+		<en>Unit of measures for maximum, minimum temperatures and flashPointTemperature shall be specified as degrees Celsius for this target market.</en>
+	</r477>
+	<r478>
+		<en>If nestingIncrement is populated it must be greater than zero(0).</en>
+	</r478>
+	<r479>
+		<en>If targetMarketCountryCode is equal to '528' (Netherlands): Invalid value for trade item stacking factor</en>
+	</r479>
+	<r480>
+		<en>If targetMarketCountryCode is equal to '528' (Netherlands): Invalid value for the non-GTIN logistic unit stacking factor</en>
+	</r480>
+	<r481>
+		<en>If targetMarketCountryCode is equal to '528' (Netherlands): Invalid value for trade layers per pallet</en>
+	</r481>
+	<r483>
+		<en>endAvailabilityDateTime shall be later than or equal to today on first population.</en>
+	</r483>
+	<r485>
+		<en>discontinuedDateTime must only be updated  with documentCommand of 'CORRECT'.</en>
+	</r485>
+	<r488>
+		<en>lastChangeDateTime for a trade item must be the same or later than previously sent value</en>
+	</r488>
+	<r491>
+		<en>Maximum and minimum humidity shall be expressed as a percentage with a value between '0' and '100'.
+E.g. '97' meaning 97%</en>
+	</r491>
+	<r493>
+		<en>There is a limit of 1000 Transactions within 1 Message</en>
+	</r493>
+	<r494>
+		<en>There is a limit of 1 Command type within 1 Transaction</en>
+	</r494>
+	<r495>
+		<en>There is a limit of 100 Documents within 1 Transaction</en>
+	</r495>
+	<r498>
+		<en>Header version in Standard Business Document Header is not the current  version approved for the network. See documentation for expected value.</en>
+	</r498>
+	<r500>
+		<en>If preliminaryItemStatusCode does not equal 'PRELIMINARY' and if the Document Command is equal to 'CHANGE_BY_REFRESH' then   TradeItemMeasurements/height must not be 20 percent greater than current version height.</en>
+	</r500>
+	<r501>
+		<en>If preliminaryItemStatusCode does not equal 'PRELIMINARY' and if the Document Command is equal to 'CHANGE_BY_REFRESH' then TradeItemMeasurements/width must not be 20 percent greater than current version width.</en>
+	</r501>
+	<r502>
+		<en>If preliminaryItemStatusCode does not equal 'PRELIMINARY' and if the Document Command is equal to 'CHANGE_BY_REFRESH' then TradeItemMeasurements/depth must not be 20 percent greater than current version depth.</en>
+	</r502>
+	<r503>
+		<en>If preliminaryItemStatusCode does not equal 'PRELIMINARY' and if the Document Command is equal to 'CHANGE_BY_REFRESH' then TradeItemMeasurements/grossWeight must not be 20 percent greater than current version grossWeight. </en>
+	</r503>
+	<r504>
+		<en>Maximum number of iterations of GDSNTradeItemClassificationAttributeType  is  25</en>
+	</r504>
+	<r506>
+		<en>>For Country of Sale Code (#targetMarketCountryCode#), the Packaging Material Quantity (packagingMaterialCompositionQuantity) unit of measure #packagingMaterialCompositionQuantity# is incorrect. The unit of measure SHALL be gram (GRM) or kilogram (KGM).</en>
+	</r506>
+	<r507>
+		<en>The total of values in packagingMaterialCompositionQuantity may not exceed the value in packagingWeight for the same item .</en>
+	</r507>
+	<r510>
+		<en>For items that are  physical,  depth must be provided and value must be greater than zero (use an average for variable measure items)</en>
+	</r510>
+	<r511>
+		<en>For items that are  physical,  height must be provided and value must be greater than zero (use an average for variable measure items)</en>
+	</r511>
+	<r512>
+		<en>For items that are  physical, width must be provided and value must be greater than zero  (use an average for variable measure items)</en>
+	</r512>
+	<r515>
+		<en>Negative values are not allowed for Gross Weight</en>
+	</r515>
+	<r516>
+		<en>Zero or negative values are not allowed for Net Weight where Net Weight is Provided</en>
+	</r516>
+	<r517>
+		<en>If (Audio Visual Media Product Description Module or Publication Title Rating Module or Audio Visual Media Content Information Module) are not empty and gpcCategoryCode is equal to '10001137' then audioVisualMediaProductTitle , genreTypeCodeReference , titleRatingCodeReference/Code, titleRatingCodeReference/codeListAgencyCode  and gameFormatCode must not be empty.</en>
+	</r517>
+	<r518>
+		<en>For targetMarketCountryCode is equal to ('036' (Australia) or '554' (New Zealand)) communityVisibilityDateTime cannot be populated if partyRecevingPrivateData (GLN) is populated.</en>
+	</r518>
+	<r519>
+		<en>If  targetMarketCountryCode is equal to '752' (Sweden) layerHeight must have the same value as one of the values in width, depth or height of the child item.</en>
+	</r519>
+	<r520>
+		<en>If  targetMarketCountryCode is equal to '752' (Sweden) priceBasisQuantity may be specified with the following units of measures: kilogram, gram , metre, millimetre, millilitre, litre, square metre, cubic metres,piece.</en>
+	</r520>
+	<r521>
+		<en>If  targetMarketCountryCode is equal to '752' (Sweden), additionalTradeItemIdentificationValue ('SUPPLIER_ASSIGNED', 'DISTRIBUTOR_ASSIGNED') may not have the same value on more than one Trade Item in the same item hierarchy. This rule applies when isTradeItemAnOrderableUnit is equal to 'true'.</en>
+	</r521>
+	<r523>
+		<en>If dataCarrierTypeCode equals ('EAN_13', 'UPC_A' or 'UPC_E') then first digit of gtin shall equal '0'.</en>
+		<fr>Si le type de code à barres est égal à ('EAN_13', 'UPC_A' ou 'UPC_E'), le premier chiffre de gtin doit être égal à '0'.</fr>
+	</r523>
+	<r524>
+		<en>netContent is not used. This attribute shall be used if isTradeItemAConsumerUnit equals ‘true’ for targetMarketCountryCode name.</en>
+	</r524>
+	<r526>
+		<en>If provided, Ordering Lead Time must be greater than zero</en>
+	</r526>
+	<r528>
+		<en>If Target Market is '036' (Australia) and taxTypeCode is equal to 'WET' (Wine Equalisation Tax), then percentageOfAlcoholByVolume must be populated</en>
+	</r528>
+	<r529>
+		<en>The Price (or Allowance) Basis Quantity must be greater than zero.</en>
+	</r529>
+	<r530>
+		<en>If QuantityOfTradeItemsPerPalletLayer is used, then QuantityOfLayersPerPallet shall be used for this target market.</en>
+	</r530>
+	<r531>
+		<en>functionalName may not contain the same text as brandName or descriptiveSizeDimension when IsTradeItemAConsumerUnit is equal to 'true'.</en>
+	</r531>
+	<r532>
+		<en>functionalName may not contain the same text as descriptive size. When validating, a space character should be added before and after descriptive size before searching for the same text in functionalName. This rule applies when isTradeItemAConsumerUnit is equal to 'true' and targetMarket is equal to '752' (Sweden)</en>
+	</r532>
+	<r533>
+		<en>If targetMarket is equal to '528' (Netherlands) then dutyFeeTaxCategoryCode is required but was not provided.</en>
+	</r533>
+	<r534>
+		<en>If targetMarket is equal to '036' (Australia') then the partyReceivingPrivateData  field cannot be populated when the communityVisibilityDate has been populated.</en>
+	</r534>
+	<r536>
+		<en>If populated, minimumTradeItemLifespanFromTimeOfArrival must be greater than zero.</en>
+	</r536>
+	<r537>
+		<en>If populated, minimumTradeItemLifespanFromTimeOfProduction must be greater than zero.</en>
+	</r537>
+	<r539>
+		<en>Value in grossWeight must be greater than or equal to value in netContent if this is given as weight. Allowance must be made for different units of measure.</en>
+	</r539>
+	<r540>
+		<en>Value in quantityofNextLowerLevelTradeItem may not exceed 2 when the pallet type is any type of full size pallet and the child item's pallet type is any type of half size pallet. Full size pallets are:  ISO 1 Pallet (code 11)</en>
+	</r540>
+	<r541>
+		<en>{insert_attribute_name} contains an invalid value. Used code {insert_incorrect_value} is not included in the relevant code list”.
+
+Error message example: “Contact type code is not valid. Used code MY_INVALID_CONTACT_CODE is not included in the relevant code list.”</en>
+	</r541>
+	<r542>
+		<en>For all attributes for which the Trade Item Standard identifies a code list and the Agency is a code representing GS1, only the values in that code list are valid in the GDS network.</en>
+	</r542>
+	<r543>
+		<en>If individualUnitMinimum and/or individualUnitMaximum are populated, then  isTradeItemABaseUnit must be 'true'</en>
+	</r543>
+	<r544>
+		<en>If isTradeItemABaseUnit is equal to 'false', then individualUnitMinimum and/or individualUnitMaximum should never be populated.</en>
+	</r544>
+	<r549>
+		<en>grossWeight shall be included at all levels where isTradeItemNonphysical does not equal 'true'.</en>
+	</r549>
+	<r550>
+		<en>If specialItemCode does not equal DYNAMIC_ASSORTMENT, then the grossWeight of the GTIN MUST BE greater than 96% of the sum of that GTIN’s packagingWeight plus the sum of the grossWeight of all next lower-level child items (whether or not packagingWeight Is populated in the child items). The formula is: [Parent GTIN Gross Weight] > 96% * ((sum of [Parent GTIN Packaging Weight]) + ([Parent GTIN Qty of Next Lower Level] * (Child GTIN Gross Weight])) NOTE :This allowance of 4% in the sum, is due to some configurations where part of the packaging of child items is removed, such as in displays. NOTE Approval of this VR will mean that VR 97 is replaced by this rule.</en>
+	</r550>
+	<r554>
+		<en>If tradeItemUnitDescriptorCode is 'TRANSPORT_LOAD', and the item has a parent, then the tradeItemUnitDescriptorCode of the parent item can only be 'TRANSPORT_LOAD'.</en>
+	</r554>
+	<r555>
+		<en>If tradeItemUnitDescriptorCode is 'PALLET', and the item has a parent, then the tradeItemUnitDescriptorCode of the parent item can only be 'TRANSPORT_LOAD' or 'PALLET'.</en>
+	</r555>
+	<r557>
+		<en>If tradeItemUnitDescriptor is 'PALLET', and the item has a children, then the tradeItemUnitDescriptorCode of the children can never be 'TRANSPORT_LOAD'.</en>
+	</r557>
+	<r558>
+		<en>If tradeItemUnitDescriptor is 'CASE', and the item has a parent, then the tradeItemUnitDescriptorCode of the parent item can never be 'BASE_UNIT_OR_EACH' or 'PACK_OR_INNER_PACK.'</en>
+	</r558>
+	<r559>
+		<en>f tradeItemUnitDescriptor is 'CASE' and the item has a children, then the tradeItemUnitDescriptorCode of the children can never be 'TRANSPORT_LOAD', 'MIXED_MODULE' or 'PALLET'.</en>
+	</r559>
+	<r560>
+		<en>If tradeItemUnitDescriptor is 'PACK_OR_INNERPACK' and the item has a parent, then the tradeItemUnitDescriptorCode of the parent item can never be 'BASE_UNIT_OR_EACH'.</en>
+	</r560>
+	<r561>
+		<en> If tradeItemUnitDescriptor is 'PACK_OR_INNERPACK', and the item has (a) child(ren), then the tradeItemUnitDescriptorCode of the children can never be 'TRANSPORT_LOAD', 'PALLET', 'MIXED_MODULE', 'DISPLAY_SHIPPER' or 'CASE'.</en>
+	</r561>
+	<r565>
+		<en>stackingFactor is mandatory for Despatch Units in target market '752' (Sweden).</en>
+	</r565>
+	<r566>
+		<en>If populated, one iteration has to be in Swedish for functionalName for TM '752' (Sweden).</en>
+	</r566>
+	<r567>
+		<en>If populated, one iteration has to be in Swedish for descriptiveSize for TM '752' (Sweden).</en>
+	</r567>
+	<r568>
+		<en>If populated, one iteration has to be in Swedish for descriptionShort for TM '752' (Sweden).</en>
+	</r568>
+	<r569>
+		<en>For this target market (#targetMarketCountryCode#), fileFormatName is mandatory, if uniformResourceIdentifier is used and referencedFileTypeCode equals the value 'PRODUCT_IMAGE'.</en>
+	</r569>
+	<r570>
+		<en>fileName is mandatory if uniformResourceIdentifier is used and typeOf Information contains the value 'PRODUCT_IMAGE'.</en>
+	</r570>
+	<r571>
+		<en>The dutyFeeTaxAgencyCode must be '9SE' if target market is '752' (Sweden).</en>
+	</r571>
+	<r572>
+		<en>lastChangeDateTime for a trade item may not be a date in the future.</en>
+	</r572>
+	<r575>
+		<en>For Country Of Sale Code (#targetMarketCountryCode#), if the Global Product Category Code of the product is not one of the brick codes in segment '51000000' (Healthcare) and Consumer Unit Indicator (isTradeItemAConsumerUnit) equals 'true',
+		    then the GTIN (#gtin#) SHALL not begin with values "1" through "9".</en>
+	</r575>
+	<r576>
+		<en>If isNonGTINLogisticUnitPackedIrregularly is equal to 'false' then value in quantityOfTradeItemsPerPallet must be equal to value in quantityOfLayersPerPallet multiplied by value in quantityOfTradeItemsPerPalletLayer</en>
+	</r576>
+	<r583>
+		<en>importClassificationTypeCode and importClassificationValue are used in pairs. If one is populated the other is required.</en>
+	</r583>
+	<r584>
+		<en>importClassificationTypeCode and importClassificationValue are used in pairs. If one is populated the other is required.</en>
+	</r584>
+	<r585>
+		<en>If quantityOfLayersPerPallet is greater than zero, then quantityOfTradeItemsPerPalletLayer shall be greater than zero for this target market.</en>
+	</r585>
+	<r586>
+		<en>If targetMarket equals '840' (US) and growingMethodCode equals 'ORGANIC' then organicClaimAgency and organicTradeItemCode MUST not be empty.</en>
+	</r586>
+	<r590>
+		<en>tradeItemDescription is missing. The long description (tradeItemDescription) is mandatory for targetMarketCountryCode Name.</en>
+	</r590>
+	<r594>
+		<en>platformTypeCode is missing. If targetMarketCountryCode does not equal ('036' (Australia) or '554' (New Zealand)  or 752 (Sweden)) it is mandatory to specify the pallet type (platformTypeCode) when tradeItemUnitDescriptor is equal to 'PALLET' or ‘MIXED_MODULE’</en>
+	</r594>
+	<r597>
+		<en>For target market '250' (France) and the tradeItemTradeChannelCode is equal to 'GROCERY', the invoice Name (invoiceName) is mandatory for all invoice unit (isTradeItemAnInvoiceUnit equals 'true').</en>
+	</r597>
+	<r598>
+		<en>For target market '249' (France) or '250' (France) and tradeItemTradeChannelCode equals 'GROCERY', the country of origin is required for all base units (tradeItemUnitDescriptor equals 'BASE_UNIT_OR_EACH').</en>
+	</r598>
+	<r603>
+		<en>When target market code equals '249' (France) or '250' (France) and tradeItemTradeChannelCode equals 'GROCERY' , the agency maintaining the list of taxes is GS1 France. (dutyFeeTaxAgencyCode = '65').</en>
+	</r603>
+	<r606>
+		<en>The start availability date (startAvailabilityDateTime) is mandatory when target market code equals '250'(France) or '249' (France) and tradeItemTradeChannelCode is equal to 'GROCERY' .</en>
+	</r606>
+	<r613>
+		<en>The  free quantity (freeQuantityOfProduct) in a promotional offer shall not exceed the Content net (netContent), when expressed in the same measurementUnitCode.</en>
+	</r613>
+	<r616>
+		<en>If the net drained weight is populated (drainedWeight) the net weight must be less than or equal to its net weight (netWeight).</en>
+	</r616>
+	<r617>
+		<en>If a trade item has a child trade item   (childTradeItem.tradeItemIdentification), the amount associated with this child (childTradeItem.tradeItemIdentification) must be informed and be greater than 0.</en>
+	</r617>
+	<r618>
+		<en>If target Market equals ('249' (France) or '250' (France)), consumer units for alcoholic beverages (Cls '50202200' , except Brick '10000142') shall have a dutyFeeTaxTypeCode equal to '3001000002008' (Rights on water and beer), '3001000002244' (Tax on cider), '3001000002312' (Rights of alcohol) or '3001000002329'.</en>
+	</r618>
+	<r631>
+		<en>If targetMarketCountryCode is equal to '372' (Ireland) and if isTradeItemABaseUnit is equal to 'true' and ((gpcCategoryCode is in Class ('50202200' or '50211500') and does not equal ('10000142', '10000143', '10000303' or '10000584')) then at least one iteration of AdditionalTradeItemClassification must have a value with additionalTradeItemClassificationCodeListCode equal to '57'(REV).</en>
+	</r631>
+	<r632>
+		<en>IF depositValueEffectiveDate is populated then returnablePackageDepositIdentification or returnablePackageDepositAmount MUST be populated.</en>
+	</r632>
+	<r633>
+		<en>If targetMarketCountryCode is not equal to '036' (Australia) or '554' (New Zealand) and productionVariantEffectiveDateTime is not empty then productionVariantDescription must not be empty.</en>
+	</r633>
+	<r634>
+		<en>returnableAssetCapacityContent is missing.
+For Target Markets '040' (Austria) and '276' (Germany) returnableAssetCapacityContent is mandatory if returnableAssetEmpty equals 'true'.</en>
+	</r634>
+	<r635>
+		<en>discontinuedDateTime shall not be older than effectiveDateTime minus six months.
+E.g. effectiveDatetime = 1 December 2016, then  discontinuedDateTime = 15 May 2016 fails, 1 June 2016 passes.</en>
+	</r635>
+	<r636>
+		<en>A trade item can not be replaced temporarily by itself ('REPLACED_BY')</en>
+	</r636>
+	<r637>
+		<en>A trade item can not be substituted temporarily by itself ('SUBSTITUTED_BY')</en>
+	</r637>
+	<r638>
+		<en>A trade item can not be substituted temporarily by itself ('EQUIVALENT')</en>
+	</r638>
+	<r639>
+		<en>Dependent Proprietary Trade Item (''DEPENDENT_PROPRIETARY') must not equal TradeItem/tradeItemIdentification.</en>
+	</r639>
+	<r640>
+		<en>A trade item can not be the same as the item variant master ('ITEM_VARIANT_MASTER')</en>
+	</r640>
+	<r641>
+		<en>A trade item can not be replaced temporarily by itself ('REPLACED').</en>
+	</r641>
+	<r642>
+		<en>If the Trade Item is a consumer unit, and the target market country code is '840' (US), the type of bar code [dataCarrierTypeCode] is mandatory</en>
+	</r642>
+	<r1000>
+		<en>The trade item must have an information provider.</en>
+	</r1000>
+	<r1001>
+		<en>The name of the information provider must be populated.</en>
+	</r1001>
+	<r1004>
+		<en>The startAvailabilityDateTime must be populated for the trade item.</en>
+	</r1004>
+	<r1008>
+		<en>isTradeItemAConsumerUnit must be populated for the trade item.</en>
+	</r1008>
+	<r1010>
+		<en>isTradeItemADespatchUnit must be populated for the trade item.</en>
+	</r1010>
+	<r1011>
+		<en>isTradeItemAnInvoiceUnit must be populated for the trade item.</en>
+	</r1011>
+	<r1012>
+		<en>isTradeItemAnOrderableUnit must be populated for the trade item.</en>
+	</r1012>
+	<r1013>
+		<en>isTradeItemAVariableUnit must not be empty for the trade item.</en>
+	</r1013>
+	<r1017>
+		<en>If the drained weight is populated (drainedWeight) it must be less than or equal to the gross weight (grossWeight).</en>
+	</r1017>
+	<r1018>
+		<en>targetMarket for a child item cannot be more specific than for the parent. Example: If parent item targetmarketCountryCode is equal to '840' then child item cannot have a targetMarketSubdivisonCode.</en>
+	</r1018>
+	<r1020>
+		<en>Category code and gtin cannot be an input together.</en>
+	</r1020>
+	<r1022>
+		<en>If cancelledDateTime is not empty then discontinuedDateTime must be empty.</en>
+	</r1022>
+	<r1023>
+		<en>The receiving data pool must not fail valid extensions  to an existing document.</en>
+	</r1023>
+	<r1024>
+		<en>GRAI check digit is not valid.</en>
+	</r1024>
+	<r1025>
+		<en>For Country Of Sale Code (#targetMarketCountryCode#) then packagingMaterialTypeCode and packagingMaterialCompositionQuantity are used in pairs. I.e. if one is populated the other one must be populated, also.</en>
+	</r1025>
+	<r1026>
+		<en>The Unit of Measure used for the trade item height must be from same measuring system (e.g. metric) across whole hierarchy.</en>
+	</r1026>
+	<r1027>
+		<en>The Unit of Measure used for the trade item width must be from same measuring system (e.g. metric) across whole hierarchy.</en>
+	</r1027>
+	<r1028>
+		<en>The Unit of Measure used for the trade item depth must be from same measuring system (e.g. metric) across whole hierarchy.</en>
+	</r1028>
+	<r1029>
+		<en>The Unit of Measure used for the trade item netweight must be from same measuring system (e.g. metric) across whole hierarchy.</en>
+	</r1029>
+	<r1030>
+		<en>The Unit of Measure used for the trade item grossWeight must be from same measuring system (e.g. metric) across whole hierarchy.</en>
+	</r1030>
+	<r1031>
+		<en>The Unit of Measure used for the trade item packagingWeight must be from same measuring system (e.g. metric) across whole hierarchy.</en>
+	</r1031>
+	<r1032>
+		<en>The Unit of Measure used for the trade item drainedWeight must be from same measuring system (e.g. metric) across whole hierarchy.</en>
+	</r1032>
+	<r1034>
+		<en>If fatPercentageInDryMatter is not empty then value must be greater than or equal to 0 and less than or equal to 100.00.</en>
+	</r1034>
+	<r1035>
+		<en>The data source gln does not exist in the Global Registry.</en>
+	</r1035>
+	<r1037>
+		<en>cancelDateTime shall be an earlier date than yesterday’s date.</en>
+	</r1037>
+	<r1038>
+		<en>discontinuedDateTime and cancelledDateTime shall not be used simultaneously .</en>
+	</r1038>
+	<r1039>
+		<en>If additionalTradeItemIdentificationTypeCode  equals 'GTIN_13' then associated additionalTradeItemIdentification value must have 13 digits and must have a valid check digit.</en>
+	</r1039>
+	<r1040>
+		<en>If additionalTradeItemIdentificationTypeCode  equals 'GTIN_8' then associated additionalTradeItemIdentification value must have 8 digits and must have a valid check digit.</en>
+	</r1040>
+	<r1041>
+		<en>If additionalTradeItemIdentificationTypeCode  equals 'GTIN_14' then associated additionalTradeItemIdentification value must have 14 digits and must have a valid check digit.</en>
+	</r1041>
+	<r1042>
+		<en>If additionalTradeItemIdentificationTypeCode  equals 'GTIN_12' then associated additionalTradeItemIdentification value must have 12 digits and must have a valid check digit.</en>
+	</r1042>
+	<r1043>
+		<en>If nutrientTypeCode is not empty then dailyValueIntakePercent or quantityContained must not be empty.</en>
+	</r1043>
+	<r1044>
+		<en>If ChildTradeItem/gtin is not empty then quantityOfChildren and totalQuantityOfNextLowerLevelTradeItem must not be empty.</en>
+	</r1044>
+	<r1045>
+		<en>There must be at most one iteration of languageSpecificBrandName per languageCode.</en>
+	</r1045>
+	<r1046>
+		<en>There must be at most one iteration of languageSpecificSubBrandName per languageCode.</en>
+	</r1046>
+	<r1047>
+		<en>There must be at most one iteration of descriptionShort per languageCode.</en>
+	</r1047>
+	<r1048>
+		<en>There must be at most one iteration of invoiceName per languageCode.</en>
+	</r1048>
+	<r1049>
+		<en>There must be at most one iteration of packagingMaterialCompositionQuantity per Unit Of Measurement.</en>
+	</r1049>
+	<r1050>
+		<en>There must be at most one iteration of colourDescription per languageCode.</en>
+	</r1050>
+	<r1051>
+		<en>There must be at most one iteration of unitsPerTradeItem per measurementUnitCode</en>
+	</r1051>
+	<r1052>
+		<en>There must be at most one iteration of priceComparisonMeasurement per measurementUnitCode</en>
+	</r1052>
+	<r1053>
+		<en>There must be at most one iteration of orderingLeadTime per measurementUnitCode</en>
+	</r1053>
+	<r1054>
+		<en>There must be at most one iteration of totalScreenArea per measurementUnitCode</en>
+	</r1054>
+	<r1055>
+		<en>There must be at most one iteration of warrantyDescription per languageCode.</en>
+	</r1055>
+	<r1056>
+		<en>There must be at most one iteration of functionalName per languageCode.</en>
+	</r1056>
+	<r1057>
+		<en>If Packagingmaterial/packagingMaterialTypeCode is not equal to ('COMPOSITE' or 'LAMINATED_CARTON' or 'OTHER' or 'PAPER_PAPERBOARD')then CompositeMaterialDetail class must be empty.</en>
+	</r1057>
+	<r1058>
+		<en>Use of temperatureTypeQualifierCode is mandatory in case any other attribute of the TradeItemTemperatureInformation class is not empty.</en>
+	</r1058>
+	<r1060>
+		<en>If the TradeItemInformation class is repeated, the values of productionVariantDescription and productionVariantEffectiveDateTime must be different in all instances.</en>
+	</r1060>
+	<r1061>
+		<en>The maximum length of data type StringAttributeValuePair is 5000 characters.</en>
+	</r1061>
+	<r1062>
+		<en>If class NonPackagedSizeDimension is used then descriptiveSizeDimension, sizeDimension or sizeCode shall be used.</en>
+	</r1062>
+	<r1063>
+		<en>The brandName must not be empty unless the context is 'Pharmaceuticals' or 'Medical Devices'</en>
+	</r1063>
+	<r1065>
+		<en>The functionalName must not be empty.</en>
+	</r1065>
+	<r1066>
+		<en>If the target market is equal to '276' (Germany) or '372' (Ireland) then functionalName must always be populated for all contexts.</en>
+	</r1066>
+	<r1067>
+		<en>There must be at most one iteration of ingredientStatement per languageCode</en>
+	</r1067>
+	<r1068>
+		<en>There must be at most one iteration of ingredientName per languageCode (per ingredient).</en>
+	</r1068>
+	<r1069>
+		<en>There must be at most one iteration of compulsoryAdditivesLabelInformation per languageCode.</en>
+	</r1069>
+	<r1070>
+		<en>There must be at most one iteration of servingSuggestion per languageCode.</en>
+	</r1070>
+	<r1071>
+		<en>There must be at most one iteration of dailyValueIntakeReference per languageCode.</en>
+	</r1071>
+	<r1072>
+		<en>There must be at most one iteration of servingSizeDescription per languageCode.</en>
+	</r1072>
+	<r1073>
+		<en>There must be at most one iteration of preparationConsumptionPrecautions  per languageCode.</en>
+	</r1073>
+	<r1074>
+		<en>There must be at most one iteration of preparationInstructions per languageCode.</en>
+	</r1074>
+	<r1075>
+		<en>There must be at most one iteration of dietTypeDescription per languageCode</en>
+	</r1075>
+	<r1076>
+		<en>If maximumHumidityPercentage and/or minimumHumidityPercentage are not empty then humidityQualifierCode must not be empty.</en>
+	</r1076>
+	<r1078>
+		<en>If TradeItem/brandOwner/PartyInRole/gln is not empty then PartyInRole/PartyRoleCode must be empty.</en>
+	</r1078>
+	<r1079>
+		<en>If TradeItem/informationProviderOfTradeItem/PartyInRole/gln is not empty then PartyInRole/PartyRoleCode must be empty.</en>
+	</r1079>
+	<r1080>
+		<en>If TradeItem/manufacturerOfTradeItem/PartyInRole/gln and/or TradeItem/manufacturerOfTradeItem/PartyInRole/partyName is not empty then PartyInRole/PartyRoleCode must be empty.</en>
+	</r1080>
+	<r1081>
+		<en>All iterations of TradeItemInformation after the first must have a productionVariantDescription and productionVariantEffectiveDateTime</en>
+	</r1081>
+	<r1082>
+		<en>If cataloguePrice/TradeItemPrice/tradeItemPrice is not empty then tradeItemPriceTypeCode must be empty.</en>
+	</r1082>
+	<r1083>
+		<en>If TradeItemPriceInformation/+suggestedRetailPrice/TradeItemPrice/tradeItemPrice is not empty then tradeItemPriceTypeCode must be empty.</en>
+	</r1083>
+	<r1084>
+		<en>If targetMarketCountryCode is equal to '528' (Netherlands) and isPackagingMarkedReturnable is equal to 'True' then returnablePackageDepositCode must not be empty.</en>
+	</r1084>
+	<r1085>
+		<en>If preliminaryItemStatusCode does not equal 'PRELIMINARY' and if the Document Command is equal to 'CHANGE_BY_REFRESH' then TradeItemMeasurements/height must not be less than 80 percent of the current version height.</en>
+	</r1085>
+	<r1086>
+		<en>If preliminaryItemStatusCode does not equal 'PRELIMINARY'  and if the Document Command is equal to 'CHANGE_BY_REFRESH' then TradeItemMeasurements/width must not be less than 80 percent of the current version width.</en>
+	</r1086>
+	<r1087>
+		<en>If preliminaryItemStatusCode does not equal 'PRELIMINARY' and if the Document Command is equal to 'CHANGE_BY_REFRESH' then  TradeItemMeasurements/depth must not be less than 80 percent of the current version depth.</en>
+	</r1087>
+	<r1088>
+		<en>If preliminaryItemStatusCode does not equal 'PRELIMINARY' and if the Document Command is equal to 'CHANGE_BY_REFRESH' then  TradeItemMeasurements/grossWeight must must not be less than 80 percent of the current version grossWeight.</en>
+	</r1088>
+	<r1089>
+		<en>partyRoleCode is mandatory in tradeItem/PartyInRole class.</en>
+	</r1089>
+	<r1090>
+		<en>If ProductYieldInformation/productYield used then PreparationServing/preparationTypeCode shall be used.</en>
+	</r1090>
+	<r1091>
+		<en>If ProductYieldInformation/productYield is not empty then ProductYieldInformation/productYieldTypeCode must not be empty.</en>
+	</r1091>
+	<r1092>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemTradeChannelCode equals 'GROCERY' and isTradeItemNonPhysical does not equal 'TRUE' then the hierarchy shall have at least one iteration where isTradeItemADespatchUnit equals 'TRUE'</en>
+	</r1092>
+	<r1093>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemTradeChannelCode equals 'GROCERY' then maximum one iteration of the same dutyFeeTaxTypeCode shall exist for the same Trade Item</en>
+	</r1093>
+	<r1102>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemTradeChannelCode equals 'GROCERY' and gpcCategoryCode equals '10000424' and isTradeItemAConsumerUnit equals 'TRUE' then at least one iteration of priceComparisonContentTypeCode shall equal 'PER_KILOGRAM' or 'PER_LITRE'</en>
+	</r1102>
+	<r1104>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemTradeChannelCode equals 'GROCERY' and if priceComparisonContentTypeCode equals 'PER_PIECE' then priceComparisonMeasurement shall be an Integer</en>
+	</r1104>
+	<r1105>
+		<en>For Country Of Sale Code (#targetMarketCountryCode#), if priceComparisonMeasurement is used, then priceComparisonMeasurement shall be greater than 0.</en>
+	</r1105>
+	<r1107>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France))  and tradeItemUnitDescriptorCode equals 'PALLET' and platformTypeCode equals '10', then depth shall be between and including  ('800 MMT' or '31.50 IN')  and ('1600 MMT' or '63 IN') and width shall be between and including (' '600 MMT' or '23.62 IN') and ('1200 MMT' or '47.24 IN').</en>
+	</r1107>
+	<r1108>
+		<en>When populating netWeight, drainedWeight or grossWeight, the associated measurementUnitCode shall be of the Unit Of Measure Classification 'MASS'
+e.g. "MMT" would fail as a value.</en>
+	</r1108>
+	<r1109>
+		<en>If (TradeItemDimensions/height or TradeItemDimensions/depth or TradeItemDimensions/width ) is not empty, then the unit of measurement must be expressed in a UOM from the Unit Of Measure Classification 'DIMENSIONS'</en>
+	</r1109>
+	<r1110>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemTradeChannelCode equals 'GROCERY' and priceComparisonContentTypeCode equals 'PER_LITRE' then the associated measurementUnitCode of priceComparisonMeasurement and of one iteration of netContent shall be from the Unit Of Measure Classification 'VOLUME'</en>
+	</r1110>
+	<r1111>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemTradeChannelCode equals 'GROCERY' and dutyFeeTaxTypeCode equals '3001000002282' then dutyFeeTaxRate shall be empty and dutyFeeTaxAmount shall be used.</en>
+	</r1111>
+	<r1112>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemTradeChannelCode equals 'GROCERY' and tradeItemUnitDescriptorCode equals'PALLET', then TradeItemMeasurements/height shall be less than or equal to '3 METERS'.</en>
+	</r1112>
+	<r1113>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and (TradeItemMeasurements/height or TradeItemMeasurements/width or TradeItemMeasurements/depth) is not empty and the associated measurementUnitCode does not equal 'MMT', then its associated value shall not have more than 3 decimal positions.</en>
+	</r1113>
+	<r1114>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemTradeChannelCode equals 'GROCERY' and (TradeItemMeasurements/height or TradeItemMeasurements/width or TradeItemMeasurements/depth) is not empty and the associated measurementUnitCode equals ''CMT', then its associated value shall not have more than 1 decimal position.</en>
+	</r1114>
+	<r1115>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and (TradeItemMeasurements/height or TradeItemMeasurements/width or TradeItemMeasurements/depth) is not empty and the associated measurementUnitCode equals ''MMT'', then its associated value shall not have a decimal position.
+E.g. '1000.6 MMT' fails, '1000 MMT' passes.</en>
+	</r1115>
+	<r1116>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemTradeChannelCode equals 'GROCERY' and priceComparisonContentTypeCode equals 'PER_KILOGRAM' and netWeight is populated, then priceComparisonMeasurement and netWeight shall be equivalent.</en>
+	</r1116>
+	<r1117>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemTradeChannelCode equals 'GROCERY' and priceComparisonContentTypeCode equals 'DRAINED_WEIGHT' and drainedWeight is populated, then priceComparisonMeasurement and drainedWeight shall be equivalent.</en>
+	</r1117>
+	<r1122>
+		<en>uDIDPublishDate shall be today's date or in the future, if CIN is sent with documentCommand "ADD"</en>
+	</r1122>
+	<r1123>
+		<en>uDIDPublishDate shall not be changed once the current populated date has been reached.</en>
+	</r1123>
+	<r1124>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemUnitDescriptorCode equals 'PALLET' and platformTypeCode equals  '49', then TradeItemMeasurements/depth shall be between and including ('610 MMT' or '24.02 IN') and ('1220 MMT' or '48.04 IN') and TradeItemMeasurements/width shall be between and including ('508 MMT' or '20 IN') and ('1016 MMT' or '40 IN').</en>
+	</r1124>
+	<r1125>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemUnitDescriptorCode equals 'PALLET' and platformTypeCode equals  '48', then TradeItemMeasurements/depth shall be between and including ('610 MMT' or '24.02 IN') and ('1220 MMT' or '48.04 IN') and TradeItemMeasurements/width shall be between and including ('1016 MMT' or '40 IN') and ('2032 MMT' or '80 IN').</en>
+	</r1125>
+	<r1126>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and  tradeItemUnitDescriptorCode equals 'PALLET' and platformTypeCode equals  '47', then TradeItemMeasurements/depth shall be between and including ('400 MMT' or '15.75 IN') and ('800 MMT' or '31.5 IN'), and TradeItemMeasurements/width shall be between and including ( '800 MMT' or '31.50 IN) and ('1600 MMT' or '63 IN').</en>
+	</r1126>
+	<r1127>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and  tradeItemUnitDescriptorCode equals 'PALLET' and platformTypeCode equals  '43', then TradeItemMeasurements/depth shall be between and including ('1140 MMT' or '43.31 IN') and  ('2280 MMT' or '86.62 IN') and TradeItemMeasurements/width shall be between and including ('1140 MMT' or '43.31 IN') and ('2280 MMT' or '86.62 IN').</en>
+	</r1127>
+	<r1128>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemUnitDescriptorCode equals 'PALLET' and platformTypeCode equals  '42', then TradeItemMeasurements/depth shall bebetween and including ('1100 MMT' or '43.31 IN') and ('2200 MMT' or '86.62 IN') and TradeItemMeasurements/width shall be between and including ('1100 MMT' or '43.31 IN') and ('2200 MMT' or '86.62 IN').</en>
+	</r1128>
+	<r1129>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and  tradeItemUnitDescriptorCode equals 'PALLET' and platformTypeCode equals  '41', then TradeItemMeasurements/depth shall be between and including ('1067 MMT' or '42.01 IN') and ('2134 MMT' or '84.02 IN') and TradeItemMeasurements/width shall be between and including ('1067 MMT' or '42.01 IN') and ('2134 MMT' or '84.02 IN').</en>
+	</r1129>
+	<r1130>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemUnitDescriptorCode equals 'PALLET' and platformTypeCode equals  '40', then TradeItemMeasurements/depth shall be between and including ('1016 MMT' or '40 IN') and ('2032 MMT' or '80 IN') and TradeItemMeasurements/width shall be between and including ('1219 MMT' or '47.99 IN') and ('2438 MMT' or '95.98 IN').</en>
+	</r1130>
+	<r1133>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemUnitDescriptorCode equals 'PALLET' and platformTypeCode equals  '35', then TradeItemMeasurements/depth shall be between and including ('1200 MMT' or '47.24 IN') and ('2400 MMT' or '94.5 IN'), and TradeItemMeasurements/width shall be between and including ('1000 MMT' or '39.37 IN') and ('2000 MMT' or '78.74 IN').</en>
+	</r1133>
+	<r1135>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemUnitDescriptorCode equals 'PALLET' and platformTypeCode equals  '31', then TradeItemMeasurements/depth shall be between and including  ('1000 MMT' or '39.37 IN') and ('2000 MMT' or '78.74 IN') and TradeItemMeasurements/width shall be between and including ('600 MMT' or '23.62 IN') and ('1200 MMT' or '47.34 IN').</en>
+	</r1135>
+	<r1137>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemUnitDescriptorCode equals 'PALLET' and platformTypeCode equals  '25', then TradeItemMeasurements/depth shall be between and including ('1165 MMT' or '45.87 IN') and ('2330 MMT' or '91.74 IN'), and TradeItemMeasurements/width shall be between and including ('1165 MMT' or '45.87 IN') and ('2330 MMT' or '91.74 IN').</en>
+	</r1137>
+	<r1138>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemUnitDescriptorCode equals 'PALLET' and platformTypeCode equals  '14', then TradeItemMeasurements/depth shall be between and including ('400 MMT' or '15.75 IN') and ('800 MMT' or '31.5 IN'), and TradeItemMeasurements/width shall be between and including ('300 MMT' or '11.81 IN') and ('600 MMT' or '23.62 IN').</en>
+	</r1138>
+	<r1139>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and  tradeItemUnitDescriptorCode equals 'PALLET' and platformTypeCode equals  '13', then TradeItemMeasurements/depth shall be between and including ('600 MMT' or '23.62 IN') and ('1200 MMT' or '47.24 IN'), and TradeItemMeasurements/width shall be between and including ('400 MMT' or '15.75 IN') and ('800 MMT' or '31.5 IN').</en>
+	</r1139>
+	<r1140>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemUnitDescriptorCode equals 'PALLET' and platformTypeCode equals  '12', then TradeItemMeasurements/depth shall be between and including ('1200 MMT' or '47.24 IN') and ('2400 MMT' or '94.48 IN'), and TradeItemMeasurements/width shall be between and including ('1000 MMT' or '39.37 IN') and ('2000 MMT' or '78.74 IN').</en>
+	</r1140>
+	<r1141>
+		<en>If targetMarketCountryCode equals ('249' (France) or '250' (France)) and  tradeItemUnitDescriptorCode equals 'PALLET' and platformTypeCode equals  '11',
+then TradeItemMeasurements/depth shall be between and including ('1200 MMT' or '47.24 IN') and ('2400 MMT' or '94.48 IN'),
+and TradeItemMeasurements/width shall be between and including ('800 MMT' or '31.50 IN') and ('1600 MMT' or '63 IN').</en>
+	</r1141>
+	<r1160>
+		<en>descriptionShort is missing. If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemTradeChannelCode equals 'GROCERY' and isTradeItemAConsumerUnit equals 'TRUE' then descriptionShort shall be used.</en>
+	</r1160>
+	<r1161>
+		<en>tradeItemDescriptionInformation/tradeItemDescription is missing. If targetMarketCountryCode equals ('249' (France) or '250' (France)) and tradeItemTradeChannelCode equals 'GROCERY' then TradeItemDescriptionInformation/tradeItemDescription is mandatory for all Trade Items</en>
+	</r1161>
+	<r1162>
+		<en>For Country of Sale Code (#targetMarketCountryCode#), and Consumer Unit Indicator (isTradeItemAConsumerUnit) is 'true' and isTradeItemNonphysical is not 'true' then both priceComparisonContentTypeCode and priceComparisonMeasurement SHALL be used.</en>
+	</r1162>
+	<r1166>
+		<en>If (PackagingDimension/packagingDepth or PackagingDimension/packagingWidth are not empty) and (platformTypeCode is empty or packagingTypeCode does not equal 'PALLET')
+then PackagingDimension/packagingHeight must not be empty.</en>
+	</r1166>
+	<r1167>
+		<en>If isTradeItemNonPhysical is not equal to 'true' then tradeItemUnitDescriptor must not be empty.</en>
+	</r1167>
+	<r1168>
+		<en>There must be at most 1 iteration of referencedTradeItem/GTIN where  referencedTradeItemTypeCode equals 'ITEM_VARIANT_MASTER'</en>
+	</r1168>
+	<r1169>
+		<en>If referencedTradeItemTypeCode equals 'PRIMARY_ALTERNATIVE' then there shall be at most 1 iteration of referencedTradeItem/GTIN</en>
+	</r1169>
+	<r1170>
+		<en>There must be at most 1 iteration of referencedTradeItem/GTIN where  referencedTradeItemTypeCode equals 'REPLACED'</en>
+	</r1170>
+	<r1171>
+		<en>There must be at most 1 iteration of referencedTradeItem/GTIN where  referencedTradeItemTypeCode equals 'SUBSTITUTED'</en>
+	</r1171>
+	<r1172>
+		<en>There must be at most 1 iteration of referencedTradeItem/GTIN where  referencedTradeItemTypeCode equals 'SUBSTITUTED_BY'</en>
+	</r1172>
+	<r1173>
+		<en>There must be at most 1 iteration of referencedTradeItem/GTIN where  referencedTradeItemTypeCode equals 'REPLACED_BY'</en>
+	</r1173>
+	<r1176>
+		<en>There must be at most 1 iteration of referencedTradeItem/GTIN where  referencedTradeItemTypeCode equals 'PREFERRED'</en>
+	</r1176>
+	<r1177>
+		<en>If there is more than one iteration of ingredientSequence, then ingredientSequence and ingredientName must not be empty.</en>
+	</r1177>
+	<r1178>
+		<en>There must be at most one iteration of accidentalReleaseMeasuresDescription per languageCode</en>
+	</r1178>
+	<r1179>
+		<en>There must be at most one iteration of additionalSDSInformation per languageCode</en>
+	</r1179>
+	<r1180>
+		<en>There must be at most one iteration of additionalTradeItemDescription per languageCode</en>
+	</r1180>
+	<r1181>
+		<en>There must be at most one iteration of allergenStatement per languageCode</en>
+	</r1181>
+	<r1182>
+		<en>There must be at most one iteration of allowanceChargeDescription per languageCode</en>
+	</r1182>
+	<r1183>
+		<en>For a particular trade item price, the same currency code shall only be used once.</en>
+	</r1183>
+	<r1184>
+		<en>There must be at most one iteration of chemicalPropertyAdditionalDescription per languageCode</en>
+	</r1184>
+	<r1185>
+		<en>There must be at most one iteration of clothingCut per languageCode</en>
+	</r1185>
+	<r1186>
+		<en>There must be at most one iteration of discountDescription per languageCode</en>
+	</r1186>
+	<r1187>
+		<en>There must be at most one iteration of displayScreenBezelSize per Unit Of Measure</en>
+	</r1187>
+	<r1188>
+		<en>There must be at most one iteration of displayScreenSize per Unit Of Measure</en>
+	</r1188>
+	<r1189>
+		<en>There must be at most one iteration of distributionMediaTypeCode </en>
+	</r1189>
+	<r1190>
+		<en>There must be at most one iteration of ecologicalInformationDescription per languageCode</en>
+	</r1190>
+	<r1191>
+		<en>There must be at most one iteration of extinguishingMediaDescription per languageCode</en>
+	</r1191>
+	<r1192>
+		<en>There must be at most one iteration of fireFighterProtectiveEquipmentDescription per languageCode</en>
+	</r1192>
+	<r1193>
+		<en>There must be at most one iteration of firstAidProceduresDescription per languageCode</en>
+	</r1193>
+	<r1194>
+		<en>There must be at most one iteration of flammablePropertiesDescription per languageCode</en>
+	</r1194>
+	<r1195>
+		<en>There must be at most one iteration of flashPointTemperature  per Unit Of Measure</en>
+	</r1195>
+	<r1196>
+		<en>There must be at most one iteration of freeQuantityOfNextLowerLevelTradeItem per Unit Of Measure</en>
+	</r1196>
+	<r1197>
+		<en>There must be at most one iteration of freeQuantityOfProduct  per Unit Of Measure</en>
+	</r1197>
+	<r1198>
+		<en>There must be at most one iteration of handlingInstructionsDescription  per languageCode</en>
+	</r1198>
+	<r1199>
+		<en>There must be at most one iteration of hazardousWasteDescription per languageCode</en>
+	</r1199>
+	<r1200>
+		<en>There must be at most one iteration of hazardStatementsDescription per languageCode</en>
+	</r1200>
+	<r1201>
+		<en>There must be at most one iteration of manufacturerTakeBackProgramFee  per currencyCode</en>
+	</r1201>
+	<r1202>
+		<en>There must be at most one iteration of maximumOptimumConsumptionTemperature per Unit Of Measure</en>
+	</r1202>
+	<r1203>
+		<en>There must be at most one iteration of minimumFishMeatPoultryContent per Unit Of Measure</en>
+	</r1203>
+	<r1204>
+		<en>There must be at most one iteration of minimumOptimumConsumptionTemperature per Unit Of Measure</en>
+	</r1204>
+	<r1205>
+		<en>There must be at most one iteration of netContent per Unit Of Measure</en>
+	</r1205>
+	<r1206>
+		<en>There must be at most one iteration of noteToPhysician  per languageCode</en>
+	</r1206>
+	<r1207>
+		<en>There must be at most one iteration of orderSizingFactor per Unit Of Measure</en>
+	</r1207>
+	<r1208>
+		<en>There must be at most one iteration of packagingCompositeMaterialDescription per languageCode</en>
+	</r1208>
+	<r1209>
+		<en>There must be at most one iteration of packagingRefundObligationName </en>
+	</r1209>
+	<r1210>
+		<en>There must be at most one iteration of packagingRefuseObligationName </en>
+	</r1210>
+	<r1211>
+		<en>packagingTermsAndConditionsCode shall only be used once.</en>
+	</r1211>
+	<r1212>
+		<en>There must be at most one iteration of physiochemicalCharacteristicValue per Unit Of Measure</en>
+	</r1212>
+	<r1213>
+		<en>There must be at most one iteration of precautionaryStatementsDescription per languageCode</en>
+	</r1213>
+	<r1214>
+		<en>There must be at most one iteration of prohibitedForTransportationReason  per languageCode</en>
+	</r1214>
+	<r1215>
+		<en>There must be at most one iteration of protectiveEquipment per languageCode</en>
+	</r1215>
+	<r1216>
+		<en>There must be at most one iteration of protectiveEquipmentAdditionalDescription per languageCode</en>
+	</r1216>
+	<r1217>
+		<en>There must be at most one iteration of publisherName </en>
+	</r1217>
+	<r1218>
+		<en>There must be at most one iteration of quantityContained per Unit Of Measure</en>
+	</r1218>
+	<r1219>
+		<en>There must be at most one iteration of regulatedChemicalDescription  per languageCode</en>
+	</r1219>
+	<r1220>
+		<en>There must be at most one iteration of restrictionDescription per languageCode</en>
+	</r1220>
+	<r1221>
+		<en>There must be at most one iteration of returnableAssetCapacityContent per Unit Of Measure</en>
+	</r1221>
+	<r1222>
+		<en>There must be at most one iteration of returnableAssetsContainedQuantity per Unit Of Measure</en>
+	</r1222>
+	<r1223>
+		<en>There must be at most one iteration of shippingRegulationException  per languageCode</en>
+	</r1223>
+	<r1224>
+		<en>There must be at most one iteration of specialRequirementsDescription  per languageCode</en>
+	</r1224>
+	<r1225>
+		<en>There must be at most one iteration of StorageCompatibilityDescription per languageCode</en>
+	</r1225>
+	<r1226>
+		<en>There must be at most one iteration of storageRequirementsDescription  per languageCode</en>
+	</r1226>
+	<r1227>
+		<en>There must be at most one iteration of suggestedRetailPrice per currencyCode</en>
+	</r1227>
+	<r1228>
+		<en>There must be at most one iteration of testCriteriaDescription  per languageCode</en>
+	</r1228>
+	<r1229>
+		<en>There must be at most one iteration of testSpeciesDescription per languageCode</en>
+	</r1229>
+	<r1230>
+		<en>There must be at most one iteration of toxicologicalInformationDescription  per languageCode</en>
+	</r1230>
+	<r1231>
+		<en>There must be at most one iteration of tradeItemDateOnPackagingFormatName  </en>
+	</r1231>
+	<r1232>
+		<en>There must be at most one iteration of tradeItemGroupIdentificationCodeReference</en>
+	</r1232>
+	<r1233>
+		<en>There must be at most one iteration of transportationModeRegulatoryAgency</en>
+	</r1233>
+	<r1234>
+		<en>There must be at most one iteration of workingPressureRatingMaximum per Unit Of Measure</en>
+	</r1234>
+	<r1235>
+		<en>There must be at most one iteration of workingPressureRatingMinimum per Unit Of Measure</en>
+	</r1235>
+	<r1236>
+		<en>You shall populate Claim Type Code (claimTypeCode) because you populated Element Claim Code (claimElementCode).</en>
+	</r1236>
+	<r1237>
+		<en>There must be at most one iteration of acidificationMeasurementProtocolDescription per languageCode.</en>
+	</r1237>
+	<r1238>
+		<en>There must be at most one iteration of acidificationMeasurementReferenceSubstanceDescription per languageCode.</en>
+	</r1238>
+	<r1239>
+		<en>There must be at most one iteration of aquaticEutrophicationReferenceSubstanceDescription per languageCode.</en>
+	</r1239>
+	<r1240>
+		<en>There must be at most one iteration of aquaticEutrophicationWaterBodyDescription per languageCode.</en>
+	</r1240>
+	<r1241>
+		<en>There must be at most one iteration of componentDescription per languageCode.</en>
+	</r1241>
+	<r1242>
+		<en>There must be at most one iteration of cumulativeEnergyDemandDescription per languageCode.</en>
+	</r1242>
+	<r1243>
+		<en>There must be at most one iteration of cumulativeEnergyDemandProtocolDescription per languageCode.</en>
+	</r1243>
+	<r1244>
+		<en>There must be at most one iteration of cumulativeEnergyDemandReferenceSubstanceDescription per languageCode.</en>
+	</r1244>
+	<r1245>
+		<en>There must be at most one iteration of facilitiesInStressedWaterAreaCalculationMethod per languageCode.</en>
+	</r1245>
+	<r1246>
+		<en>There must be at most one iteration of freshWaterEcotoxicityModelDescription per languageCode.</en>
+	</r1246>
+	<r1247>
+		<en>There must be at most one iteration of freshWaterEcotoxicityReferenceSubstanceDescription per languageCode.</en>
+	</r1247>
+	<r1248>
+		<en>There must be at most one iteration of freezingMeltingPoint per Unit of Measure.</en>
+	</r1248>
+	<r1249>
+		<en>There must be at most one iteration of functionalBasisUnitDescription per languageCode.</en>
+	</r1249>
+	<r1250>
+		<en>There must be at most one iteration of globalWarmingPotentialEquivalentBasisYearsDescription per languageCode.</en>
+	</r1250>
+	<r1251>
+		<en>There must be at most one iteration of globalWarmingPotentialEquivalentProtocolDescription per languageCode.</en>
+	</r1251>
+	<r1253>
+		<en>There must be at most one iteration of globalWarmingPotentialEquivalentSubstanceDescription per languageCode.</en>
+	</r1253>
+	<r1254>
+		<en>There must be at most one iteration of massEquivalentProtocolDescription per languageCode.</en>
+	</r1254>
+	<r1255>
+		<en>There must be at most one iteration of massEquivalentSubstanceDescription per languageCode.</en>
+	</r1255>
+	<r1256>
+		<en>There must be at most one iteration of packagingComponentDescription per languageCode.</en>
+	</r1256>
+	<r1257>
+		<en>There must be at most one iteration of packagingConstituent per languageCode.</en>
+	</r1257>
+	<r1258>
+		<en>There must be at most one iteration of packagingMaterialDescription per languageCode.</en>
+	</r1258>
+	<r1259>
+		<en>There must be at most one iteration of packagingRecoveryRateDescriptionper languageCode.</en>
+	</r1259>
+	<r1260>
+		<en>There must be at most one iteration of packagingRecycledContentDescription per languageCode.</en>
+	</r1260>
+	<r1261>
+		<en>There must be at most one iteration of packagingRenewableContentDescription per languageCode.</en>
+	</r1261>
+	<r1262>
+		<en>There must be at most one iteration of packagingReusabilityStandardDescription per languageCode.</en>
+	</r1262>
+	<r1263>
+		<en>There must be at most one iteration of packagingWeightReductionProtocolName per languageCode.</en>
+	</r1263>
+	<r1264>
+		<en>There must be at most one iteration of productCharacteristicValueAmount per currencyCode.</en>
+	</r1264>
+	<r1265>
+		<en>There must be at most one iteration of productCharacteristicValueDescription per languageCode.</en>
+	</r1265>
+	<r1266>
+		<en>There must be at most one iteration of productCharacteristicValueMeasurement per Unit of Measure.</en>
+	</r1266>
+	<r1267>
+		<en>There must be at most one iteration of proofOfOptimizedPackagingWeightStandardDescription per languageCode.</en>
+	</r1267>
+	<r1269>
+		<en>There must be at most one iteration of relevantSupportingSubstanceHazardousDocumentationper languageCode.</en>
+	</r1269>
+	<r1270>
+		<en>There must be at most one iterationof sourceCertificationSystemProtocolDescriptionper languageCode.</en>
+	</r1270>
+	<r1271>
+		<en>There must be at most one iteration of totalPackagingEconomicCostAmount per currencyCode.</en>
+	</r1271>
+	<r1272>
+		<en>There must be at most one iteration of totalPackagingEconomicCostMeasurementDescription per languageCode.</en>
+	</r1272>
+	<r1273>
+		<en>There must be at most one iteration of toxicityMeasurementProtocolDescription per languageCode.</en>
+	</r1273>
+	<r1274>
+		<en>There must be at most one iteration of toxicityReferenceSubstanceDescription per languageCode.</en>
+	</r1274>
+	<r1275>
+		<en>When using the FoodAndBeverageIngredient class the attributes depend on either ingredientName or grapeVarietyCode being used. Neither ingredientName nor grapeVarietyCode were used.</en>
+	</r1275>
+	<r1277>
+		<en>If tradeItemUnitDescriptorCode is equal to 'MIXED_MODULE' and parent item exists then parent item tradeItemUnitDescriptorCode must equal 'TRANSPORT_LOAD', 'PALLET', or 'MIXED_MODULE'.</en>
+	</r1277>
+	<r1278>
+		<en>If tradeItemUnitDescriptorCode is equal to 'MIXED_MODULE' then child item tradeItemUnitDescriptorCode must not equal 'TRANSPORT_LOAD' .</en>
+	</r1278>
+	<r1279>
+		<en>If tradeItemUnitDescriptorCode equals 'DISPLAY_SHIPPER' then parent item tradeItemUnitDescriptorCode shall not equal 'BASE_UNIT_OR_EACH' or 'PACK_OR_INNER_PACK'.</en>
+	</r1279>
+	<r1280>
+		<en>If tradeItemUnitDescriptorCode is equal to 'DISPLAY_SHIPPER' then child item tradeItemUnitDescriptorCode must not equal 'TRANSPORT_LOAD', 'MIXED_MODULE' or ' PALLET'.</en>
+	</r1280>
+	<r1281>
+		<en>The format of ingredientSequence must be 'dd.dd.dd…'. Where 'd' must be a digit, always ending in a 'dd' and never having a value of '00'.
+
+E.g.
+00 FAILS
+01 PASSES
+01.00 FAILS
+01.01 PASSES
+01.01.00 FAILS
+
+</en>
+	</r1281>
+	<r1282>
+		<en>Transaction/DocumentCommand/documentCommandHeader/Type shall not be empty</en>
+	</r1282>
+	<r1283>
+		<en>effectiveDateTime must not be empty</en>
+	</r1283>
+	<r1284>
+		<en>Maximum Temperature must be given using unique units of measurement, if multiple temperatures for Temperature Activity Code (#temperatureQualifierCode#), the (#maximumTemperature#) SHALL not be repeated.</en>
+	</r1284>
+	<r1285>
+		<en>Minimum Temperature must be given using unique units of measurement, if multiple temperatures for Temperature Activity Code (#temperatureQualifierCode#), the (#minimumTemperature#) SHALL not be repeated.</en>
+	</r1285>
+	<r1286>
+		<en>There must be at most one iteration of minimumToleranceTemperature per value of temperatureQualifierCode</en>
+	</r1286>
+	<r1287>
+		<en>There must be at most one iteration of maximumToleranceTemperature per value of temperatureQualifierCode</en>
+	</r1287>
+	<r1288>
+		<en>If preliminaryItemStatusCode is equal to 'PRELIMINARY' or 'FINAL' then firstShipDateTime must not be empty. </en>
+	</r1288>
+	<r1289>
+		<en>If  firstShipDateTime is less than or equal to current date then preliminaryItemStatusCode must not equal 'PRELIMINARY' </en>
+	</r1289>
+	<r1290>
+		<en>If preliminaryItemStatusCode changes from  'PRELIMINARY' to 'FINAL' and Document Command is equal to CHANGE_BY_REFRESH, then the changedate must be less than or equal to the firstShipDateTime.</en>
+	</r1290>
+	<r1291>
+		<en>If preliminaryItemStatusCode is equal to 'PRELIMINARY' then parent trade item preliminaryItemStatusCode must not equal 'FINAL'.</en>
+	</r1291>
+	<r1292>
+		<en>If preliminaryItemStatusCode equals 'FINAL' or 'PRELIMINARY' then the preliminaryItemStatusCode for the GTIN in all published hierarchies with the same GTIN, GLN and Target Market combination must be the same.</en>
+	</r1292>
+	<r1293>
+		<en>If the Packaging class is used, then either packagingTypeCode or platformTypeCode must not be empty.</en>
+	</r1293>
+	<r1294>
+		<en>If gs1TradeItemIdentificationKeyCode  is equal to 'GTIN_13' then associated gs1TradeItemIdentificationKeyValue value must have 13 digits and must have a valid check digit.</en>
+	</r1294>
+	<r1295>
+		<en>If gs1TradeItemIdentificationKeyCode  is equal to 'GTIN_8' then associated gs1TradeItemIdentificationKeyValue value must have 8 digits and must have a valid check digit.</en>
+	</r1295>
+	<r1296>
+		<en>If gs1TradeItemIdentificationKeyCode  is equal to 'GTIN_14' then associated gs1TradeItemIdentificationKeyValue value must have 14 digits and must have a valid check digit.</en>
+	</r1296>
+	<r1297>
+		<en>If gs1TradeItemIdentificationKeyCode  is equal to 'GTIN_12' then associated gs1TradeItemIdentificationKeyValue value must have 12 digits and must have a valid check digit.</en>
+	</r1297>
+	<r1299>
+		<en>If targetMarketCountryCode does not equal (‘036’ (Australia)) and the association brandowner/PartyInRole is invoked, then brandOwner/gln SHALL be used.</en>
+	</r1299>
+	<r1300>
+		<en>If TargetMarket equals '124' (Canada) and PharmaceuticalIteminformation/PsychotropicSubstance/ExternalCodeValueInformation/externalAgencyName and/or PharmaceuticalIteminformation/PsychotropicSubstance/EnumerationValueInformation/enumerationValue are not empty, then doesSaleOfTradeItemRequireGovernmentalReporting must not be empty.</en>
+	</r1300>
+	<r1301>
+		<en>If fileEffectiveStartDateTime and fileEffectiveEndDateTime are not empty, then fileEffectiveEndDateTime must be greater than fileEffectiveStartDateTime</en>
+	</r1301>
+	<r1302>
+		<en>fileEffectiveStartDateTime is missing.
+If targetMarketCountryCode equals ('840' (United States) or '124' (Canada)) and uniformResourceIdentifier is used, then fileEffectiveStartDateTime is mandatory.</en>
+	</r1302>
+	<r1303>
+		<en>fileFormatName is missing.
+If targetMarketCountryCode equals ('840' (United States) or '124' (Canada)) and uniformResourceIdentifier is used, then fieFormatName is mandatory.</en>
+	</r1303>
+	<r1304>
+		<en>fileName is missing.
+If targetMarketCountryCode equals ('840' (United States) or '124' (Canada)) and uniformResourceIdentifier is used, then fieName is mandatory.</en>
+	</r1304>
+	<r1305>
+		<en>If isIngredientGeneric is not empty, then ingredientStength must not be empty.</en>
+	</r1305>
+	<r1308>
+		<en>If a Material Agency (#materialAgencyCode#) is used, then Material Code (#materialCode#) SHALL be used.</en>
+	</r1308>
+	<r1309>
+		<en>if TextileMaterial/materialAgencyCode and TextileMaterial/TextileMaterialComposition/materialCode are used then TextileMaterial/TextileMaterialComposition/materialPercentage shall be used.</en>
+	</r1309>
+	<r1310>
+		<en>If packagingFunctioncode is equal to "TAMPER_EVIDENT" then"packagingTypeCode must not be empty.</en>
+	</r1310>
+	<r1312>
+		<en>If platformTermsAndConditionsCode is not empty then platformTypeCode must not be empty.</en>
+	</r1312>
+	<r1315>
+		<en>If priceComparisonContentTypeCode is used, then priceComparisonMeasurement shall be used.</en>
+	</r1315>
+	<r1316>
+		<en>If nonPromotionalTradeItem/tradeItemIdentification is not empty, the associateded TradeItemIdentification must already be in the home data pool in order to ensure data integrity.</en>
+	</r1316>
+	<r1317>
+		<en>If PromotionalItemInformation/nonPromotionalTradeItem/tradeItemIdentification is not empty,  then isTradeItemAconsumerUnit must equal "TRUE" </en>
+	</r1317>
+	<r1320>
+		<en>If (freeQuantityOfNextLowerLevelTradeItem or  freeQuantityOfProduct) is not empty, then istradeItemAConsumerunit must equal "TRUE"</en>
+	</r1320>
+	<r1321>
+		<en>If promotionTypeCode is not empty, then isTradeItemAConsumerUnit must equal "TRUE"</en>
+	</r1321>
+	<r1323>
+		<en>The associated UoM of freeQuantityOfNextLowerLevelTradeItem must be one of the associated UoMs of netContent of the child trade item.</en>
+	</r1323>
+	<r1324>
+		<en>If stackingFactor is not empty, it must equal or be greater than '1'</en>
+	</r1324>
+	<r1333>
+		<en>The discontinuedDateTime and the cancelDateTime were both set for the same item  or the CatalogueItem and TradeItem discontinuedDatesTime and cancelDateTime were not the same.</en>
+	</r1333>
+	<r1334>
+		<en>There must be at most one iteration of dangerousGoodsTechnicalName per languageCode.</en>
+	</r1334>
+	<r1335>
+		<en>There must be at most one iteration of boilingPoint per measurementUnitCode.</en>
+	</r1335>
+	<r1336>
+		<en>There must be at most one iteration of filePrintHeight per measurementUnitCode.</en>
+	</r1336>
+	<r1337>
+		<en>There must be at most one iteration of filePrintWidth per measurementUnitCode.</en>
+	</r1337>
+	<r1338>
+		<en>gpcAttributeValueCode is missing. gpcAttributeTypeCode and gpcAttributeValueCode in class gDSNTradeItemClassificationAttribute are used as a pair but only gpcAttributeTypeCode was used. </en>
+	</r1338>
+	<r1340>
+		<en>The value provided for gpcAttributeTypecode is not valid for the provided value of gpcCategoryCode</en>
+	</r1340>
+	<r1341>
+		<en>The value provided for gpcAttributeValueCode is not valid for the provided value of gpcAttributeTypeCode</en>
+	</r1341>
+	<r1342>
+		<en>If targetMarketCountryCode equals '840 (United States) and (ChildNutritionQualifier or ChildNutritionLabel) is used, then ChildNutritionQualifier/childNutritionQualifier, ChildNutritionQualifier/childNutritionQualifiedValue,ChildNutritionQualifier/childNutritionValue,ChildNutritionLabel/ childNutritionLabelStatement, ChildNutritionLabel/childNutritionProductIdentificationAgencyCode and  ChildNutritionLabel/childNutritionProductIdentification shall be used.
+This means that only childNutritionExpirationDateTime is not conditionally mandatory.</en>
+	</r1342>
+	<r1343>
+		<en>If targetMarketCountryCode equals '840' (United States) and productFormulationStatementRegulatoryBodyCode is used, then
+totalPortionWeightAsPurchased shall be used.</en>
+	</r1343>
+	<r1344>
+		<en>For target market '840' (United States), both creditableIngredientTypeCode and
+totalCreditableIngredientTypeAmount shall be used at least once if class ProductFormulationStatement is used .</en>
+	</r1344>
+	<r1345>
+		<en>For target market '840' (United States),
+creditableIngredientDescription shall be used if creditableIngredientTypeCode is used .</en>
+	</r1345>
+	<r1346>
+		<en>creditableAmount is missing. For target market '840' (United States) creditableAmount shall be used  when  creditableIngredientDescription is used.</en>
+	</r1346>
+	<r1347>
+		<en>totalVegetableSubgroupAmount is missing.  For target market '840' (United States) totalVegetableSubgroupAmount shall be used when vegetableSubgroupcode is used.</en>
+	</r1347>
+	<r1348>
+		<en>The attributes doesTradeItemMeetWholeGrainRichCriteria, and creditableGrainGroupCode shall be used for Target Market '840' (United States) when doesTradeItemContainNonCreditableGrains is used.</en>
+	</r1348>
+	<r1349>
+		<en>The attributes doesTradeItemContainNonCreditableGrains, and creditableGrainGroupCode  shall be used for Target Market '840' (United States) when the attribute doesTradeItemMeetWholeGrainRichCriteria is used.</en>
+	</r1349>
+	<r1350>
+		<en>The attributes doesTradeItemContainNonCreditableGrains, and doesTradeItemMeetWholeGrainRichCriteria  shall be used for Target Market '840' (United States) when the attribute creditableGrainGroupCode is used.</en>
+	</r1350>
+	<r1351>
+		<en>The attribute nonCreditableGrainAmount  shall be used for Target Market '840' (United States) when the attribute doesTradeItemContainNoncreditableGrains is TRUE</en>
+	</r1351>
+	<r1352>
+		<en>The attributes nonCreditableGrainDescription shall be used for Target Market '840' (United States) when  the attribute nonCreditableGrainGrams is used.</en>
+	</r1352>
+	<r1353>
+		<en>regulatoryAct and/or regulatoryAgency missing. If regulationTypeCode equals 'TRACEABILITY_REGULATION' and targetMarketCountryCode equals '752' (Sweden), then regulatoryAct AND regulatoryAgency shall be used</en>
+	</r1353>
+	<r1380>
+		<en>@CurrencyCode must be the 3 character representation found in the ISO 4217 codelist.</en>
+	</r1380>
+	<r1381>
+		<en>There shall be at most one iteration of tradeItemLicenseTitle per LanguageCode</en>
+	</r1381>
+	<r1382>
+		<en>There shall be at most one iteration of TextileMaterial/tradeItemMaterialDesignationDescription per LanguageCode</en>
+	</r1382>
+	<r1383>
+		<en>There shall be at most one iteration of onixPartNumber per LanguageCode</en>
+	</r1383>
+	<r1384>
+		<en>There shall be at most one iteration of educationalFocusDescription per LanguageCode</en>
+	</r1384>
+	<r1385>
+		<en>There shall be at most one iteration of connectorFinishDescription per LanguageCode</en>
+	</r1385>
+	<r1386>
+		<en>There shall be at most one iteration of dutyFeeTaxLegalProvision per LanguageCode</en>
+	</r1386>
+	<r1387>
+		<en>There shall be at most one iteration of recommendedUsageLocation per LanguageCode</en>
+	</r1387>
+	<r1388>
+		<en>There shall be at most one iteration of experienceLevel per LanguageCode</en>
+	</r1388>
+	<r1389>
+		<en>There shall be at most one iteration of sizeTermDescription per LanguageCode</en>
+	</r1389>
+	<r1390>
+		<en>There shall be at most one iteration of closureOrFastenerLocation per LanguageCode</en>
+	</r1390>
+	<r1391>
+		<en>There shall be at most one iteration of feedLifeStage per LanguageCode</en>
+	</r1391>
+	<r1392>
+		<en>There shall be at most one iteration of maximumFeedingAmount per measurementUnitCode</en>
+	</r1392>
+	<r1393>
+		<en>There shall be at most one iteration of minimumFeedingAmount per measurementUnitCode</en>
+	</r1393>
+	<r1394>
+		<en>There shall be at most one iteration of recommendedFrequencyOfFeeding per LanguageCode</en>
+	</r1394>
+	<r1395>
+		<en>There shall be at most one iteration of maximumWeightOfAnimalBeingFed per measurementUnitCode</en>
+	</r1395>
+	<r1396>
+		<en>There shall be at most one iteration of minimumWeightOfAnimalBeingFed per measurementUnitCode</en>
+	</r1396>
+	<r1397>
+		<en>There shall be at most one iteration of feedingAmount per measurementUnitCode</en>
+	</r1397>
+	<r1400>
+		<en>There shall be at most one iteration of animalNutrientQuantityContained per measurementUnitCode</en>
+	</r1400>
+	<r1401>
+		<en>There shall be at most one iteration of animalNutrientQuantityContainedBasis per measurementUnitCode</en>
+	</r1401>
+	<r1402>
+		<en>There shall be at most one iteration of maximumResolution per measurementUnitCode</en>
+	</r1402>
+	<r1403>
+		<en>There shall be at most one iteration of itemMinimumDurability per timeMeasurementUnitCode</en>
+	</r1403>
+	<r1404>
+		<en>There shall be at most one iteration of dutyFeeTaxBasisPrice per currencyCode</en>
+	</r1404>
+	<r1405>
+		<en>There shall be at most one iteration of feedingAmountBasisDescription per languageCode</en>
+	</r1405>
+	<r1406>
+		<en>The length of MarketingInformationModule/MarketingInformation/couponFamilyCode shall exactly be 3 characters for targetMarketCountryCode equal to ('840' (United States).</en>
+	</r1406>
+	<r1407>
+		<en>The LanguageCode shall be the 2-5 character representation found in the ISO 639 list.</en>
+	</r1407>
+	<r1408>
+		<en>brandName is mandatory for targetMarket 840 (United States) and context 'Medical Devices'</en>
+	</r1408>
+	<r1409>
+		<en>returnableAssetsContainedQuantity shall only have a measurementUnitCode of Unit Of Measure Classification 'Count'.
+E.g. 'H87' ('Piece') passes as this is of Unit Of Measure Classification 'Count',  '58' ('Net Kilogram') fails as this is of Unit Of Measure Classification 'Mass'.</en>
+	</r1409>
+	<r1410>
+		<en>productYieldTypeCode  requires productYield  to be used The code value of productYieldTypeCode in its own right does not provide any business benefit.</en>
+	</r1410>
+	<r1411>
+		<en>regulatedProductName cannot be used more than once with the same @languageCode for the same trade item.</en>
+	</r1411>
+	<r1412>
+		<en>One instance of componentDescription has to be in Swedish. You are not allowed to populate componentDescription more than once in the same language.</en>
+	</r1412>
+	<r1413>
+		<en>Exactly one instance of Consumer storage instructions shall  be in Swedish.</en>
+	</r1413>
+	<r1414>
+		<en>One instance of servingSuggestion has to be in Swedish. You are not allowed to populate servingSuggestion more than once in the same language.</en>
+	</r1414>
+	<r1415>
+		<en>One instance of Compulsory additive label information  has to be in Swedish. You are not allowed to populate compulsoryAdditiveLabelInformation more than once in the same language.</en>
+	</r1415>
+	<r1416>
+		<en>One instance of nonfoodIngredientStatement  has to be in Swedish. You are not allowed to populate nonfoodIngredientStatement  more than once in the same language.</en>
+	</r1416>
+	<r1417>
+		<en>One instance of nutritionalClaim has to be in Swedish.</en>
+	</r1417>
+	<r1418>
+		<en>One instance of countryOfOriginStatement has to be in Swedish.</en>
+	</r1418>
+	<r1419>
+		<en>One instance of contentDescription has to be in Swedish. You are not allowed to populate contentDescription more than once in the same language.</en>
+	</r1419>
+	<r1420>
+		<en>One instance of Hazard statements description shall be in Swedish. You are not allowed to populate hazardStatementsDescription more than once in the same language.</en>
+	</r1420>
+	<r1421>
+		<en>One instance of precautionaryStatementsDescription  shall be in Swedish. You are not allowed to populate precautionaryStatementsDescription more than once in the same language.</en>
+	</r1421>
+	<r1422>
+		<en>One instance of tradeItemDescription shall be in Swedish.</en>
+	</r1422>
+	<r1423>
+		<en>One instance of colourDescription shall be in Swedish. You are not allowed to populate colourDescription more than once in the same language.</en>
+	</r1423>
+	<r1424>
+		<en>One instance of hazardousMaterialAdditionalInformation shall be in Swedish. You are not allowed to populate hazardousMaterialAdditionalInformation more than once in the same language.</en>
+	</r1424>
+	<r1425>
+		<en>One instance of dangerousGoodsTechnicalName  shall be in Swedish. You are not allowed to populate dangerousGoodsTechnicalName  more than once in the same language.</en>
+	</r1425>
+	<r1426>
+		<en>One instance of recommendedFrequencyOfFeeding  shall be in Swedish. You are not allowed to populate recommendedFrequencyOfFeeding more than once in the same language.</en>
+	</r1426>
+	<r1427>
+		<en>One instance of feedingAmountBasisDescription  shall be in Swedish. You are not allowed to populate feedingAmountBasisDescription more than once in the same language.</en>
+	</r1427>
+	<r1428>
+		<en>One instance of animalNutritionalClaim shall be in Swedish.</en>
+	</r1428>
+	<r1429>
+		<en>One instance of tradeItemKeyWords shall be in Swedish. You are not allowed to populate tradeItemKeyWords more than once in the same language.</en>
+	</r1429>
+	<r1430>
+		<en>One instance of provenanceStatement shall be in Swedish.</en>
+	</r1430>
+	<r1431>
+		<en>For descriptiveSizeDimension one of the values must be in Swedish. You are not allowed to populate descriptiveSizeDimension more than once in the same language.</en>
+	</r1431>
+	<r1432>
+		<en>One instance of claimDescription shall be in Swedish.</en>
+	</r1432>
+	<r1433>
+		<en>One instance of ingredientStatement  shall be in Swedish. You are not allowed to populate ingredientStatement more than once in the same language.</en>
+	</r1433>
+	<r1434>
+		<en>One instance of dailyValueIntakeReference  shall be in Swedish. You are not allowed to populate dailyValueIntakeReference more than once in the same language.</en>
+	</r1434>
+	<r1435>
+		<en>One instance of servingSizeDescription  shall be in Swedish. You are not allowed to populate servingSizeDescription more than once in the same language.</en>
+	</r1435>
+	<r1436>
+		<en>One instance of allergenStatement shall be in Swedish. You are not allowed to populate allergenStatement more than once in the same language.</en>
+	</r1436>
+	<r1437>
+		<en>One instance of preparationInstructions  shall be in Swedish. You are not allowed to populate preparationInstructions more than once in the same language.</en>
+	</r1437>
+	<r1438>
+		<en>preparationTypeCode is missing for this trade item.</en>
+	</r1438>
+	<r1440>
+		<en>For Country Of Sale Code (#targetMarketCountryCode#), if Nutritional Preparation Code (preparationStateCode) is used, then Nutrient Code (nutrientTypeCode) SHALL be used.</en>
+	</r1440>
+	<r1445>
+		<en>quantityContained and/or dailyValueIntakePercent is(are) missing. They are used together, i.e. if nutrientTypeCode is used, one or both of the others shall be used.</en>
+	</r1445>
+	<r1446>
+		<en>returnablePackageDepositIdentification is missing for this Trade Item.</en>
+	</r1446>
+	<r1447>
+		<en>applicationIdentifierTypeCode is missing. If dataCarrierFamilyTypeCode equals 'GS1_128', then applicationIdentifierTypeCode shall be used for target market Sweden (‘752’)</en>
+	</r1447>
+	<r1449>
+		<en>descriptionShort is missing in Swedish or has been repeated with the same language code. descriptionShort is mandatory for consumer units. You are not allowed to populate descriptionShort more than once in the same language.</en>
+	</r1449>
+	<r1450>
+		<en>functionalName is missing in Swedish or has been repeated with the same language code. functionalName is mandatory for consumer units. You are not allowed to populate functionalName more than once in the same language.</en>
+	</r1450>
+	<r1456>
+		<en>The trade item information has been updated since the previous version but lastChangeDateTime has not been updated.</en>
+	</r1456>
+	<r1457>
+		<en>Invalid document command. The CatalogueItemHierarchicalWithdrawal message shall have a document command of ‘DELETE’. No other document commands are valid for this message
+</en>
+	</r1457>
+	<r1458>
+		<en>Invalid command. You shall not send a CIN with 'DELETE' to withdraw an item. You shall use the CatalogueItemHierarchicalWithdrawal message.</en>
+	</r1458>
+	<r1459>
+		<en>additionalTradeItemClassificationCodeValue is not used.if additionalTradeItemClassificationSystemCode is used then there shall be a corresponding additionalTradeItemClassificationCodeValue used</en>
+	</r1459>
+	<r1460>
+		<en>additionalTradeItemClassificationSystemCode is not used. If additionalTradeItemClassificationCodeValue is used then there shall be a corresponding additionalTradeItemClassificationSystemCode used</en>
+	</r1460>
+	<r1461>
+		<en>additionalPublicationDescription is repeatable for language only.</en>
+	</r1461>
+	<r1462>
+		<en>additionalTradeItemClassificationPropertyDescription is repeatable for language only.</en>
+	</r1462>
+	<r1463>
+		<en>ageRangeDescription is repeatable for language only.</en>
+	</r1463>
+	<r1464>
+		<en>aquaticEutrophicationModelDescription is repeatable for language only.</en>
+	</r1464>
+	<r1465>
+		<en>audienceDescription is repeatable for language only.</en>
+	</r1465>
+	<r1466>
+		<en>availableTime is repeatable for language only.</en>
+	</r1466>
+	<r1467>
+		<en>awardPrizeDescription is repeatable for language only.</en>
+	</r1467>
+	<r1468>
+		<en>biographicalNote is repeatable for language only.</en>
+	</r1468>
+	<r1469>
+		<en>campaignName is repeatable for language only.</en>
+	</r1469>
+	<r1470>
+		<en>channelSpecificMarketingMessage is repeatable for language only.</en>
+	</r1470>
+	<r1471>
+		<en>cheeseMaturationPeriodDescription is repeatable for language only.</en>
+	</r1471>
+	<r1472>
+		<en>childNutritionQualifiedValue is repeatable for @measurementUnitCode only.</en>
+	</r1472>
+	<r1473>
+		<en>childNutritionValue is repeatable for @measurementUnitCode only.</en>
+	</r1473>
+	<r1474>
+		<en>collarType is repeatable for language only.</en>
+	</r1474>
+	<r1475>
+		<en>componentQuantity is repeatable for @measurementUnitCode. only.</en>
+	</r1475>
+	<r1476>
+		<en>contentDescription  is repeatable for language only.</en>
+	</r1476>
+	<r1477>
+		<en>contentsDescription is repeatable for language only.</en>
+	</r1477>
+	<r1478>
+		<en>contributorDescription is repeatable for language only.</en>
+	</r1478>
+	<r1479>
+		<en>contributorStatement is repeatable for language only.</en>
+	</r1479>
+	<r1483>
+		<en>creditableIngredientDescription is repeatable for language only.</en>
+	</r1483>
+	<r1484>
+		<en>cumulativeHumidityInterruptionAcceptableTimeSpanInstructions is repeatable for language only.</en>
+	</r1484>
+	<r1485>
+		<en>descriptiveSizeDimension is repeatable for language only.</en>
+	</r1485>
+	<r1486>
+		<en>dutyFeeTaxReductionCriteriaDescription is repeatable for language only.</en>
+	</r1486>
+	<r1487>
+		<en>dutyFeeTaxTypeDescription is repeatable for language only.</en>
+	</r1487>
+	<r1488>
+		<en>editionDescription is repeatable for language only.</en>
+	</r1488>
+	<r1489>
+		<en>editionStatement is repeatable for language only.</en>
+	</r1489>
+	<r1490>
+		<en>enumerationValueDefinition is repeatable for language only.</en>
+	</r1490>
+	<r1491>
+		<en>enumerationValueDescription is repeatable for language only.</en>
+	</r1491>
+	<r1492>
+		<en>fileFormatDescription  is repeatable for language only.</en>
+	</r1492>
+	<r1493>
+		<en>fileResolutionDescription is repeatable for language only.</en>
+	</r1493>
+	<r1494>
+		<en>hazardousMaterialAdditionalInformation is repeatable for language only.</en>
+	</r1494>
+	<r1495>
+		<en>illustrationNote is repeatable for language only.</en>
+	</r1495>
+	<r1496>
+		<en>ingredientDefinition is repeatable for language only.</en>
+	</r1496>
+	<r1498>
+		<en>longSynopsis is repeatable for language only.</en>
+	</r1498>
+	<r1499>
+		<en>TextileMaterial/TextileMaterialComposition/materialContent is repeatable for language only.</en>
+	</r1499>
+	<r1500>
+		<en>materialThreadCount is repeatable for language only.</en>
+	</r1500>
+	<r1501>
+		<en>minimumOrderValue is repeatable for currency only.</en>
+	</r1501>
+	<r1502>
+		<en>necessaryTradeItemToUseDescription is repeatable for language only.</en>
+	</r1502>
+	<r1503>
+		<en>nonCreditableGrainAmount is repeatable for measurementUnitCode only.</en>
+	</r1503>
+	<r1504>
+		<en>nonCreditableGrainDescription is repeatable for language only.</en>
+	</r1504>
+	<r1505>
+		<en>nonFoodIngredientStatement is repeatable for language only.</en>
+	</r1505>
+	<r1506>
+		<en>nonMarkedTradeItemComponents is repeatable for language only.</en>
+	</r1506>
+	<r1507>
+		<en>numberOfServingsRangeDescription is repeatable for language only.</en>
+	</r1507>
+	<r1508>
+		<en>physicalFormDescription is repeatable for language only.</en>
+	</r1508>
+	<r1509>
+		<en>productInformationLegalDisclaimer is repeatable for language only.</en>
+	</r1509>
+	<r1510>
+		<en>productionVariantDescription is repeatable for language only.</en>
+	</r1510>
+	<r1511>
+		<en>propertyDescription is repeatable for language only.</en>
+	</r1511>
+	<r1512>
+		<en>servingSize is repeatable for @measurementUnitCode only.</en>
+	</r1512>
+	<r1513>
+		<en>shortSynopsis is repeatable for language only.</en>
+	</r1513>
+	<r1514>
+		<en>sleeveType is repeatable for language only.</en>
+	</r1514>
+	<r1515>
+		<en>styleDescription is repeatable for language only.</en>
+	</r1515>
+	<r1516>
+		<en>targetAudience is repeatable for language only.</en>
+	</r1516>
+	<r1517>
+		<en>targetConsumerAge is repeatable for language only.</en>
+	</r1517>
+	<r1518>
+		<en>totalCreditableIngredientTypeAmount is repeatable for @measurmentUnitCode only.</en>
+	</r1518>
+	<r1519>
+		<en>totalVegetableAmount is repeatable for @measurementUnitCode only.</en>
+	</r1519>
+	<r1520>
+		<en>trackTitle is repeatable for language only.</en>
+	</r1520>
+	<r1521>
+		<en>tradeItemFinishDescription is repeatable for language only.</en>
+	</r1521>
+	<r1522>
+		<en>tradeItemIncludedAccessories is repeatable for language only.</en>
+	</r1522>
+	<r1523>
+		<en>tradeItemVariantValue is repeatable for language only.</en>
+	</r1523>
+	<r1524>
+		<en>tradeItemMarketingMessage is repeatable for language only.</en>
+	</r1524>
+	<r1525>
+		<en>cumulativeTemperatureInterruptionAcceptableTimeSpanInstructions is repeatable for language only.</en>
+	</r1525>
+	<r1526>
+		<en>propertyMeasurement is repeatable for measurementUnitCode only.</en>
+	</r1526>
+	<r1527>
+		<en>totalAudioPowerOutput is repeatable for measurementUnitCode only.</en>
+	</r1527>
+	<r1528>
+		<en>maximumAvailableStorageCapacity is repeatable for measurementUnitCode only.</en>
+	</r1528>
+	<r1529>
+		<en>microbiologicalOrganismMaximumValue is repeatable for measurementUnitCode only.</en>
+	</r1529>
+	<r1530>
+		<en>microbiologicalOrganismReferenceValue is repeatable for measurementUnitCode only.</en>
+	</r1530>
+	<r1531>
+		<en>microbiologicalOrganismWarningValue is repeatable for measurementUnitCode only.</en>
+	</r1531>
+	<r1532>
+		<en>microbiologicalOrganismMaximumValueBasis is repeatable for measurementUnitCode only.</en>
+	</r1532>
+	<r1533>
+		<en>microbiologicalOrganismReferenceValueBasis is repeatable for measurementUnitCode only.</en>
+	</r1533>
+	<r1534>
+		<en>microbiologicalOrganismWarningValueBasis is repeatable for measurementUnitCode only.</en>
+	</r1534>
+	<r1535>
+		<en>physiochemicalCharacteristicValueBasis is repeatable for measurementUnitCode only.</en>
+	</r1535>
+	<r1536>
+		<en>physiochemicalCharacteristicReferenceValueBasis is repeatable for measurementUnitCode only.</en>
+	</r1536>
+	<r1537>
+		<en>physiochemicalCharacteristicWarningValueBasis is repeatable for measurementUnitCode only.</en>
+	</r1537>
+	<r1538>
+		<en>physiochemicalCharacteristicValue is repeatable for measurementUnitCode only.</en>
+	</r1538>
+	<r1539>
+		<en>physiochemicalCharacteristicReferenceValue is repeatable for measurementUnitCode only.</en>
+	</r1539>
+	<r1540>
+		<en>physiochemicalCharacteristicWarningValue is repeatable for measurementUnitCode only.</en>
+	</r1540>
+	<r1541>
+		<en>consumerWarningTypeCode is missing.
+If targetMarketCountryCode equals ('249' (France) or '250' (France) and consumerWarningDescription is used, then consumerWarningTypeCode shall be used.</en>
+	</r1541>
+	<r1542>
+		<en>chemicalIngredientConcentrationLowerValue is repeatable for measurementUnitCode only.</en>
+	</r1542>
+	<r1543>
+		<en>chemicalIngredientConcentrationUpperValue is repeatable for measurementUnitCode only.</en>
+	</r1543>
+	<r1544>
+		<en>flashPointTemperatureLowerValue  is repeatable for measurementUnitCode only.</en>
+	</r1544>
+	<r1545>
+		<en>flashPointTemperatureUpperValue  is repeatable for measurementUnitCode only.</en>
+	</r1545>
+	<r1546>
+		<en>netContentstatement is repeatable for @languageCode only.</en>
+	</r1546>
+	<r1547>
+		<en>flashPointDescriptor is repeatable for @languageCode only.</en>
+	</r1547>
+	<r1548>
+		<en>flashPointTemperature , or flashPointTemperatureLowerValue or flashPointTemperatureUpperValue is/are missing.
+If flashPointDescriptor is used, then at least (flashPointtemperature, or flashPointTemperatureLowerValue or flashPointTemperatureUpperValue) shall be used.</en>
+	</r1548>
+	<r1549>
+		<en>packagingWeightPerConsumerUser is repeatable for @measurementUnitCode only.</en>
+	</r1549>
+	<r1550>
+		<en>Too many iterations of class GDSNTradeItemClassificationAttributeType.
+Maximum number of iterations of GDSNTradeItemClassificationAttributeType  is  25 per iteration of ComponentInformation/gpcCategoryCode</en>
+	</r1550>
+	<r1551>
+		<en>expectedResultsTime is repeatable for @timeMeasurementUnitCode only.</en>
+	</r1551>
+	<r1552>
+		<en>itemPeriodSafeToUseAfterOpening is repeatable for @timeMeasurementUnitCode only.</en>
+	</r1552>
+	<r1553>
+		<en>(if TradeItemMaterial/materialAgencyCode is used then TradeItemMaterial/TradeItemMaterialComposition/materialCode shall be used) and (if TradeItemMaterial/TradeItemMaterialComposition/materialCode is used then TradeItemMaterial/materialAgencyCode shall be used).</en>
+	</r1553>
+	<r1554>
+		<en>if TradeItemMaterial/materialAgencyCode and TradeItemMaterial/TradeItemMaterialComposition/materialCode are used then TradeItemMaterial/TradeItemMaterialComposition/materialPercentage shall be used.</en>
+	</r1554>
+	<r1555>
+		<en>There shall be at most one iteration of TradeItemMaterial/tradeItemMaterialDesignationDescription per LanguageCode</en>
+	</r1555>
+	<r1556>
+		<en>There shall be at most one iteration of TradeItemMaterial/TradeItemMaterialComposition/materialContent per @languageCode.</en>
+	</r1556>
+	<r1557>
+		<en>There shall be at most one iteration of totalPortionWeightAsPurchased per @measurementUnitCode.</en>
+	</r1557>
+	<r1558>
+		<en>There shall be at most one iteration of creditableAlternativeProteinPerPortion per @measurementUnitCode.</en>
+	</r1558>
+	<r1559>
+		<en>There shall be at most one iteration of alcoholicBeverageSugarContent per @measurementUnitCode.</en>
+	</r1559>
+	<r1560>
+		<en>There shall be at most one iteration of packagingTypeDescription per @languageCode.</en>
+	</r1560>
+	<r1561>
+		<en>There must be at most one iteration of proofOfPackagingWeightReductionDescription per languageCode.</en>
+	</r1561>
+	<r1563>
+		<en>targetMarketConsumerSalesConditionCode is missing.
+If salesConditionTargetMarketCountry/countryCode is used, then targetMarketConsumerSalesConditionCode shall be used.</en>
+	</r1563>
+	<r1564>
+		<en>priceTypeApplicationSequence is not greater than '1'.
+
+If targetMarketCountryCode equals '249' (France), '250' (France) then for an ItemPricetype segment, value of the attribute priceTypeApplicationSequence shall be greater than '1' for allowance or charge .</en>
+	</r1564>
+	<r1565>
+		<en>priceTypeApplicationSequence is not unique.
+
+If targetMarketCountryCode equals '249' (France), '250' (France) then for an ItemPricetype segment, in the same  ItemDepictionQualifier, a different value (greater than '1') shall be used for priceTypeApplicationSequence to identify each allowance or charge.</en>
+	</r1565>
+	<r1569>
+		<en>Organic Claim Agency Code (tradeItemOrganicInformation/organicClaim/organicClaimAgencyCode) is missing.This attribute is mandatory, For Country of Sale Code (#targetMarketCountryCode#), Growing Method Code (tradeItemFarmingAndProcessing/growingMethodCode) equals 'ORGANIC' and for Fresh fruits - vegetables Global Product Category Code (#gpc#). </en>
+	</r1569>
+	<r1570>
+		<en>For Country of Sale Code (#targetMarketCountryCode#), the Growing Method Code (#growingMethodCode#) is not applicable to fresh fruits and vegetables for Global Product Category Code (#gpc#).</en>
+	</r1570>
+	<r1571>
+		<en>The same combined value of selfTimerDelay and selfTimerDelay/@measurementUnitCode was repeated.
+The same combined value shall not be repeated.</en>
+	</r1571>
+	<r1572>
+		<en>lightBulbDiameterValue is repeatable for @measurementUnitCode only.</en>
+	</r1572>
+	<r1573>
+		<en>lightOutput is repeatable for @measurementUnitCode only.</en>
+	</r1573>
+	<r1576>
+		<en>A relationship already exist with the same functional key and the same period.
+A newer relationship shall not have a relationshipEffectiveStartDateTime earlier than the relationshipEffectiveEndDateTime of any previous relationship.</en>
+	</r1576>
+	<r1577>
+		<en>relationshipEffectiveStartDateTime was updated with relationshipActionCode not equal to 'CORRECT'.
+If priceSynchronisationRelationship segment is used, then relationshipEffectiveStartDateTime shall only be updated if relationshipActionCode equals 'CORRECT'. </en>
+	</r1577>
+	<r1578>
+		<en>conditionType was updated with conditionActionCode not equal to 'CORRECT'.
+If priceSynchronisationCondition segment is used, then conditionType shall only be updated if conditionActionCode equals 'CORRECT'. </en>
+	</r1578>
+	<r1579>
+		<en>effectiveStartDateTime was updated with conditionActionCode not equal to 'CORRECT'.
+If priceSynchronisationCondition segment is used, then effectiveStartDateTime shall only be updated if conditionActionCode equals 'CORRECT'. </en>
+	</r1579>
+	<r1580>
+		<en>effectiveStartDateContextCode was updated with conditionActionCode not equal to 'CORRECT'.
+If priceSynchronisationCondition segment is used, then effectiveStartDateContextCode shall only be updated if conditionActionCode equals 'CORRECT'. "</en>
+	</r1580>
+	<r1581>
+		<en>effectiveStartDateTime was updated with priceActionCode not equal to 'CORRECT'.
+If itemPriceType segment is used, then effectiveStartDateTime shall only be updated if priceActionCode equals 'CORRECT'. </en>
+	</r1581>
+	<r1582>
+		<en>effectiveStartDateContextCode was updated with priceActionCode not equal to 'CORRECT'.
+If itemPriceType segment is used, then effectiveStartDateContextCode shall only be updated if priceActionCode equals 'CORRECT'. </en>
+	</r1582>
+	<r1583>
+		<en>priceValueType was updated with priceActionCode not equal to 'CORRECT'.
+If itemPriceType segment is used, then priceValueType shall only be updated if priceActionCode equals 'CORRECT'. </en>
+	</r1583>
+	<r1584>
+		<en>parentCatalogueItem is missing or not equal to catalogueItemReference/GTIN.
+If targetMarketcountryCode equals '250' (France), parentCatalogueItem shall be used for each segment itemPriceType contained in the price document.
+If the catalogueItemReference does not have a parent gtin, parentCatalogueItem/gtin shall equal catalogueItemReference/gtin.</en>
+	</r1584>
+	<r1585>
+		<en>No iteration of catchMethodCode is a numerical code.
+Values for this attribute shall equal ('01', '02', '03', '04', '05', '07', '08' or '09') for at least one iteration of catchMethodCode if targetMarketCountryCode equals ('008' (Albania), '051' (Armenia), '031' (Azerbaijan), '112' (Belarus), '056' (Belgium), '070' (Bosnia-Herzegovina), '100' (Bulgaria), '191' (Croatia), '196' (Cyprus), '203' (Czech Republic), '208' (Denmark), '233' (Estonia), '246' (Finland), '250' (France),'268' (Georgia), '300' (Greece), '348' (Hungary), '352' (Iceland), '372' (Ireland), '376' (Israel), '380' (Italy), '398' (Kazakstan), '417' (Kyrgyzstan), '428' (Latvia), '440' (Lithuania), '442' (Luxembourg), '807' (Macedonia), '498' (Moldova), '499' (Montenegro), '528' (Netherlands), '578' (Norway), '616' (Poland), '620' (Portugal), '642' (Romania), '643' (Russia), '688' (Serbia), '703' (Slovakia), '705' (Slovenia), '724' (Spain), '752' (Sweden),'792' (Turkey), '795' (Turkmenistan), '826' (United Kingdom), '804' (Ukraine), or '860' (Uzbekistan))</en>
+	</r1585>
+	<r1586>
+		<en>Multiple iterations of attribute velocity per @measurementUnitcode.</en>
+	</r1586>
+	<r1587>
+		<en>Multiple iterations of attribute nutrientBasisquantityDescription per @languageCode.</en>
+	</r1587>
+	<r1588>
+		<en>Multiple iterations of attribute tensileStrength per @measurementUnitCode.</en>
+	</r1588>
+	<r1589>
+		<en>Multiple iterations of attribute shippingContainerQuantity per @transactionalMeasurementUnitCode.</en>
+	</r1589>
+	<r1590>
+		<en>Multiple iterations of attribute equalizerControlFeatures per @languageCode.</en>
+	</r1590>
+	<r1601>
+		<en>netContent is mandatory for this target market and gpcCategoryCode, if isTradeItemAConsumerUnit equals 'true'.</en>
+	</r1601>
+	<r1602>
+		<en>grossWeight is not used or not greater than ‘0’.
+This attribute is mandatory and shall be greater than ‘0’ if targetMarketCountryCode equals '528' (Netherlands) and isTradeItemADespatchUnit equals 'true'  and gpcCategoryCode does not equal  (10000458,10000570,10000686,10000915,10000456,10000457,10000681,10000912,10000922,10000448,10000449,10000450,10000451,10000684,10000908,10000909,10000910,10000474,10000488,10000489,10000685,10000907,10000459,10000682,10000690,10000487,10000525,10000526,10000527,10000528,10000529,10000637,10000638,10000639,10000687,10000688,10000689,10000911,10000500,10000504,10000683,10000846,10000847,10000848,10000849,10000850,10000851,10000852,10000923,10000853,10000854,10000855,10000856,10000857,10000858,10000859,10000860,10000861,10000862,10000914,10000863,10000864,10000865,10000866,10000867,10000868,10000869,10000870,10000871,10000872,10000873,10000874,10000919,10000875,10000876,10000877,10000878,10000879,10000880,10000881,10000882,10000883,10000884,10000916,10000920,10000885,10000886,10000887,10000888,10000889,10000890,10000891,10000892,10000893,10000903,10000904,10000905,10000906,10000894,10000895,10000896,10000897,10000898,10000899,10000900,10000901,10000902,10000921,10002423,10000460,10000461,10000462,10000674,10000838,10000463,10000464,10000675,10000455,10000843,10000452,10000453,10000454,10000648,10000844,10000647,10000673,10005844,10006412,10005845,10000514)</en>
+	</r1602>
+	<r1604>
+		<en>numberOfPiecesInSet and/or totalNumberOfComponents is/are not used.</en>
+	</r1604>
+	<r1605>
+		<en>componentDescription and/or componentQuantity is/are not used.</en>
+	</r1605>
+	<r1606>
+		<en>totalNumberOfComponents is not greater than '0'.</en>
+	</r1606>
+	<r1607>
+		<en>componentNumber is not unique within this tradeItem</en>
+	</r1607>
+	<r1608>
+		<en>numberOfPiecesInSet does not equal sum of componentQuantity of each child component.</en>
+	</r1608>
+	<r1609>
+		<en>totalNumberOfComponents does not equal total number of iterations of class componentInformation.</en>
+	</r1609>
+	<r1610>
+		<en>componentIdentification is not used or not unique for each component.</en>
+	</r1610>
+	<r1611>
+		<en>fileEffectiveStartDateTime is missing.</en>
+	</r1611>
+	<r1612>
+		<en>Code value 'D_A'  or '001' was invalidly used.</en>
+	</r1612>
+	<r1613>
+		<en>additionalTradeItemClassificationCodeValue is incorrect for additionalTradeItemClassificationSystemCode '76' MDR/IVDR. Please use one of the codes 'EU_CLASS_I', 'EU_CLASS_IIA', 'EU_CLASS_IIB', 'EU_CLASS_III', 'EU_CLASS_A', 'EU_CLASS_B', 'EU_CLASS_C', or 'EU_CLASS_D’.</en>
+	</r1613>
+	<r1617>
+		<en>farmingAndProcessingInformationModule/tradeItemOrganicInformation/organicClaim/organicTradeItemCode is missing. This attribute is mandatory, for Country of Sale Code (#targetMarketCountryCode#) , Growing Method Code (tradeItemFarmingAndProcessing/growingMethodCode) equals 'ORGANIC and for Fresh fruits - vegetables Global Product Category Code (#gpc#). </en>
+	</r1617>
+	<r1619>
+		<en>Multiple values for servingsPerPackageDescription. This attribute is repeating for @languageCode only.</en>
+	</r1619>
+	<r1620>
+		<en>Multiple values for brandMarketingDescription. This attribute is repeating for @languageCode only.</en>
+	</r1620>
+	<r1621>
+		<en>Multiple values for shearStrength. This attribute is repeating for @measurementUnitCode only.</en>
+	</r1621>
+	<r1623>
+		<en>Multiple values for caseDescription. This attribute is repeating for @languageCode only.</en>
+	</r1623>
+	<r1624>
+		<en>Multiple values for feedCompositionStatement. This attribute is repeating for @languageCode only.</en>
+	</r1624>
+	<r1625>
+		<en>Multiple values for feedAnalyticalConstituentsStatement. This attribute is repeating for @languageCode only.</en>
+	</r1625>
+	<r1626>
+		<en>Multiple values for feedAdditiveStatement. This attribute is repeating for @languageCode only.</en>
+	</r1626>
+	<r1627>
+		<en>Multiple values for feedingInstructions. This attribute is repeating for @languageCode only.</en>
+	</r1627>
+	<r1628>
+		<en>Multiple values for FoodAndBeverageIngredientModule/additiveStatement for the same @languageCode are not allowed.</en>
+	</r1628>
+	<r1630>
+		<en>Multiple values for healthcareItemUsageAgeDescription for the same @languageCode are not allowed.</en>
+	</r1630>
+	<r1631>
+		<en>Multiple values for colourTemperature for the same @temperatureMeasurementUnitCode are not allowed.</en>
+	</r1631>
+	<r1632>
+		<en>Multiple values for visibleLight for the same @measurementUnitCode are not allowed.</en>
+	</r1632>
+	<r1633>
+		<en>Multiple values for tastingNotes for the same @languageCode are not allowed.</en>
+	</r1633>
+	<r1634>
+		<en>Multiple values for NonfoodIngredientModule/additiveStatement for the same @languageCode are not allowed.</en>
+	</r1634>
+	<r1635>
+		<en>Multiple values for nutrientSource for the same @languageCode are not allowed.</en>
+	</r1635>
+	<r1636>
+		<en>Multiple values for consumerFriendlyDateOnPackagingDescription for the same @languageCode are not allowed.</en>
+	</r1636>
+	<r1637>
+		<en>frontFaceTypeCode is not used.
+frontFaceTypeCode is mandatory for targetMarketCountryCode '826' (United Kingdom) when displayTypeCode equals 'SDR' (Shelf Display Ready Packaging).</en>
+	</r1637>
+	<r1638>
+		<en>/catalogue_item_notification:catalogueItemNotificationMessage/transaction/documentCommand/catalogue_item_notification:catalogueItemNotification/catalogueItem/tradeItem/tradeItemInformation/extension/*[namespace-uri()='urn:gs1:gdsn:safety_data_sheet:xsd:3' and local-name()='safetyDataSheetModule']/safetyDataSheetInformation/referencedFileInformation/referencedFileTypeCode is invalid for targetMarketCountryCode equal to  '528' (The Netherlands), '056' (Belgium), '442' (Luxembourg) and and additionalTradeItemClassificationSystemCode equals ‘64’ and an iteration of /catalogue_item_notification:catalogueItemNotificationMessage/transaction/documentCommand/catalogue_item_notification:catalogueItemNotification/catalogueItem/tradeItem/gDSNTradeItemClassification/additionalTradeItemClassification/additionalTradeItemClassificationValue/additionalTradeItemClassificationProperty/additionalTradeItemClassificationPropertyCode equals ‘5.067’ or ‘5.006’.</en>
+	</r1638>
+	<r1639>
+		<en>isTradeItemAQualityVintageAlcoholProduct is not used.
+This attribute  is required if targetMarketCountryCode equals '250' (France) and  isTradeItemABaseUnit equals 'true' and (gpcCategoryCode equals ('10000273' [- Wine – Fortified] or '10000275' [- Wine – Sparkling] or  '10000276' [- Wine – Still])</en>
+	</r1639>
+	<r1640>
+		<en>Same feedType exists multiple times for the same Trade Item.</en>
+	</r1640>
+	<r1641>
+		<en>Quantity of starch ('STARCH') is greater than the quantity of carbohydrates ('CHOAVL').</en>
+	</r1641>
+	<r1642>
+		<en>Quantity of polyols (Carbohydrates of which multiple alcohols) ('POLYL') is greater than the quantity of carbohydrates ('CHOAVL').</en>
+	</r1642>
+	<r1643>
+		<en>Quantity of total saturated fatty acids ('FASAT') is greater than the quantity of total fat ('FAT').</en>
+	</r1643>
+	<r1644>
+		<en>Quantity of total monounsaturated-cis fatty acids ('FAMSCIS') is greater than the quantity of total fat ('FAT').</en>
+	</r1644>
+	<r1645>
+		<en>Quantity of total polyunsaturated-cis fatty acids ('FAPUCIS') is greater than the quantity of total fat ('FAT').</en>
+	</r1645>
+	<r1646>
+		<en>Attribute quantityOfCompleteLayersContainedInATradeItem shall only be used for GTIN identified pallets.</en>
+	</r1646>
+	<r1647>
+		<en>Attribute quantityOfTradeItemsContainedInACompleteLayer shall only be used for GTIN identified pallets.</en>
+	</r1647>
+	<r1648>
+		<en>Attribute quantityOfTradeItemsPerPalletLayer shall only be used for non-GTIN logistic units.</en>
+	</r1648>
+	<r1649>
+		<en>Attribute quantityOfTradeItemsPerPallet shall only be used for non-GTIN logistic units.</en>
+	</r1649>
+	<r1650>
+		<en>Attribute quantityOfLayersPerPallet shall only be used for non-GTIN logistic units.</en>
+	</r1650>
+	<r1651>
+		<en>Attributes from nonGTINLogisticsUnitInformation class SHALL NOT be used when trade item is GTIN identified pallet.</en>
+	</r1651>
+	<r1652>
+		<en>If temperatureQualifierCode equals 'STORAGE_HANDLING', then maximumTemperature SHALL be used for any context other than 'DP007' or 'DP008'.</en>
+	</r1652>
+	<r1653>
+		<en>If temperatureQualifierCode equals 'STORAGE_HANDLING', then minimumTemperature SHALL be used  for any context other than 'DP007' or 'DP008'.</en>
+	</r1653>
+	<r1654>
+		<en>If dailyValueIntakePercent is used for any of the 7 main nutrients listed in Article 30 (1) of EU Regulation 1169/2011, then dailyValueIntakeReference SHALL be used.</en>
+	</r1654>
+	<r1655>
+		<en>According to the GS1 measurement rules, depth shall be greater than or equal to width when trade item is not a consumer (POS) unit.</en>
+	</r1655>
+	<r1656>
+		<en>If multiple countries of origin are provided, they SHALL be different.</en>
+	</r1656>
+	<r1657>
+		<en>If multiple peg hole numbers are provided, they SHALL be different.</en>
+	</r1657>
+	<r1658>
+		<en>If multiple allergen type codes are provided, they SHALL be different.</en>
+	</r1658>
+	<r1659>
+		<en>If multiple handling instructions code references are provided, they SHALL be different.</en>
+	</r1659>
+	<r1660>
+		<en>If multiple packaging marked label accreditation codes are provided, they SHALL be different.</en>
+	</r1660>
+	<r1661>
+		<en>If multiple packaging marked diet allergen codes are provided, they SHALL be different.</en>
+	</r1661>
+	<r1662>
+		<en>For this target market, consumer units that are classified as Beer (gpcCategoryCode '10000159') must have  degreeOfOriginalWort populated.</en>
+	</r1662>
+	<r1663>
+		<en>If numberOfServingsPerPackage is used, it SHALL be greater than zero.</en>
+	</r1663>
+	<r1664>
+		<en>There SHALL not be multiple iterations of descriptiveSizeDimension for the same language.</en>
+	</r1664>
+	<r1665>
+		<en>Quantity of sugars ('SUGAR-') is greater than the quantity of carbohydrates ('CHOAVL').</en>
+	</r1665>
+	<r1666>
+		<en>Multiple values for clinicalSizeDescription for the same @languageCode are not allowed.</en>
+	</r1666>
+	<r1667>
+		<en>Multiple values for clinicalSizeValue for the same @measurementCode are not allowed.</en>
+	</r1667>
+	<r1668>
+		<en>Multiple values for econtentTradeItemStatement for the same @languageCode are not allowed.</en>
+	</r1668>
+	<r1669>
+		<en>componentIdentification shall be a valid GTIN-14 if the identificationSchemeAgencyCode equals 'GTIN_14'. </en>
+	</r1669>
+	<r1670>
+		<en>directPartMarkingIdentifier shall be a valid GTIN-14 if the identificationSchemeAgencyCode equals 'GTIN_14' </en>
+	</r1670>
+	<r1671>
+		<en>componentIdentification shall be a valid GTIN-13 if the identificationSchemeAgencyCode equals 'GTIN_13'. </en>
+	</r1671>
+	<r1672>
+		<en>directPartMarkingIdentifier shall be a valid GTIN-13 if the identificationSchemeAgencyCode equals 'GTIN_13' </en>
+	</r1672>
+	<r1673>
+		<en>componentIdentification shall be a valid GTIN-12 if the identificationSchemeAgencyCode equals 'GTIN_12'. </en>
+	</r1673>
+	<r1674>
+		<en>directPartMarkingIdentifier shall be a valid GTIN-12 if the identificationSchemeAgencyCode equals 'GTIN_12' </en>
+	</r1674>
+	<r1675>
+		<en>componentIdentification shall be a valid GTIN-8 if the identificationSchemeAgencyCode equals 'GTIN_8'. </en>
+	</r1675>
+	<r1676>
+		<en>directPartMarkingIdentifier shall be a valid GTIN-8 if the identificationSchemeAgencyCode equals 'GTIN_8' </en>
+	</r1676>
+	<r1678>
+		<en>X_SER' shall only be used as @measurementUnitCode for attribute childNutritionQualifiedValue</en>
+	</r1678>
+	<r1679>
+		<en>alternateText is only repeating for language, not for value.</en>
+	</r1679>
+	<r1680>
+		<en>titleText is only repeating for language, not for value.</en>
+	</r1680>
+	<r1681>
+		<en>targetConsumerMinimumUsage is only repeating for @measurementUnitCode, not for value.</en>
+	</r1681>
+	<r1682>
+		<en>targetConsumerMaximumUsage is only repeating for @measurementUnitCode, not for value.</en>
+	</r1682>
+	<r1683>
+		<en>tradeItemStory is only repeating for language, not for value.</en>
+	</r1683>
+	<r1684>
+		<en>If the target market is France, and the product has a GPC brick code belonging to the family ('67010000' (clothing) or'63010000' (footwear)), and the hierarchy level is a base unit that is also a consumer unit then the supplier reference is mandatory.</en>
+	</r1684>
+	<r1685>
+		<en>In France the official language is French. So a description fiel needs to be provided at least in French language.</en>
+	</r1685>
+	<r1686>
+		<en>If the target market is France, and the product has a GPC brick code belonging to the family ('67010000' (clothing) or'63010000' (footwear)), then the extended description is mandatory.</en>
+	</r1686>
+	<r1688>
+		<en>If the target market is France, the product has a GPC brick code belonging to the family ('67010000' (clothing) or'63010000' (footwear)), and the hierarchy level is a base unit that is also a consumer unit then at least one colour code must be provided.</en>
+	</r1688>
+	<r1689>
+		<en>If the target market is France, the product has a GPC brick code belonging to the family ('67010000' (clothing) or'63010000' (footwear)), and the hierarchy level is a base unit that is also a consumer unit then the colour family code is mandatory.</en>
+	</r1689>
+	<r1690>
+		<en>If the target market is France, the product has a GPC brick code belonging to the family ('67010000' (clothing) or'63010000' (footwear)), and the hierarchy level is a base unit that is also a consumer unit then the gender of the target consumer gender must be provided for the product.</en>
+	</r1690>
+	<r1691>
+		<en>Both priceComparisonContentTypeCode and priceComparisonMeasurement shall be used for #targetMarketCountryCode#.</en>
+	</r1691>
+	<r1692>
+		<en>At least one instance of import classification type code shall be used with code 'INTRASTAT' for target markets Belgium, Netherlands and Luxembourg.</en>
+	</r1692>
+	<r1693>
+		<en>The INTRASTAT code must contain exactly 8 digits for target markets Belgium, Netherlands and Luxembourg.</en>
+	</r1693>
+	<r1694>
+		<en>If attribute XY (any attribute of class microbiologicalInformation) is provided, therefore microbiologicalOrganismCode SHALL be populated</en>
+	</r1694>
+	<r1695>
+		<en>The "NON_EU' and 'D_A' country codes are not usable if the target market is 'France'.</en>
+	</r1695>
+	<r1696>
+		<en>For DE, AT the FAO catch zones of 27, 37 are not valid, please use the sub areas or divisions for these zones.</en>
+	</r1696>
+	<r1697>
+		<en>Code value '097'  or 'NON_EU' was invalidly used.</en>
+	</r1697>
+	<r1698>
+		<en>Acceptable values for Nutri-Score program are  ('A', 'B', 'C','D', 'E' or 'EXEMPT')</en>
+	</r1698>
+	<r1699>
+		<en>nutritionalProgramIngredientTypecode is not used.</en>
+	</r1699>
+	<r1700>
+		<en>nutritionalProgramIngredientMeasurement is repeatable for @measurementUnitCode only.</en>
+	</r1700>
+	<r1701>
+		<en>materialStatement is repeatable for @languageCode only. </en>
+	</r1701>
+	<r1702>
+		<en>If catchAreaCode is used and PlaceOfItemActivityModule/../productActivityTypeCode equals 'CATCH_ZONE', then catchAreaCode shall equal PlaceOfItemActivityModule/../productActivityRegionZoneCodeReference/enumerationValueInformation/enumerationValue for the following countries: '008' (Albania), '051' (Armenia), '031' (Azerbaijan), '040' (Austria), '112' (Belarus), '056' (Belgium), '070' (Bosnia-Herzegovina), '100' (Bulgaria), '191' (Croatia), '196' (Cyprus), '203' (Czech Republic), '208' (Denmark), '233' (Estonia), '246' (Finland), '250' (France), '276' (Germany), '268' (Georgia), '300' (Greece), '348' (Hungary), '352' (Iceland), '372' (Ireland), '376' (Israel), '380' (Italy), '398' (Kazakstan), '417' (Kyrgyzstan), '428' (Latvia), '440' (Lithuania), '442' (Luxembourg), '807' (Macedonia), '498' (Moldova), '499' (Montenegro), '528' (Netherlands), '578' (Norway), '616' (Poland), '620' (Portugal), '642' (Romania), '643' (Russia), '688' (Serbia), '703' (Slovakia), '705' (Slovenia),  '756' (Switzerland), '792' (Turkey), '795' (Turkmenistan), '826' (United Kingdom), '804' (Ukraine),  '860' (Uzbekistan)</en>
+	</r1702>
+	<r1703>
+		<en>In Sweden for items both maximumTemperature &amp; minimumTemperature are required.</en>
+	</r1703>
+	<r1704>
+		<en>For biocide regulation, at least one regulationLevelCodeReference shall be provided for the product with the biocide type.</en>
+	</r1704>
+	<r1705>
+		<en>The dietTypeSubcodeCode is not valid for a Pescatarian diet.</en>
+	</r1705>
+	<r1706>
+		<en>The dietTypeSubcodeCode is not valid for a Vegetarian diet.</en>
+	</r1706>
+	<r1707>
+		<en>For Country of Sale Code (#targetMarketCountryCode#), the dietTypeSubCode (#dietTypeSubCode#) is not valid for a Vegetarian diet.</en>
+	</r1707>
+	<r1708>
+		<en>The dietTypeSubcodeCode is not valid for a Kosher diet.</en>
+	</r1708>
+	<r1709>
+		<en>Multiple values for batteryCapacity for the same @measurementCode are not allowed.</en>
+	</r1709>
+	<r1710>
+		<en>Multiple values for batteryVoltage for the same @measurementCode are not allowed.</en>
+	</r1710>
+	<r1711>
+		<en>Multiple values for tradeItemVariantStatement for the same @languageCode are not allowed.</en>
+	</r1711>
+	<r1712>
+		<en>Multiple values for consumerRecyclingInstructions for the same @languageCode are not allowed.</en>
+	</r1712>
+	<r1713>
+		<en>If populated, packagingRawMaterialContentPercentage must be greater than or equal to 0 and smaller than or equal to 100.</en>
+	</r1713>
+	<r1714>
+		<en>If populated, packagingLabellingCoveragePercentage must be greater than or equal to 0 and smaller than or equal to 100.</en>
+	</r1714>
+	<r1715>
+		<en>If targetMarketCountryCode equals '250' (France) and an attribute with NonBinaryLogicEnumeration data type is used, then its value SHALL NOT equal 'UNSPECIFIED'.</en>
+	</r1715>
+	<r1716>
+		<en>AllergenRelatedInformation is only repeatable when either the Allergen Specification Agencies or the Allergen Specification Names are populated or when both are populated, the values of the pairs [Allergen Specification Agency and Allergen Specification Name ] shall be different. If the Allergen Specification Agencies and Allergen Specification Names are the same, repeat the Allergens Types within the same Allergen group (class).</en>
+	</r1716>
+	<r1717>
+		<en>If NutrientDetail sub-class is used, then all nutrientTypeCode values shall be unique within the same NutrientHeader class.</en>
+	</r1717>
+	<r1718>
+		<en>For DE, AT, CH the FAO catch zones of 27, 37 are not valid, please use the sub areas or divisions for these zones.</en>
+	</r1718>
+	<r1719>
+		<en>For DE, AT, CH the FAO catch zones of 27, 37 are not valid, please use the sub areas or divisions for these zones.</en>
+	</r1719>
+	<r1720>
+		<en>One or more of the GTINs in each hierarchy must be marked as an INVOICE UNIT.</en>
+	</r1720>
+	<r1721>
+		<en>isTradeItemAnInvoiceUnit must be populated for the trade item.</en>
+	</r1721>
+	<r1722>
+		<en>additionalTradeItemClassificationCodeValue is incorrect. For additionalTradeItemClassificationSystemCode '85' shall be one of these values (‘EU_CLASS_I’, ‘EU_CLASS_IIA’, ‘EU_CLASS_IIB’, ‘EU_CLASS_III’, ‘IVDD_ANNEX_II_LIST_A’, ‘IVDD_ANNEX_II_LIST_B’, ‘IVDD_DEVICES_SELF_TESTING’, ‘IVDD_GENERAL’, 'AIMDD').</en>
+	</r1722>
+	<r1723>
+		<en>Multiple values for languageSpecificPartyName for the same language are not allowed.</en>
+	</r1723>
+	<r1725>
+		<en>>Multiple values for lightBulbWarmUpTime for each measurement are not allowed.</en>
+	</r1725>
+	<r1726>
+		<en>>Multiple values for minimumColourTemperature for each measurement are not allowed.</en>
+	</r1726>
+	<r1727>
+		<en>>Multiple values for maximumColourTemperature for each measurement are not allowed.</en>
+	</r1727>
+	<r1728>
+		<en>>Multiple values for declaredPower for each measurement are not allowed.</en>
+	</r1728>
+	<r1729>
+		<en>>Multiple values for equivalentLightBulbPower for each measurement are not allowed.</en>
+	</r1729>
+	<r1730>
+		<en>>Multiple values for recallPrecision for each language are not allowed.</en>
+	</r1730>
+	<r1731>
+		<en>>Multiple values for clinicalSizeValueMaximum for each measurement are not allowed.</en>
+	</r1731>
+	<r1732>
+		<en>>Multiple values for globalModelDescription for each language are not allowed.</en>
+	</r1732>
+	<r1733>
+		<en>>Multiple values for nonFoodIngredientName for each language are not allowed.</en>
+	</r1733>
+	<r1734>
+		<en>>Multiple values for alcoholBeverageAge for each measurement are not allowed.</en>
+	</r1734>
+	<r1735>
+		<en>>Multiple values for nutritionalProgramIngredientMeasurement for each measurement are not allowed.</en>
+	</r1735>
+	<r1736>
+		<en>Multiple values for productTexturalCharacteristics for each language are not allowed.</en>
+	</r1736>
+	<r1737>
+		<en>>Multiple values for imitationOrSubstituteFor for each language are not allowed.</en>
+	</r1737>
+	<r1738>
+		<en>>Multiple values for additionalTradeItemDimensions/diameter for each measurement are not allowed.</en>
+	</r1738>
+	<r1739>
+		<en>For Country of Sale Code (#targetMarketCountryCode#) , if any of the following attributes is provided, then all three must be provided: Nutrient Code, Nutrient Quantity, Nutrient Value Precision Code.</en>
+	</r1739>
+	<r1740>
+		<en>If Product Hierarchy Level Code (tradeItemUnitDescriptorCode) is equal to 'PALLET' and Irregularly Configured Pallet Indicator (isTradeItemPackedIrregularly) is equal to 'FALSE' or is not used, then Number of Layers per GTIN (quantityOfCompleteLayersContainedInATradeItem) shall be used and greater than zero.</en>
+	</r1740>
+	<r1741>
+		<en>If batteries are required for the trade item (areBatteriesRequired= 'true’), then areBatteriesIncluded must be provided.</en>
+	</r1741>
+	<r1742>
+		<en>If any of the attributes from class Packaging is provided, than attribute packagingTypeCode must be provided (in each iteration of the class).</en>
+	</r1742>
+	<r1743>
+		<en>If any of the following attributes is provided, then platformTypeCode must be provided: quantityOfTradeItemsPerPallet, quantityOfLayersPerPallet or quantityOfTradeItemsPerPalletLayer.</en>
+	</r1743>
+	<r1744>
+		<en>Regulated Product Name (#regulatedProductName#) must be provided for all consumer units (isTradeItemAConsumerUnit is equal to 'true') from this Global Product Category Code (#gpcCategoryCode#).</en>
+	</r1744>
+	<r1745>
+		<en>If any of the following two attributes is provided, then both must be provided: stackingFactorTypeCode and stackingFactor.</en>
+	</r1745>
+	<r1746>
+		<en>You must attach a safety data sheet because you entered that a safety data sheet is legally required. Please set safetyDataSheetModule/safetyDataSheetInformation/referencedFileInformation/referencedFileTypeCode equal to 'SAFETY_DATA_SHEET’. Additional data required for business use are: URL of SDS file (uniformResourceIdentifier) Name of external file SDS (fileName) SDS language code (fileLanguageCode) Trade name on SDS (contentDescription) Date of last SDS revision fileEffectiveStartDateTime</en>
+	</r1746>
+	<r1747>
+		<en>You must attach a declaration of performance sheet because you entered that a declaration of performance sheet is legally required. Please set safetyDataSheetModule/safetyDataSheetInformation/referencedFileInformation/referencedFileTypeCode equal to ‘DOP_SHEET’. Additional data required for business use are:	URL of DoP file (uniformResourceIdentifier)	DoP language code (fileLanguageCode) Trade name on DoP (contentDescription)	Date of last DoP revision fileEffectiveStartDateTime</en>
+	</r1747>
+	<r1748>
+		<en>Zero Suppressed GTINs provided as a GS1 Trade Key shall begin with a "0".</en>
+	</r1748>
+	<r1749>
+		<en>Zero Suppressed GTINs provided as a GS1 Trade Item Key shall be eight digits with a valid check digit.</en>
+	</r1749>
+	<r1750>
+		<en>Multiple values for consumerSalesConditionMaximumAmount for each language are not allowed.</en>
+	</r1750>
+	<r1751>
+		<en>Multiple values for microbiologicalOrganismMinimumValue for each measurement are not allowed.</en>
+	</r1751>
+	<r1752>
+		<en>Multiple values for bitternessOfBeerMeasurement for each measurement are not allowed.</en>
+	</r1752>
+	<r1753>
+		<en>Preparation state code must contain at least one value of 'PREPARED' or 'UNPREPARED' for the target market.</en>
+	</r1753>
+	<r1754>
+		<en>Measurement precision code contains an invalid value: only values 'APPROXIMATELY' or 'LESS_THAN' are allowed for the target market.</en>
+	</r1754>
+	<r1755>
+		<en>The value for level of containment code is not valid; the allowed values are 'CONTAINS', 'FREE_FROM', 'MAY_CONTAIN' for the target market.</en>
+	</r1755>
+	<r1756>
+		<en>The drained weight unit of measure shall contain the value 'KGM' or 'GRM' for the target market.</en>
+	</r1756>
+	<r1757>
+		<en>The quantity contained unit of measurement shall be 'GRM' in case the nutrient type code is 'FAT', 'FASAT', 'FAMSCIS', 'FAPUCIS', 'CHOAVL', 'PRO-', 'FIBTG', 'SALTEQ', 'SUGAR-', 'POLYL' or 'STARCH' for the target market.</en>
+	</r1757>
+	<r1758>
+		<en>The value of percentage of daily value intake shall be greater than or equal to 0 (zero).</en>
+	</r1758>
+	<r1759>
+		<en>The percentage of alcohol by volume shall have the same value in all levels of this hierarchy for the target market.</en>
+	</r1759>
+	<r1760>
+		<en>The degree of original wort shall have the same value in all levels of this hierarchy for the target market.</en>
+	</r1760>
+	<r1761>
+	<en>An instance of preparation instructions with the language code 'nl' shall be filled out in case preparation state code is filled out with 'PREPARED' and at least one nutrient type code is filled out.</en>
+	</r1761>
+	<r1762>
+		<en>An instance of provenance statement with the language code 'nl' shall be filled out for target market Netherlands in case regulatory product name is filled out and the gpc category code equals 10005786.</en>
+	</r1762>
+	<r1763>
+		<en>You should fill out the field quantity contained because you used the field nutrient type code for this target market.</en>
+	</r1763>
+	<r1764>
+		<en>Daily value intake reference shall be filled out in case the nutrient type code equals 'FAT', 'FASAT', 'ENER-', 'CHOAVL', 'PRO-', 'SUGAR-' or 'SALTEQ' and daily value intake percent is filled out for the target market.</en>
+	</r1764>
+	<r1765>
+		<en>If nutrient type code is filled out with 'FASAT', then there shall be another nutrient type code with value 'FAT' within the same group for the target market.</en>
+	</r1765>
+	<r1766>
+		<en>If nutrient type code is filled out with 'FAMSCIS', then there shall be another nutrient type code with value 'FAT' within the same group, for the target market.</en>
+	</r1766>
+	<r1767>
+		<en>If nutrient type code is filled out with 'FAPUCIS', then there shall be another nutrient type code with value 'FAT' within the same group, for the target market.</en>
+	</r1767>
+	<r1768>
+		<en>If nutrient type code is filled out with 'STARCH', then there shall be another nutrient type code with value 'CHOAVL' within the same group, for the target market.</en>
+	</r1768>
+	<r1769>
+		<en>If nutrient type code is filled out with 'POLYL', then there shall be another nutrient type code with value 'CHOAVL' within the same group, for the target market.</en>
+	</r1769>
+	<r1770>
+		<en>If nutrient type code is filled out with 'SUGAR-’, then there shall be another nutrient type code with value 'CHOAVL' for the legally required nutritional table within the same group, for the target market.</en>
+	</r1770>
+	<r1771>
+		<en>The amount of nutrient type code 'NA' multiplied by 2.5 may not deviate more than 10% from the amount of nutrient type code SALTEQ with identical unit of measure in case of consumer units and a measurementPrecisionCode not equal to 'LESS_THAN' for target market Netherlands.</en>
+	</r1771>
+	<r1772>
+		<en>Is packaging marked returnable shall not be 'true' for an empty article for target market Netherlands.</en>
+	</r1772>
+	<r1773>
+	<en>Is packaging marked returnable shall be populated for the target market in case of packed fresh fruits and vegetables.</en>
+	</r1773>
+	<r1774>
+		<en>Is packaging marked returnable shall be populated for the target market in case of packed fresh fruits and vegetables.</en>
+	</r1774>
+	<r1775>
+		<en>Drained weight shall be greater than 0 (zero).</en>
+	</r1775>
+	<r1776>
+		<en>Drained weight shall not be used, if packaging type code is equal to 'NE' (Not packed).</en>
+	</r1776>
+	<r1777>
+		 <en>Number of smallest units per package shall be greater than 0 (zero).</en>
+	</r1777>
+	<r1778>
+		<en>The #nutrientTypeCode# nutrient type code used is not allowed in the target market.</en>
+	</r1778>
+	<r1779>
+		<en>The sum of the quantity contained values for nutrient type codes 'FAT', 'PRO-' and 'CHOAVL' exceeds 100 gram.</en>
+	</r1779>
+	<r1780>
+		<en>If preparation state code is used, then regulated product name should be used as well for consumer units.</en>
+	</r1780>
+	<r1781>
+		<en>For batteries the field quantity of batteries built-in shall be greater than 0 (zero) if used. If quantity of batteries built in is not required, please do not populate.</en>
+	</r1781>
+	<r1782>
+		<en>For batteries the field quantity of batteries included shall be greater than 0 (zero) if used. If batteries are not included, please do not populate.</en>
+	</r1782>
+	<r1783>
+		<en>For batteries the field quantity of batteries required shall be greater than 0 (zero) if used. If batteries are not required, please do not populate.</en>
+	</r1783>
+	<r1784>
+		<en>For batteries the field Battery weight shall be greater than 0 (zero), if used.</en>
+	</r1784>
+	<r1785>
+		<en>Battery weight unit of measure shall contain the value 'KGM', 'GRM' or 'MGM'.</en>
+	</r1785>
+	<r1786>
+		<en>For a Nutrient Header class, the Nutrient #nutrientTypeCode# and Unit of Measure #measurementUnitCode# must be unique.</en>
+	</r1786>
+	<r1787>
+		<en>For a Nutrient Header class, the Nutrient #nutrientTypeCode# and Measurement Precision Code #measurementPrecisionCode# must be unique.</en>
+	</r1787>
+	<r101788>
+		<en>If multiple product images are provided, then one of them should be identified as the main product image using isPrimaryFile with a value of TRUE, where the referenced file type code = ‘PRODUCT_IMAGE’. For implementation guidance please refer to: LINK to new TIIG section</en>
+	</r101788>
+	<r10799>
+		<en>packagingMarkedDietAllergenCode is a deprecated attribute and shall not be used.</en>
+	</r10799>
+	<r1789>
+		<en>Only one tradeItem/gtin within a hierarchy can have isTradeItemUDIDILevel set to 'true'.</en>
+	</r1789>
+	<r1790>
+		<en>Only one tradeItem/gtin within a hierarchy can have isTradeItemUnitOfUse set to 'true'.</en>
+	</r1790>
+	<r1791>
+		<en>For Target Market #targetMarketCountryCode#, when a product contains restricted explosive precursor (regulationTypeCode equals EXPLOSIVES_PRECURSORS_REGISTRATION), then you must populate regulatoryActComplianceLevelCode with ABOVE_REGULATED_LEVELS or BELOW_REGULATED_LEVELS.</en>
+	</r1791>
+	<r1792>
+		<en>If all of following three attributes are provided, then gross weight of a Non-GTIN Logistic Unit (NonGTINLogisticsUnitInformation/grossWeight) must be greater than 96 % of Trade Item’s Gross Weight (tradeItemMeasurements/tradeItemWeight/grossWeight) multiplied by the Quantity Of Trade Items Per Pallet (quantityOfTradeItemsPerPallet). </en>
+	</r1792>
+	<r1793>
+		<en>The attribute additionalTradeItemClassificationSystemCode with value ‘76’ EU Regulation (MDR/IVDR) Risk class is not repeatable.</en>
+	</r1793>
+	<r1794>
+		<en>The attribute additionalTradeItemClassificationSystemCode with value ‘85’ EU Regulation (MDR/IVDR) Risk class is not repeatable.</en>
+	</r1794>
+	<r1795>
+		<en>Multiple values for depth for each measurement are not allowed.</en>
+	</r1795>
+	<r1796>
+		<en>Multiple values for grossWeight for each measurement are not allowed.</en>
+	</r1796>
+	<r1797>
+		<en>Multiple values for height for each measurement are not allowed.</en>
+	</r1797>
+	<r1798>
+		<en>Multiple values for width for each measurement are not allowed.</en>
+	</r1798>
+	<r1799>
+		<en>nutritionalScore shall not be used, if nutritionalProgramCode equals '8' (Nutri-Score) and nutritionalProgramStatusCode equals 'NOT_REGISTERED’.</en>
+	</r1799>
+	<r1800>
+		<en>For Country of Sale Code (Sweden), alcoholicBeverageSugarContent must have 'GL' (gram per litre) as the measurement unit.</en>
+	</r1800>
+	<r1801>
+		<en>For Country of Sale Code (Sweden), one iteration of Feeding Instructions must be supplied in Swedish.</en>
+	</r1801>
+	<r1802>
+		<en>For Country of Sale Code (#targetMarketCountryCode#), invalid use of aDRDangerousGoodsLimitedQuantitiesCode. aDRDangerousGoodsLimitedQuantitiesCode has been deprecated. Use Dangerous Goods Limited Quantities Code (dangerousGoodsLimitedQuantitiesCode) instead.</en>
+	</r1802>
+	<r1803>
+		<en>One or both of targetConsumerMinimumUsage or targetConsumerMaximumUsage is missing. You must supply one or both of these attributes if you use targetConsumerUsageTypeCode.</en>
+	</r1803>
+	<r1804>
+		<en>Missing consumerSalesConditionTypeCode. For Country of Sale Code (Sweden), the attribute is required for tobacco products.</en>
+	</r1804>
+	<r1806>
+		<en>tradeItemMarketingMessage is missing. For Country of Sale Code (Sweden), it is not permitted to use shortTradeItemMarketingMessage without also using tradeItemMarketingMessage.</en>
+	</r1806>
+	<r1808>
+		<en>packagingRawMaterialCode is missing. When packagingRawMaterialContentPercentage is used, packagingRawMaterialCode must also be used.</en>
+	</r1808>
+	<r1809>
+		<en>For Country of Sale Code (Sweden), sizeTypeCode or sizeDimension is missing. When one is used, the other must be used.</en>
+	</r1809>
+	<r1810>
+		<en>Invalid meaurement unit for colourTemperature: #colourTemperature#. colourTemperature must have 'KEL' (Kelvin) as the measurement unit.</en>
+	</r1810>
+	<r1811>
+		<en>Invalid Meaurement unit for lightOutput: #lightOutput#. For Country of Sale Code (#targetMarketCountryCode#) , lightOutput must have 'B60' (Lumens per square metre) or 'LUX' (Lux) as the measurement unit.</en>
+	</r1811>
+	<r1812>
+		<en>For Country of Sale Code (sweden), if Nutrient Code  is used then both Nutrient Basis and Nutrient Basis Type Code must also be used.</en>
+	</r1812>
+	<r1813>
+		<en>For Country of Sale Code (Sweden), one iteration of Feed Composition Statement must be supplied in Swedish.</en>
+	</r1813>
+	<r1814>
+		<en>For Country of Sale Code (Sweden), one iteration of Feed Analytical Constituents Statement must be supplied in Swedish.</en>
+	</r1814>
+	<r1815>
+		<en>For Country of Sale Code (Sweden), one iteration of Feed Additive Statement must be supplied in Swedish.</en>
+	</r1815>
+	<r1819>
+		<en>For Country of Sale Code (France) and the same Tax Type Code cannot be repeated without having a corresponding start date.</en>
+	</r1819>
+	<r1820>
+		<en>For Country of Sale Code (France) and the same Tax Type Code cannot be repeated without having a corresponding end date.</en>
+	</r1820>
+	<r1821>
+		<en>For Country Of Sale Code (France) and Customs Classification Type Code  equals 'CUSTOMS_TARIFF_NUMBER' then the corresponding Customs Classification Value shall have a value 8 to 13 numeric characters long.</en>
+	</r1821>
+	<r1822>
+		<en>For the target market France, the customs nomenclature code shall have a value [less than or equal to] 13 characters.</en>
+	</r1822>
+	<r1823>
+		<en>For Country Of Sale Code (France) and Pallet Type Code  is used, it is mandatory to provide a valid Number of Layers per GTIN for a pallet.</en>
+	</r1823>
+	<r1824>
+		<en>For Country Of Sale Code (France) and bracketQualifier is used, then Bracket Sequence Number shall be used.</en>
+	</r1824>
+	<r1825>
+		<en>For Country Of Sale Code (France), Bracket Sequence Number shall be unique within the same item price type class.</en>
+	</r1825>
+	<r1826>
+		<en>Multiple values for meatPoultryCut for each language are not allowed.</en>
+	</r1826>
+	<r1827>
+		<en>Multiple values for minimumAmountOfAnimalProtein for each measurement are not allowed.</en>
+	</r1827>
+	<r1828>
+		<en>Multiple values for tradeItemSustainabilityStatement for each language are not allowed.</en>
+	</r1828>
+	<r1829>
+		<en>Multiple values for compulsoryAdditionalLabelInformation for each language are not allowed.</en>
+	</r1829>
+	<r1830>
+		<en>For Country of Sale Code (sweden), invalid use of dutyFeeTaxRate. Values cannot differ across the trade item hierarchy when used.</en>
+	</r1830>
+	<r1831>
+		<en>Multiple values for packagingRecyclabilityValue for each measurement are not allowed.</en>
+	</r1831>
+	<r1834>
+		<en>If GTIN for Point of Sale (gs1TradeItemIdentificationKeyValue) is used, then there shall be a GTIN for Point of Sale Type Code (gs1TradeItemIdentificationKeyCode) used.</en>
+	</r1834>
+	<r1835>
+		<en>When Referenced GTIN Type Code (referencedTradeItemTypeCode) equals 'EQUIVALENT', then each iteration with Referenced GTIN (referencedTradeItem/gtin) SHALL be unique.</en>
+	</r1835>
+	<r1836>
+		<en>When Referenced GTIN Type Code (referencedTradeItemTypeCode) equals 'DEPENDENT_PROPRIETARY', then each iteration with Referenced GTIN (referencedTradeItem/gtin) SHALL be unique.</en>
+	</r1836>
+	<r1837>
+		<en>At least one other attribute in Trade Item Temperature Information class SHALL be used when Temperature Activity Code (temperatureQualifierCode) is used.</en>
+	</r1837>
+	<r1838>
+		<en>At least one other attribute in Trade Item Humidity Information class SHALL be used when humidityQualifierCode is used.</en>
+	</r1838>
+	<r1839>
+		<en>If Additional Legal Product Information Type Code (compulsoryAdditionalLabelInformationTypeCode) is used, then you SHALL use Additional Legal Product Information (compulsoryAdditionalLabelInformation).</en>
+	</r1839>
+	<r1840>
+		<en>Catch Country Code (catchCountryCode) may only be used when Fish Production Method Code (productionMethodForFishAndSeafoodCode) does not equal 'MARINE_FISHERY'.</en>
+	</r1840>
+	<r1841>
+		<en>Catch Country Code (catchCountryCode) may only be used when Catch Area Code (#catchAreaCode#) is one of the inland water codes ('01', '02', '03', '04', '05', '06', '07' or '08').</en>
+	</r1841>
+	<r1842>
+		<en>If Fish Production Method Code (productionMethodForFishAndSeafoodCode) equals 'INLAND_FISHERY', then Catch Area Code (#catchAreaCode#) SHALL be one of the inland water codes ('01', '02', '03', '04', '05', '06', '07' or '08').</en>
+	</r1842>
+	<r1843>
+		<en>Multiple values for additionalTradeItemClassificationCodeDescription for each languageCode are not allowed.</en>
+	</r1843>
+	<r1843>
+		<en>Multiple values for sizeDimenision for each measurement unit code are not allowed.</en>
+	</r1843>
+	<r1844>
+		<en>Multiple values for sizeDimenision for each measurement unit code are not allowed.</en>
+	</r1844>
+	<r1847>
+		<en>For Country of Sale Code (#targetMarketCountryCode#), both seasonalAvailabilityEndDateTime and seasonalAvailabilityStartDateTime SHALL be used.</en>
+	</r1847>
+	<r1848>
+		<en>For Country of Sale Code (#targetMarketCountryCode#), priceComparisonMeasurement SHALL be specified with the following units of measures: kilogram, litre or piece.</en>
+	</r1848>
+	<r1849>
+		<en>For Country of Sale Code (#targetMarketCountryCode#), Price Comparison Quantity (#priceComparisonMeasurement#) is required for food product(s).</en>
+	</r1849>
+	<r1850>
+		<en>For Country of Sale Code (#targetMarketCountryCode#), Trade Item Trade Channel Code (#tradeItemTradeChannelCode#) SHALL be used.</en>
+	</r1850>
+	<r1851>
+		<en>For Country of Sale Code (#targetMarketCountryCode#), Net Mass of Explosives SHALL be specified with the unit of measure of kilogram (KGM).</en>
+	</r1851>
+	<r1852>
+		<en>For initialSterilisationPriorToUseCode (#initialSterilisationPriorToUseCode#) and/or manufacturerSpecifiedAcceptableResterilisationCode (#manufacturerSpecifiedAcceptableResterilisationCode#) shall not equal NOT_STERILISED and is invalidly used.</en>
+	</r1852>
+	<r1853>
+		<en>Multiple values for nutrientNameOnPackage for each language code are not allowed.</en>
+	</r1853>
+	
+</codes>

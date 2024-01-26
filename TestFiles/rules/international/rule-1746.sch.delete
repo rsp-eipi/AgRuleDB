@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://purl.oclc.org/dsdl/schematron" 
+		xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+        xmlns:doc="http://doc"
+        queryBinding="xslt2">
+   <ns uri="urn:gs1:gdsn:catalogue_item_confirmation:xsd:3"
+       prefix="catalogue_item_confirmation"/>
+   <ns uri="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader"
+       prefix="sh"/>
+    <ns uri="http://data" prefix="data"/>  
+    <let name="gpc" value="doc('../data/data.xml')//data:gpc"/>   
+   <pattern>
+      <title>Rule 1746</title>      
+      <doc:description>If targetMarketCountryCode equals ('528' (The Netherlands), '056' (Belgium) or '442' (Luxembourg)) and isTradeItemAConsumerUnit equals 'true' and additionalTradeItemClassificationSystemCode equals ‘64’ and additionalTradeItemClassificationPropertyCode equals 5.006 and the corresponding propertyCode equals ‘TRUE’, then there SHALL be at least one instance of class safetyDataSheetModule/safetyDataSheetInformation/referencedFileInformation where referencedFileTypeCode equals 'SAFETY_DATA_SHEET'.</doc:description> 
+	  <doc:avenant>Suppression 3.1.19 Le 17/02/2022</doc:avenant>
+      <doc:attribute1>targetMarketCountryCode,gpcCategoryCode,isTradeItemAConsumerUnit,additionalTradeItemClassificationSystemCode,additionalTradeItemClassificationPropertyCode,propertyCode</doc:attribute1>   
+      <doc:attribute2>referencedFileTypeCode</doc:attribute2>     
+      <rule context="tradeItem">
+     		   <assert test="if ((targetMarket/targetMarketCountryCode =  ('528', '056' , '442'))     		           
+     		            and (not (gdsnTradeItemClassification/gpcCategoryCode = $gpc/gpcDP007/gpcDP007Code))                                                                          									 					
+        				and (not (gdsnTradeItemClassification/gpcCategoryCode = $gpc/gpcDP008/gpcDP008Code)) 	  
+        				and (isTradeItemAConsumerUnit = 'true' ) 
+        				and (gdsnTradeItemClassification/additionalTradeItemClassification/additionalTradeItemClassificationSystemCode = '64')
+        				and (gdsnTradeItemClassification/additionalTradeItemClassification/additionalTradeItemClassificationValue/additionalTradeItemClassificationProperty/additionalTradeItemClassificationPropertyCode = '5.006') 
+        				and (gdsnTradeItemClassification/additionalTradeItemClassification/additionalTradeItemClassificationValue/additionalTradeItemClassificationProperty/propertyCode = 'TRUE'))  
+     		            then exists(tradeItemInformation/extension/*:safetyDataSheetModule/safetyDataSheetInformation/referencedFileInformation/referencedFileTypeCode) 
+		                and  (some $node in (tradeItemInformation/extension/*:safetyDataSheetModule/safetyDataSheetInformation/referencedFileInformation/referencedFileTypeCode)
+         				satisfies  ($node = 'SAFETY_DATA_SHEET' ) )                    
+           							        							
+				          				 else true()">			          		 
+				          		 		
+							      		 		<errorMessage>You must attach a safety data sheet because you entered that a safety data sheet is legally required. Please set safetyDataSheetModule/safetyDataSheetInformation/referencedFileInformation/referencedFileTypeCode equal to 'SAFETY_DATA_SHEET’. Additional data required for business use are: URL of SDS file (uniformResourceIdentifier),	Name of external file SDS (fileName), SDS language code (fileLanguageCode), Trade name on SDS (contentDescription), Date of last SDS revision (fileEffectiveStartDateTime)</errorMessage>
+							                
+								                 <location>
+														<!-- Fichier SDBH -->
+														<messageId><xsl:value-of select="/*/sh:StandardBusinessDocumentHeader/sh:DocumentIdentification/sh:InstanceIdentifier"/></messageId>
+														<messageOwner><xsl:value-of select="/*/sh:StandardBusinessDocumentHeader/sh:Sender/sh:Identifier"/></messageOwner>
+																			
+														<transactionId><xsl:value-of select="ancestor::transaction/transactionIdentification/entityIdentification"/></transactionId>
+														<transactionOwner><xsl:value-of select="ancestor::transaction/transactionIdentification/contentOwner/gln"/></transactionOwner>
+														<commandId><xsl:value-of select="ancestor::documentCommand/documentCommandHeader/documentCommandIdentification/entityIdentification"/></commandId>
+														<commandOwner><xsl:value-of select="ancestor::documentCommand/documentCommandHeader/documentCommandIdentification/contentOwner/gln"/></commandOwner>
+														<!-- Fichier CIN -->
+														<documentId><xsl:value-of select="ancestor::*:catalogueItemNotification/catalogueItemNotificationIdentification/entityIdentification"/></documentId>
+														<documentOwner><xsl:value-of select="ancestor::*:catalogueItemNotification/catalogueItemNotificationIdentification/contentOwner/gln"/></documentOwner>
+														<!--  Le 1er tradeItem . 1 seul car les autres sont imbriqués -->
+														<gtinHigh><xsl:value-of select="ancestor::*:catalogueItemNotification/catalogueItem/tradeItem/gtin"/></gtinHigh>
+														<!-- Context = TradeItem -->
+														<gtin><xsl:value-of select="gtin"/></gtin>
+														<glnProvider><xsl:value-of select="informationProviderOfTradeItem/gln"/></glnProvider>
+														<targetMarket><xsl:value-of select="targetMarket/targetMarketCountryCode"/></targetMarket>	
+														
+												</location>
+						          		 		
+						          		 		
+          		 		
+ 		  </assert>
+      </rule>
+   </pattern>
+</schema>

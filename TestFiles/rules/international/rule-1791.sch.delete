@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://purl.oclc.org/dsdl/schematron" 
+        xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+        xmlns:doc="http://doc"
+        queryBinding="xslt2">
+    <ns uri="urn:gs1:gdsn:catalogue_item_confirmation:xsd:3" prefix="catalogue_item_confirmation"/>
+    <ns uri="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader" prefix="sh"/>
+    <ns uri="http://data" prefix="data"/>
+    <pattern>
+        <title>Rule 1791</title>
+        <doc:description>If  targetMarketCountryCode equals ('040' (Austria), '056' (Belgium), '100' (Bulgaria), '191' (Croatia), '196' (Cyprus), '203' (Czech Republic), '208' (Denmark), '233' (Estonia), '246' (Finland), '250' (France), 
+                                                             '276' (Germany), '300' (Greece), '348' (Hungary), '372' (Ireland), '380' (Italy), '428' (Latvia), '440' (Lithuania), '442' (Luxembourg), '470' (Malta), '528' (Netherlands), 
+                                                             '616' (Poland), '620' (Portugal), '642' (Romania), '703' (Slovakia), '705' (Slovenia), '724' (Spain) or '752' (Sweden))
+                                                          and regulationTypeCode equals 'EXPLOSIVES_PRECURSORS_REGISTRATION' 
+                                                          and isTradeItemRegulationCompliant equals 'TRUE' in the corresponding iteration of class RegulatoryInformation , 
+                                                          then regulatoryActComplianceLevelCode SHALL equal 'ABOVE_REGULATED_LEVELS' or 'BELOW_REGULATED_LEVELS' in the corresponding iteration of class RegulatoryInformation.</doc:description>
+        <doc:attribute1>targetMarketCountryCode,regulationTypeCode,isTradeItemRegulationCompliant</doc:attribute1>
+        <doc:attribute2>regulatoryActComplianceLevelCode</doc:attribute2>
+        <rule context="regulatoryInformation">
+            <assert test="if ((ancestor::tradeItem/targetMarket/targetMarketCountryCode =  ('040' , '056' , '100' , '191', '196' , '203' , '208' , '233' , '246' , '250' , '276' , '300' , '348' ,
+                                                                     '372' , '380' , '428' , '440' , '442' , '470' , '528' , '578' , '616' , '620' , '642', '703' , '705' , '724' , '752')) 
+                            and (isTradeItemRegulationCompliant = 'TRUE')
+        					and (regulationTypeCode = 'EXPLOSIVES_PRECURSORS_REGISTRATION'))					    					
+        					then (exists(regulatoryActComplianceLevelCode)
+        					and  (every $node in (regulatoryActComplianceLevelCode) 
+        					satisfies ($node = ('ABOVE_REGULATED_LEVELS' , 'BELOW_REGULATED_LEVELS'))))        
+             		     
+             		     	   else true()"> 	
+             		     	   
+             		     	   		<targetMarketCountryCode><xsl:value-of select="ancestor::tradeItem/targetMarket/targetMarketCountryCode"/></targetMarketCountryCode>	 		
+            			  		
+	            			  	   <errorMessage>For Target Market , when a product contains restricted explosive precursor (regulationTypeCode equals EXPLOSIVES_PRECURSORS_REGISTRATION),
+	            			  	                 then you must populate regulatoryActComplianceLevelCode with  ABOVE_REGULATED_LEVELS or BELOW_REGULATED_LEVELS.</errorMessage>
+					           
+					               <location>
+											<!-- Fichier SDBH -->
+											<messageId><xsl:value-of select="/*/sh:StandardBusinessDocumentHeader/sh:DocumentIdentification/sh:InstanceIdentifier"/></messageId>
+											<messageOwner><xsl:value-of select="/*/sh:StandardBusinessDocumentHeader/sh:Sender/sh:Identifier"/></messageOwner>
+																
+											<transactionId><xsl:value-of select="ancestor::transaction/transactionIdentification/entityIdentification"/></transactionId>
+											<transactionOwner><xsl:value-of select="ancestor::transaction/transactionIdentification/contentOwner/gln"/></transactionOwner>
+											<commandId><xsl:value-of select="ancestor::documentCommand/documentCommandHeader/documentCommandIdentification/entityIdentification"/></commandId>
+											<commandOwner><xsl:value-of select="ancestor::documentCommand/documentCommandHeader/documentCommandIdentification/contentOwner/gln"/></commandOwner>
+											<!-- Fichier CIN -->
+											<documentId><xsl:value-of select="ancestor::*:catalogueItemNotification/catalogueItemNotificationIdentification/entityIdentification"/></documentId>
+											<documentOwner><xsl:value-of select="ancestor::*:catalogueItemNotification/catalogueItemNotificationIdentification/contentOwner/gln"/></documentOwner>
+											<!--  Le 1er tradeItem . 1 seul car les autres sont imbriqués -->
+											<gtinHigh><xsl:value-of select="ancestor::*:catalogueItemNotification/catalogueItem/tradeItem/gtin"/></gtinHigh>
+											<!-- Context = TradeItem -->
+											<gtin><xsl:value-of select="ancestor::tradeItem/gtin"/></gtin>
+											<glnProvider><xsl:value-of select="ancestor::tradeItem/informationProviderOfTradeItem/gln"/></glnProvider>
+											<targetMarket><xsl:value-of select="ancestor::tradeItem/targetMarket/targetMarketCountryCode"/></targetMarket>	
+											
+								  </location>	  
+            			  		
+	  		</assert>
+        </rule>
+    </pattern>
+</schema>

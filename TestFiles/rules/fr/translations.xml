@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<codes>
+
+<!-- Le code erreur doit être sous la forme FR_NOMBRE -->
+<!-- Afin de faire apparaître le message d'erreur, la règle doit avoir une balise contenant un code pays -->
+
+	<FR_000>
+		<fr>Si un niveau logistique comporte un gtin enfant, alors la fiche produit de ce GTIN enfant doit être décrite dans le même document CIN que son gtin parent.</fr>
+	</FR_000>
+	<FR_001>
+		<fr>Le code nomenclature douanière est obligatoire pour toutes les unités de base</fr>
+	</FR_001>
+	<FR_002>
+		<fr>Le code de nomenclature douanière a une taille entre 8 et 13 caractères.</fr>
+	</FR_002>
+	<FR_003>
+		<fr>Il est obligatoire d'indiquer le nombre de couche pour une palette</fr>
+	</FR_003>
+	<FR_004>
+		<fr>Le libellé court est obligatoire pour les unités consommateurs</fr>
+	</FR_004>
+	<FR_005>
+		<fr>Le libellé long est obligatoire pour toutes les unités commerciales</fr>
+	</FR_005>
+	<FR_006>
+		<fr>Le taux d'alcool est obligatoire pour toutes les boissons alcoolisées</fr>
+	</FR_006>
+	<FR_007>
+		<fr>Le type et la mesure d'affichage du prix est obligatoire pour toutes les unités consommateurs</fr>
+	</FR_007>
+	<FR_008>
+		<fr>Le type d'emballage est obligatoire pour toutes les unités logistiques</fr>
+	</FR_008>
+	<FR_009>
+		<fr>Il est obligatoire d'indiquer un type de support pour les unités logistiques palette ou box palette et les 1/2, 1/4,… de palette ou box palette.</fr>
+	</FR_009>
+	<FR_010>
+		<fr>Un type de TVA doit être défini pour toutes les unités consommateurs</fr>
+	</FR_010>
+	<FR_011>
+		<fr>Il est obligatoire d'indiquer l'unité de mesure utilisée pour la facture pour les produits à mesure variable.</fr>
+	</FR_011>
+	<FR_012>
+		<fr>Le contenu net est obligatoire pour toutes les unités consommateurs</fr>
+	</FR_012>
+	<FR_013>
+		<fr>Le libellé facture est obligatoire si l'unité commerciale est déclarée facturable.</fr>
+	</FR_013>
+	<FR_014>
+		<fr>Le pays d'origine est obligatoire pour les unités de base</fr>
+	</FR_014>
+	<FR_015>
+		<fr>La date de début de disponibilité à la commANDe d'une unité commerciale doit toujours être antérieure ou égale à la date de début de disponibilité des unités commerciales de rang supérieur dans la hiérarchie logistique.</fr>
+	</FR_015>
+	<FR_016>
+		<fr>La date de fin de disponibilité à la commANDe d'une unité commerciale doit toujours être postérieure ou égale à la date de fin de disponibilité des unités commerciales de rang supérieur dans la hiérarchie logistique.
+
+ATTENTION : Si la date de fin de disponibilité est renseignée sur un niveau logistique, alors elle doit également l'être sur son niveau logistique parent.</fr>
+	</FR_016>
+	<FR_017>
+		<fr>La date d'annulation (nouveau produit non commercialisé) doit toujours être postérieure ou égale à la date de réception de la mise à jour de sa valeur</fr>
+	</FR_017>
+	<FR_018>
+		<fr>Le poids brut est obligatoire pour toutes les unités commerciales</fr>
+	</FR_018>
+	<FR_019>
+		<fr>Une référence interne ne doit pas dépasser 35 caractères</fr>
+	</FR_019>
+	<FR_020>
+		<fr>Les données suivantes sont obligatoires pour toutes les unités commerciales:
+- Produit promotion consommateur (oui / non)</fr>
+	</FR_020>
+	<FR_021>
+		<fr>Si l'unité commerciale n'est pas une unité à mesure variable, on ne peut indiquer ni un Identifiant article poids variable (Prix) ni un identifiant article poids variable (Poids)</fr>
+	</FR_021>
+	<FR_022>
+		<fr>Le nom du propriétaire de la marque commerciale est obligatoire si son GLN est indiqué.</fr>
+	</FR_022>
+	<FR_023>
+		<fr>Nom du (des) du "Commander à" est obligatoire si GLN du (des) "Commander à" est indiqué</fr>
+	</FR_023>
+	<FR_024>
+		<fr>"Nom du (des) lieu d'enlèvement / lieu d'expédition" est obligatoire si "GLN du (des) lieu d'enlèvement / lieu d'expédition" est indiqué</fr>
+	</FR_024>
+	<FR_025>
+		<fr>L'indication du marché cible est obligatoire</fr>
+	</FR_025>
+	<FR_026>
+		<fr>L'agence de maintenance de la liste des dIFférentes taxes est GS1 France</fr>
+	</FR_026>
+	<FR_027>
+		<fr>La devise utilisée pour exprimer le montant des taxes est toujours l'euro</fr>
+	</FR_027>
+	<FR_028>
+		<fr>La marque est obligatoire pour toutes les unités commerciales</fr>
+	</FR_028>
+	<FR_029>
+		<fr>La date de début de disponibilité à la commANDe est obligatoire pour toutes les unités commerciales</fr>
+	</FR_029>
+	<FR_030>
+		<fr>Un produit Prêt à Vendre ne peut pas être une unité consommateur.</fr>
+	</FR_030>
+	<FR_031>
+		<fr>Un produit Prêt à Vendre est une unité logistique</fr>
+	</FR_031>
+	<FR_032>
+		<fr>VérIFier la cohérence des niveaux logistiques en fonction du tableau de l'onglet "Niveaux logistiques".</fr>
+	</FR_032>
+	<FR_033>
+		<fr>VérIFier la cohérence des valeurs possibles des indicateurs en fonction du niveau logistique: EA, PK, CA, DS, PL ou MX. (Voir onglet "Niveaux logistiques")</fr>
+	</FR_033>
+	<FR_034>
+		<fr>VérIFier la cohérence des valeurs possibles des indicateurs en fonction du niveau logistique: EA, PK, CA, DS, PL ou MX. (Voir onglet "Niveaux logistiques")</fr>
+	</FR_034>
+	<FR_035>
+		<fr>VérIFier la cohérence des valeurs possibles des indicateurs en fonction du niveau logistique: EA, PK, CA, DS, PL ou MX. (Voir onglet "Niveaux logistiques")</fr>
+	</FR_035>
+	<FR_036>
+		<fr>VérIFier la cohérence des valeurs possibles des indicateurs en fonction du niveau logistique: EA, PK, CA, DS, PL ou MX. (Voir onglet "Niveaux logistiques")</fr>
+	</FR_036>
+	<FR_037>
+		<fr>S'assurer que MIXED_MODULE|DISPLAY_SHIPPER a plus d'un fils.</fr>
+	</FR_037>
+	<FR_038>
+		<fr>Une palette ne peut pas avoir pour fils une palette</fr>
+	</FR_038>
+	<FR_039>
+		<fr>Si une unité commerciale est unité consommateur, toutes les unités commerciales de niveau inférieur dans la même hiérarchique sont aussi unités consommateurs</fr>
+	</FR_039>
+	<FR_040>
+		<fr>Si une unité commerciale est un produit promotionnel, toutes les unités commerciales de niveau supérieur dans la hiérarchie logistique sont aussi des produits promotionnels</fr>
+	</FR_040>
+	<FR_041>
+		<fr>Si le produit n'est pas un service, toute hiérarchie logistique doit contenir au moins un niveau logistique.</fr>
+	</FR_041>
+	<FR_042>
+		<fr>Lorsque renseigné, l'identifiant article poids variable doit commencer par les préfixes: « 02 », « 22 », « 24 », « 26 », « 28 », « 21 », « 23 », « 25 », « 27 » ou « 29 ».</fr>
+	</FR_042>
+	<FR_043>
+		<fr>Lorsque renseigné, l'identifiant article poids variable (Poids) doit commencer par les préfixes: « 21 », « 23 », « 25 », « 27 » ou « 29 ».</fr>
+	</FR_043>
+	<FR_044>
+		<fr>Si l'identifiant article poids variable (Poids) ou l' identifiant article poids variable (Prix) sont renseignés, l'unité commerciale doit être déclarée comme une unité à poids variable</fr>
+	</FR_044>
+	<FR_045>
+		<fr>Une unité commerciale ne peut pas être remplacée définitivement par elle-même.</fr>
+	</FR_045>
+	<FR_046>
+		<fr>Une taxe parafiscale ne peut pas avoir un montant égal à 0.</fr>
+	</FR_046>
+	<FR_047>
+		<fr>On ne peut pas définir deux fois la même taxe pour une même unité consommateur.</fr>
+	</FR_047>
+	<FR_048>
+		<fr>La quantité gratuite dans une offre promotionnelle ne doit pas dépasser la quantité totale de l'unité consommateur</fr>
+	</FR_048>
+	<FR_049>
+		<fr>Un lot doit avoir une quantité de produit fils &gt; 1</fr>
+	</FR_049>
+	<FR_049>
+		<fr>Un lot consommateur doit avoir une quantité de produit fils &gt; 1</fr>
+	</FR_049>
+	<FR_050>
+		<fr>Un produit à mesure variable ne peut pas être facturé à la pièce.</fr>
+	</FR_050>
+	<FR_051>
+		<fr>Si le produit n'est pas un service, il est obligatoire d'indiquer un multiple de commANDe et un minimum de commANDe &gt; 0 sur au moins 1 unité logistique d'une hiérarchie logistique.</fr>
+	</FR_051>
+	<FR_052>
+		<fr>L'identifiant article poids variable (Prix ou Poids) ne peut pas être renseigné pour un produit qui n'est pas à poids variable</fr>
+	</FR_052>
+	<FR_053>
+		<fr>Si renseigné, le poids net égoutté de l'unité commerciale déclarée doit être strictement inférieur à son poids net</fr>
+	</FR_053>
+	<FR_054>
+		<fr>Si un produit a une unité commercial "fils", la quantité associé à ce fils doit être renseigné et être supérieur ou égal à 1.</fr>
+	</FR_054>
+	<FR_055>
+		<fr>Si un produit est une boisson alcoolisée, il doit être soumis à au moins une des taxes suivantes:3001000002244 (Taxe sur les cidres), 3001000002312 (Droits sur alcool) ou 3001000002329 (Cotisations Sécurité Sociale) ou 3001000002541 (Taxe sur les prémix)</fr>
+	</FR_055>
+	<FR_056>
+		<fr>Si la taxe parafiscale "Droits sur les alcools" (3001000002312) est définie, un taux d'alcool doit être déclaré.</fr>
+	</FR_056>
+	<FR_057>
+		<fr>Pour les unités consommateurs et les unités logistiques hétérogènes (MX,DS), le premier chIFfre de leur GTIN (code sur 14 caractères) doit être 0.</fr>
+	</FR_057>
+	<FR_058>
+		<fr>Au moins un des contenus nets d'un lot homogène doit être déclaré dans la même unité de mesure que le contenu net de son composant</fr>
+	</FR_058>
+	<FR_059>
+		<fr>Pour les produits PGC, la profondeur d'un carton doit toujours être INFERIEUR ou égale à la profondeur de sa palette</fr>
+	</FR_059>
+	<FR_060>
+		<fr>Pour les produits PGC, la largueur d'un carton doit toujours être INFERIEUR ou égale à la largueur de sa palette</fr>
+	</FR_060>
+	<FR_061>
+		<fr>La classIFication GPC est obligatoire pour toutes les unités commerciales.</fr>
+	</FR_061>
+	<FR_062>
+		<fr>Le volume d'une unité logistique doit être supérieure ou égale à la somme des volumes des unités logistiques fils (si ces unités commerciales fils existent). Cette règle ne s'applique que pour les unités logistiques. Le volume étant calculé comme le produit de la hauteur, largeur et profondeur. 
+Exemple: volume de la palette &gt;= volume du carton * nombre de cartons</fr>
+	</FR_062>
+	<FR_063>
+		<fr>Une unité commerciale ne peut pas être remplacée provisoirement par elle-même.</fr>
+	</FR_063>
+	<FR_064>
+		<fr>Le facteur de commANDe est toujours exprimé dans l'unité de mesure point : 1N</fr>
+	</FR_064>
+	<FR_065>
+		<fr>Pour une unité consommateur promotionnelle ayant un GTIN dIFférent de l'article permanent, le type de promotion et le GTIN de l'article standard référent sont obligatoires</fr>
+	</FR_065>
+	<FR_066>
+		<fr>Si un type de promotion est indiqué, l'unité commerciale doit être déclarée comme une unité consommateur promotionnelle.</fr>
+	</FR_066>
+	<FR_067>
+		<fr>Pour une unité consommateur promotionnelle offrant une quantité gratuite (type: "dont gratuit" ou "plus gratuit"), la quantité gratuite doit être exprimée dans la même unité de mesure qu'un de ses contenu nets.</fr>
+	</FR_067>
+	<FR_068>
+		<fr>Si un lot consommateur promotionnel offre une quantité gratuite sur un des ces composants (Type: "Plus gratuit" ou "dont gratuit") alors cette quantité gratuite doit s'exprimer dans la même unité de mesure que le contenu net du composant concerné.</fr>
+	</FR_068>
+	<FR_069>
+		<fr>Une promotion de type "lot promotionnel spécialement créé" ne peut pas être déclarée pour une unité de base.</fr>
+	</FR_069>
+	<FR_070>
+		<fr>La quantité gratuite d'un produit fils ne peut être indiquée que pour un lot hétérogène promotionnel</fr>
+	</FR_070>
+	<FR_071>
+		<fr>Il est obligatoire d'indiquer un nombre d'article par couche pour les palettes et box palettes homogènes et hétérogènes.</fr>
+	</FR_071>
+	<FR_072>
+		<fr>L'indication du type de support palette réutilisable est obligatoire pour les palettes et box palettes homogènes et hétérogènes.</fr>
+	</FR_072>
+	<FR_073>
+		<fr>Le poids net est obligatoire pour toutes les unités consommateurs</fr>
+	</FR_073>
+	<FR_074>
+		<fr>Si Brick GPC =10000424 (Détergents pour la Lessive) alors l’unité de mesure légale doit être exprimée en VOLUME ou en POIDS</fr>
+	</FR_074>
+	<FR_075>
+		<fr>L’unité de mesure légale doit obligatoirement être en VOLUME ou en POIDS pour les produits pré-emballés alimentaires à l'exception des œufs, les épices et la confiserie en raison des exceptions listées par la règlementation.</fr>
+	</FR_075>
+	<FR_076>
+		<fr>Si l’unité de mesure légale est la pièce alors la mesure/affichage du prix (associée à l’unité de mesure légale) doit être un nombre entier.</fr>
+	</FR_076>
+	<FR_077>
+		<fr>La mesure/affichage du prix (associée à l’unité de mesure légale) doit avoir une valeur strictement supérieure à zéro.</fr>
+	</FR_077>
+	<FR_078>
+		<fr>Le poids net égoutté doit être strictement inférieur au poids net</fr>
+	</FR_078>
+	<FR_079>
+		<fr>Les dimensions d'une palette doivent être au moins égales aux dimensions du support palette.
+Les dimensions des palettes sont fournies dans la liste 12 document GSGDS_022_DonneesFicheProduitV28</fr>
+	</FR_079>
+	<FR_080>
+		<fr>Les dimensions de la palette doivent être strictement inférieures au double des dimensions du support palette.
+Les dimensions des palettes sont fournies dans la liste 12 document GSGDS_022_DonneesFicheProduitV28</fr>
+	</FR_080>
+	<FR_081>
+		<fr>Un poids doit être exprimé uniquement en unité de mesure de masse (gramme, kilogramme,…). 
+Les unités de mesure de masse sont indiquées dans la liste 1 document GSGDS_022_DonneesFicheProduitV28</fr>
+	</FR_081>
+	<FR_082>
+		<fr>Une dimension doit être exprimée uniquement en unité de longueur : mètre, centimètre, ... 
+Les unités de mesure de dimension sont indiquées dans la liste 1 document GSGDS_022_DonneesFicheProduitV28</fr>
+	</FR_082>
+	<FR_083>
+		<fr>Si l’unité de mesure légale est exprimée en volume, l’affichage du prix à l’unité de mesure et le contenu net doivent être exprimés uniquement en unité de contenance : millilitre (ML), litre (LT), mètre cube (CR), centilitre (C3). 
+
+ATTENTION : Règle non applicable pour les briques 10000050 et 10000262</fr>
+	</FR_083>
+	<FR_084>
+		<fr>Le mode de calcul de la contribution Eco-Emballage étant un montant en euro par poids de l’emballage, il ne peut y avoir une éco-emballage exprimée en %.</fr>
+	</FR_084>
+	<FR_085>
+		<fr>La hauteur d’une palette doit toujours être inférieure ou égale à 3 mètres.</fr>
+	</FR_085>
+	<FR_086>
+		<fr>Si les dimensions (hauteur, largeur, profondeur) sont exprimées en mètre, 3 décimales maximum</fr>
+	</FR_086>
+	<FR_087>
+		<fr>Si les dimensions sont exprimées en centimètre, 1 décimale maximum</fr>
+	</FR_087>
+	<FR_088>
+		<fr>Si les dimensions sont exprimées en millimètre, aucune décimale ne peut être échangée</fr>
+	</FR_088>
+	<FR_089>
+		<fr>Si Type de Mesure / affichage du prix est PER_KILOGRAM alors le poids net est égal à Mesure / affichage du prix (ATTENTION à la conversion entre la quantité exprimé au kilogramme est le poids net)</fr>
+	</FR_089>
+	<FR_090>
+		<fr>Si Type de Mesure / affichage du prix est DRAINED_WEIGHT alors le poids net égoutté est égal à « Mesure / affichage du prix» (ATTENTION à la conversion entre la quantité exprimé au kilogramme est le poids net égoutté)</fr>
+	</FR_090>
+	<FR_091>
+		<fr>Toutes les unités consommateurs facturables doivent avoir les informations de taxes renseignées.</fr>
+	</FR_091>
+	<FR_092>
+		<fr>Les GTIN des displays homogènes et des colis homogènes standards ne sont ni commANDables ni facturables en France (isTradeItemAnOrderableUnit = false et isTradeItemAnInvoiceUnit = false).</fr>
+	</FR_092>
+	<FR_093>
+		<fr>Les GTIN des displays hétérogènes et colis mixtes sont commANDables et facturables, (isTradeItemAnOrderableUnit = true et isTradeItemAnInvoiceUnit = true)</fr>
+	</FR_093>
+	<FR_094>
+		<fr>Les 8 premiers chIFfres de la nomenclature douanière doivent être présents dans la nomenclature combinée publiée chaque année par la commission européenne.
+ATTENTION Règle non bloquante, uniquement un warning. La nomenclature combinée sera fournie aux catalogues électroniques annuellement par GS1 France.</fr>
+	</FR_094>
+	<FR_095>
+		<fr>Si le visuel est fourni dans la fiche produit, le nom du visuel du produit doit respecter la règle de nommage définie dans le standard image GS1.
+ATTENTION Règle non bloquante, uniquement un warning. S'applique uniquement si le catalogue héberge le visuel.</fr>
+	</FR_095>
+	<FR_096>
+		<fr>Si le visuel est fourni dans la fiche produit, la définition de la photo produit doit être comprise dans l'intervalle de valeurs défini dans le standard image GS1.
+ATTENTION Règle non bloquante, uniquement un warning. S'applique uniquement si le catalogue héberge le visuel.</fr>
+	</FR_096>
+	<FR_097>
+		<fr>Si le visuel est fourni dans la fiche produit, la photo produit doit être dans un des formats définis dans le standard image GS1.
+ATTENTION Règle non bloquante, uniquement un warning. S'applique uniquement si le catalogue héberge le visuel.</fr>
+	</FR_097>
+	<FR_098>
+		<fr>Si le visuel est fourni dans la fiche produit, la photo produit doit être dans le système colorimétrique défini dans le standard image GS1.
+ATTENTION Règle non bloquante, uniquement un warning. S'applique uniquement si le catalogue héberge le visuel.</fr>
+	</FR_098>
+	<FR_099>
+		<fr>Pour le marché cible France, si un produit est biologique (organicTradeItemCode = 2), le numéro du certificat BIO et les dates de validité de ce certificat doivent être renseignées.</fr>
+	</FR_099>
+	<FR_100>
+		<fr>Si un prix brut est renseigné dans le message tradeItem, sa valeur doit être supérieure ou égale à 0.</fr>
+	</FR_100>
+	<FR_101>
+		<fr>Si un prix brut est renseigné dans le message priceSync, sa valeur doit être supérieure ou égale à 0.</fr>
+	</FR_101>
+	<FR_102 = à spliter en 2 règles en 3.1 (stateful)>
+		<fr>Si la fiche-produit est synchronisée depuis plus de 6 mois (CIC RECEIVED reçu d'au moins un client), sa modification (CIN CORRECT) est interdite.</fr>
+	</FR_102 = à spliter en 2 règles en 3.1 (stateful)>
+	<FR_103>
+		<fr>Si fournie, la déclaration nutritionnelle doit contenir au minimum la valeur énergétique en kilojoules et en kilocalories et les nutriments suivants : Matières grasses, Acides gras saturés, glucides, sucres, protéines et sel.</fr>
+	</FR_103>
+	<FR_104>
+		<fr>Les unités de mesure des quantités d'énergie et de nutriments utilisées dans la déclaration nutritionnelle doivent correspondre aux unités de mesure imposées pour chaque nutriment par le Règlement UE n°1169/2011.</fr>
+	</FR_104>
+	<FR_105>
+		<fr>Pour toutes les denrées alimentaires, la fiche produit GS1 doit comporter les données EU 1169 suivantes : 
+- L'identifiant de la variante : productionVariantDescription
+- La date de mise à disposition de la variante : effectiveDate
+- La dénomination de vente : regulatedProductName</fr>
+	</FR_105>
+	<FR_107>
+		<fr>Si un produit est pré-emballé destiné en l'état au consommateur dès que les données EU 1169 sont fournies dans la fiche-produit, alors il est obligatoire de fournir le nom ou la raison sociale et l'adresse de l'exploitant du secteur alimentaire.</fr>
+	</FR_107>
+	<FR_108>
+		<fr>Dès que des informations nutritionnelles sont fournies dans la fiche produit, il est obligatoire de transmettre les valeurs nutritionnelles pour 100 GR ou 100 ML.</fr>
+	</FR_108>
+	<FR_109>
+		<fr>Si les informations nutritionnelles sont fournies à la portion et que la déclaration nutritionnelle contient le nutriment sel, le nombre de portions (exact ou approximatIF) doit être communiqué.</fr>
+	</FR_109>
+	<FR_110>
+		<fr>Si une déclaration nutritionnelle est fournie et qu'elle contient le nutriment sel, elle doit comporter la totalité des nutriments obligatoires sauf pour les boissons titrant plus de 1,2%, les eaux minérales, les compléments alimentaires et les denrées alimentaires non préemballées.
+
+Les nutriments obligatoires sont : la valeur énergétique (en kilojoules et en kilocalories), les matières grasses,  dont les acides gras saturés, les glucides, dont les sucres, les proteines et le sel.</fr>
+	</FR_110>
+	<FR_111>
+		<fr>Les unités de mesure utilisées pour indiquer la quantité de chaque nutriment doit être conforme à l'unité de mesure précisée dans le règlement UE n°1169/2011</fr>
+	</FR_111>
+	<FR_112>
+		<fr>Pour les vitamines et minéraux, la quantité de nutriment doit être exprimée obligatoirement en pourcentage des apports de référence lorsque fournie pour la taille de référence (100 g ou 100 ml).</fr>
+	</FR_112>
+	<FR_113>
+		<fr>Si au moins une donnée EU 1169 est fournie dans la fiche produit GS1 alors il est obligatoire de fournir la dénomination légale de vente.</fr>
+	</FR_113>
+	<FR_114>
+		<fr>Si la déclaration nutritionnelle contient le nutriment sel, il est obligatoire de préciser l'apport de référence ("apports de référence pour un adulte type (8400kj/2000 Kcal") si au moins une des quantités des macronutriments obligatoires est exprimée en pourcentage des apports de référence pour 100g.</fr>
+	</FR_114>
+	<FR_115>
+		<fr>Il est impossible de fournir un nombre de portions exact et un nombre de portions approximatIFs pour un même produit</fr>
+	</FR_115>
+	<FR_116>
+		<fr>Il est obligatoire de fournir une description textuelle de la portion (servingSizeDescription), si les informations sont fournies pour quantitée de denrée alimentaire dIFférente de 100 GR ou 100 ML (portion)</fr>
+	</FR_116>
+	<FR_117>
+		<fr>Il est obligatoire d'indiquer une quantité contenue pour chaque nutriment fournie dans la déclaration nutritionnelle.</fr>
+	</FR_117>
+	<FR_118>
+		<fr>La valeur "EXACT" ne peut pas être utilisé pour la précision de la mesure associé à la quantité d'un nutriment.</fr>
+	</FR_118>
+	<FR_119>
+		<fr>L'indication de la mention d'origine est obligatoire pour les viANDes bovines fraîches, congelées et réfrigérées.</fr>
+	</FR_119>
+	<FR_120>
+		<fr>L'indication de la mention d'origine est obligatoire pour toutes les viANDes porcines, ovines, caprines et volailles fraîches, congelées et réfrigérées à partir du 1er avril 2015.</fr>
+	</FR_120>
+	<FR_121>
+		<fr>Si des valeurs nutritionnelles sont fournies pour le produit tel que préparé et non tel que vendu, alors il est obligatoire d'indiquer les instructions de préparation</fr>
+	</FR_121>
+	<FR_122>
+		<fr>Si renseignés, les éléments suivants doivent être fournis en français pour le marché français: 
+ - la liste des ingrédients
+ - la liste des allergènes
+ - conditions particulières de conservation et/ou d’utilisation
+ - apport de référence
+ - Taille de la portion
+ - Mentions obligatoires complémentaires
+ -Description de la variante produit</fr>
+	</FR_122>
+	<FR_123>
+		<fr>Pour chaque déclaration nutritionnelle, il est obligatoire d'indiquer la quantité de denrée alimentaire à laquelle elle s'applique (donnée servingSize)</fr>
+	</FR_123>
+	<FR_124>
+		<fr>Si plusieurs déclarations nutritionnelles sont transmises pour la même quantité de denrée alimentaire et le même état de préparation, il est obligatoire de fournir une description textuelle de cette variété (householdServingSize) pour ces déclarations nutritionnelles.</fr>
+	</FR_124>
+	<FR_125>
+		<fr>La quantité d'acides gras saturés ne doit pas être supérieure à la quantité de matières grasses</fr>
+	</FR_125>
+	<FR_126>
+		<fr>La quantité de Sucres ne doit pas être supérieure à la quantité de Glucides
+</fr>
+	</FR_126>
+	<FR_127>
+		<fr>Si l’identifiant de la variante est modIFié dans la fiche produit (pour annoncer la commercialisation d’une nouvelle variante), alors la donnée effectiveDate doit également être modIFiée pour indiquer aux distributeurs la date de mise à disposition de cette nouvelle variante.</fr>
+	</FR_127>
+	<FR_128>
+		<fr>La taxe textile ne peut être appliquée qu'aux "produits textiles"</fr>
+	</FR_128>
+	<FR_X01>
+		<fr>La balise referencedFileTypeCode ne peut pas prendre la valeur TRADE_ITEM_DESCRIPTION.</fr>
+	</FR_X01>
+	<FR_X02>
+		<fr>Les faux GTIN ne sont pas autorisés.</fr>
+	</FR_X02>
+	<FR_130>
+		<fr>Pour le marché cible France, pour une hiérarchie logistique publiée, au moins une des fiches-produits doit être déclarée en tant qu'unité commandable "isTradeItemAnorderableUnit = true".</fr>
+	</FR_130>
+	<FR_131>
+		<fr>Pour le marché cible France, si le carton présentoir est homogène "quantityOfChildren = 1" alors il doit être déclaré comme CASE "tradeItemUnitDescriptorCode = CASE" et comme présentoir "isTradeItemADisplayUnit = true"</fr>
+	</FR_131>
+	<FR_132>
+		<fr>Pour le marché cible France, si le carton présentoir est hétérogène "quantityOfChildren > 1" alors il doit être déclaré comme DISPLAY_SHIPPER "tradeItemUnitDescriptorCode = DISPLAY_SHIPPER" et comme présentoir "isTradeItemADisplayUnit = true"</fr>
+	</FR_132>
+	<FR_145>
+		<fr>Pour le marché cible France, levelOfContainmentCode est obligatoire si la donnée allergenTypeCode est renseignée.</fr>
+	</FR_145>
+	<FR_146>
+		<fr>Pour le marché cible France, awardPrizeName est Obligatoire si la donnée awardPrizeJury est renseignée.</fr>
+	</FR_146>
+	<FR_147>
+		<fr>Pour le marché cible France, awardPrizeName est Obligatoire si la donnée awardPrizeYear est renseignée.</fr>
+	</FR_147>
+	<FR_148>
+		<fr>Pour le marché cible France, si le type de batterie est 'OTHER' alors le poids de la batterie doit être indiqué.</fr>
+	</FR_1487>
+	<FR_149>
+		<fr>Pour le marché cible France, si le produit porte le label bio, alors l'agence de certification doit être renseignée.</fr>
+	</FR_149>
+	<FR_150>
+		<fr>Pour le marché cible France, si le produit porte le label bio, alors la valeur de certification doit être renseignée.</fr>
+	</FR_150>
+	<FR_151>
+		<fr>Pour le marché cible France, si le produit porte le label bio, alors la date de fin de certification doit être renseignée.</fr>
+	</FR_151>
+	<FR_152>
+		<fr>Pour le marché cible France, si le produit porte le label bio, alors la date de début de certification doit être renseignée.</fr>
+	</FR_152>
+	<FR_153>
+		<fr>Pour le marché cible France, si le produit est un fromage, le pourcentage de graisse doit être renseigné.</fr>
+	</FR_153>
+	<FR_154>
+		<fr>Pour le marché cible France, si le produit est non alimentaire et est une unité consommateur alors il est obligatoire d'indiquer si l'unité commerciale est commandable à nouveau.</fr>
+	</FR_154>
+	<FR_157>
+		<fr>Pour le marché cible France, si le produit est non alimentaire et est une unité consommateur alors il est obligatoire d'indiquer si l'unité commerciale est commandable à nouveau.</fr>
+	</FR_157>
+	<FR_159>
+		<fr>Pour le marché cible France, la quantité minimale de commande doit être au moins égal à un sur au moins un niveau de la hiérarchie logistique.</fr>
+	</FR_159>
+	<FR_162>
+		<fr>Pour le marché cible France, si le type de taxe n'est pas utilisé avec les taux usuels de TVA alors le taux de taxe et le montant de la taxe doit être renseigné.</fr>
+	</FR_162>
+	<FR_180>
+		<fr>Pour le marché cible France, si le type de nutriment est renseigné avec ('vitamine A', 'vitamine B12', 'vitamine B6', 'vitamine C', 'vitamine D', 'vitamine E', 'vitamine K', 'Calcium', 'Chlorure', 'Chrome', 'Cuivre', 'Fluorure', 'Fer', 'Iode', 'Potassium', 'Magnésium', 'Manganèse', 'Sodium', 'Molybdène', 'Phosphore', 'Sélénium' ou 'Zinc') alors, le pourcentage d'apport journalier doit être renseigné.</fr>
+	</FR_180>
+	<FR_182>
+		<fr>Pour le marché cible France, si le produit est un aérosol alors le type de packaging doit être renseigné avec la valeur aérosol.</fr>
+	</FR_182>
+	<FR_184>
+		<fr>Pour le marché cible France, si le type de packaging est 'Palette' alors la description du packaging ne doit pas être renseignée.</fr>
+	</FR_184>
+	<FR_186>
+		<fr>Pour le marché cible France, si le type de nomenclature douanière est renseigné alors il doit avoir la valeur 'CUSTOMS_TARIFF_NUMBER'.</fr>
+	</FR_186>
+	<FR_188>
+		<fr>Pour le marché cible France, les country codes doivent comporter 3 chiffres uniquement.</fr>
+	</FR_188>
+	<FR_192>
+		<fr>Pour le marché cible France, si l'URI est renseigné , alors le code du type du fichier référencé doit être renseigné.</fr>
+	</FR_192>
+	<FR_194>
+		<fr>Pour le marché cible France, si l'URI est renseigné, alors la date de début d'effectivité du fichier externe doit être renseignée.</fr>
+	</FR_194>
+	<FR_196>
+		<fr>Pour le marché cible France, si le code de la catégorie gpc vaut '30012505', alors le code du type de régulation doit valoir 'BIOCIDE_REGULATION' ou 'AGRICULTURE_PROTECTION_REGULATION' ou 'BIOCIDE_REGULATION_TREATED_ARTICLE'.</fr>
+	</FR_196>
+	<FR_197>
+		<fr>Pour le marché cible France et pour chaque instance de la classe XML relative aux informations réglementaires, si l'agence de régulation vaut 'SANITARY_AGREEMENT_NUMBER_AGENCY', alors la décision réglementaire doit être renseigné avec la valeur 'SANITARY_AGREEMENT_NUMBER'.</fr>
+	</FR_197>
+	<FR_198>
+		<fr>Pour le marché cible France et pour chaque instance de la classe XML relative aux informations réglementaires, si la décision réglementaire vaut 'SANITARY_AGREEMENT_NUMBER', alors l'agence de régulation doit être renseigné avec la valeur 'SANITARY_AGREEMENT_NUMBER_AGENCY'.</fr>
+	</FR_198>
+	<FR_199>
+		<fr>Pour le marché cible France et pour chaque instance de la classe XML relative aux informations réglementaires, si l'agence de régulation vaut 'SANITARY_AGREEMENT_NUMBER_AGENCY', alors l'identification de l'autorisation réglementaire doit être renseigné.</fr>
+	</FR_199>
+	<FR_205>
+		<fr>Pour le marché cible France, si le code du type de contenu de comparaison des prix est renseigné, alors la mesure de comparaison des prix doit être renseignée.</fr>
+	</FR_205>
+	<FR_207>
+		<fr>Pour le marché cible France, la mesure de l'unité de vente est différente de 'PIECES', alors la mesure de l'unité de commande doit être renseignée.</fr>
+	</FR_207>
+	<FR_210>
+		<fr>Pour le marché cible France, si l'unité commerciale est une unité consommateur, alors la description courte doit être renseignée.</fr>
+	</FR_210>
+	<FR_217>
+		<fr>Pour le marché cible France, si le code couleur est renseigné, alors le code de la liste des codes couleurs doit être renseigné.</fr>
+	</FR_217>
+	<FR_218>
+		<fr>Pour le marché cible France, si le code de la liste des codes couleurs est renseigné, alors le code couleur doit être renseigné.</fr>
+	</FR_218>
+	<FR_220>
+		<fr>Pour le marché cible France, si le facteur de gerbage et/ou le poids maximal de gerbage est (sont) renseigné(s), alors le code du type de facteur de gerbage doit être renseigné.</fr>
+	</FR_220>
+	<FR_222>
+		<fr>Pour le marché cible France, si le code descripteur de l'unité commerciale vaut 'PALLET' ou 'MIXED_MODULE', alors le nombre de couches complètes dans l'unité commerciale doit être renseigné.</fr>
+	</FR_222>
+	<FR_229>
+		<fr>Pour le marché cible France, si l'unité commerciale est de type prêt à vendre et si l'unité commerciale est ordonnée de façon régulière, alors le nombre de rangées au sein de l'unité commerciale doit être renseigné.</fr>
+	</FR_229>
+	<FR_231>
+		<fr>Pour le marché cible France, si l'unité commerciale est de type prêt à vendre et si l'unité commerciale est ordonnée de façon régulière, alors le nombre de colonnes au sein de l'unité commerciale doit être renseigné.</fr>
+	</FR_231>
+	<FR_239>
+		<fr>Pour le marché cible France, si l'unité commerciale est une unité consommateur, alors le poids net doit être renseigné.</fr>
+	</FR_239>
+	<FR_242>
+		<fr>Pour le marché cible France, si le code ONU pour les marchandises dangereuses est renseigné alors le code de limitation de packaging de marchandises dangereuses doit être renseigné.</fr>
+	</FR_242>
+	<FR_243>
+		<fr>Pour le marché cible France, si le numéro ONU de marchandise dangereuse est renseigné alors le code de règlementation doit être renseigné.</fr>
+	</FR_243>
+	<FR_245>
+		<fr>Pour le marché cible France, si le numéro ONU de matières dangereuses est renseigné, alors la classe de matières dangereuses doit être renseignée.</fr>
+	</FR_245>
+	<FR_246>
+		<fr>Pour le marché cible France, si le numéro ONU de matières dangereuses est renseigné, alors le groupement de matières dangereuses doit être renseigné.</fr>
+	</FR_246>
+	<FR_248>
+		<fr>Pour le marché cible France, si le numéro ONU de matières dangereuses est renseigné, alors le nom technique des matières dangereuses doit être renseigné.</fr>
+	</FR_248>
+	<FR_250>
+		<fr>Pour le marché cible France, le numéro ONU de marchandise dangereuse doit être renseigné si le code indiquant si l'unité commerciale déclarée (produit fini) dispose d'une Fiche de données de Sécurité (FDS) ou d'une Fiche d'Information Technique Produits Cosmétiques (FITPC) vaut 'FITPC' ou 'REACH'.</fr>
+	</FR_250>
+	<FR_251>
+		<fr>Pour le marché cible France, si une indication de marchandises dangereuses est renseigné alors le numéro d'indication de marchandise dangereuse doit être renseigné.</fr>
+	</FR_251>
+	<FR_252>
+		<fr>Pour le marché cible France, si le numéro d'indication de marchandises dangereuses est renseigné alors la séquence de numéro d'indication de marchandise dangereuse doit être renseigné.</fr>
+	</FR_252>
+	<FR_254>
+		<fr>Pour le marché cible France, si la date d'annulation est renseigné alors la date de de discontinuité ne doit pas être renseignée.</fr>
+	</FR_254>
+	<FR_261>
+		<fr>Pour le marché cible France, si la valeur de classification additionnel de l'unité commerciale est renseignée alors le code de classification additionnel de l'unité commerciale doit être renseigné.</fr>
+	</FR_261>
+	<FR_262>
+		<fr>Pour le marché cible France, si la propriété de classification additionnel est renseignée alors le code de la propriété de classification additionnel doit être renseigné.</fr>
+	</FR_262>
+	<FR_267>
+		<fr>Pour le marché cible France, si la propriété de classification additionnel est renseignée alors le code de la propriété de classification additionnel doit être renseigné.</fr>
+	</FR_267>
+	<FR_268>
+		<fr>Pour le marché cible France, si le code de type de règlementation est égal à 'FRENCH_SPARE_PARTS_REGULATION' et si l'unité commerciale répond aux exigences règlementaires alors la date de disponibilité effective des pièces de rechanges doit être renseignée.</fr>
+	</FR_268>
+	<FR_269>
+		<fr>Pour le marché cible France, si le code de type de règlementation est égal à 'FRENCH_SPARE_PARTS_REGULATION' et si l'unité commerciale répond aux exigences règlementaires alors la période de disponibilité des pièces de rechanges doit être renseignée.</fr>
+	</FR_269>
+	<FR_270>
+		<fr>Pour le marché cible France, l'unité de mesure du temps de la période de disponibilité des pièces détachées doit être renseigné si la période de disponibilité des pièces détachées est renseigné.</fr>
+	</FR_270>
+	<FR_271>
+		<fr>Pour le marché cible France, si le code de type de règlementation est égal à 'FRENCH_SPARE_PARTS_REGULATION' et si l'unité commerciale répond aux exigences règlementaires ne doit pas prendre la valeur 'UNSPECIFIED'.</fr>
+	</FR_271>
+	<FR_272>
+		<fr>Pour le marché cible France, si l'unité commerciale est une unité de base alors pour les vin tranquilles, les vins mousseux ou les vins fortifiés il est nécessaire de renseigné si l'unité commerciale est a un millésime.</fr>
+	</FR_272>
+	<FR_284>
+		<fr>Pour le marché cible France, le code pays du pays d'activité avec une valeur comportant 3 chiffres doit être renseigné si le pays d'activité est renseigné et si le code de type d'activité du produit vaut 'BIRTH', 'REARING', 'SLAUGHTER' ou 'CATCH_ZONE'.</fr>
+	</FR_284>
+	<FR_288>
+		<fr>Pour le marché cible France, si le code de type de régulation est 'BIOCIDE_REGULATION' alors le code de niveau de régulation doit être renseigné.</fr>
+	</FR_288>
+	<FR_290>
+		<fr>Pour le marché cible France, si le code de type de programme nutritionnel est renseigné alors la mesure des ingrédients du program nutritionnel doit être renseigné.</fr>
+	</FR_290>
+	<FR_291>
+		<fr>Pour le marché cible France, l'unité de mesure de la mesure des ingrédients dans un programme nutritionnel doit être renseigné si la mesure des ingrédients dans un programme nutritionnel est renseigné.</fr>
+	</FR_291>
+	<FR_292>
+		<fr>Pour le marché cible France, si le type de garantie est renseigné alors l'extension gratuite de garantie doit être renseigné.</fr>
+	</FR_292>
+	<FR_293>
+		<fr>Pour le marché cible France, si l'unité commerciale est saisonnière alors le code de paramètre saisonnier doit être renseigné.</fr>
+	</FR_293>
+	<FR_294>
+		<fr>Pour le marché cible France, si code de description de l'unité commerciale est égal à 'CASE' ou 'DISPLAY_SHIPPER' et si le code de type de plateforme est renseigné alors la quantité de couche complète contenue dans l'unité commerciale doit être renseigné.</fr>
+	</FR_294>
+	<FR_295>
+		<fr>Pour le marché cible France, si l'unité commerciale est un présentoir fourni et si l'unité commerciale est rangée de façon régulière alors la quantité de couche complète contenue dans l'unité commerciale doit être renseignée.</fr>
+	</FR_295>
+	<FR_296>
+		<fr>Pour le marché cible France, si le produit n'est pas naturel ou lite, il est obligatoire de renseigner les allégations nutritionnelles.</fr>
+	</FR_296>
+	<FR_297>
+		<fr>Pour le marché cible France, si le pourcentage d'alcool est renseigné alors sa valeur doit être supérieure ou égale à 0 et inférieure ou égale à 99,99.</fr>
+	</FR_297>
+	<FR_298>
+		<fr>Pour le marché cible France, si un type de gratuité est renseigné, alors la quantité gratuite est obligatoire.</fr>
+	</FR_298>
+	<FR_299>
+		<fr>Pour le marché cible France, et pour toutes les unités logistiques, si le minimum de commande est renseigné alors le multiple de commande doit être renseigné.</fr>
+	</FR_299>
+	<FR_300>
+		<fr>Pour le marché cible France, et pour toutes les unités logistiques, si le multiple de commande est renseigné alors le minimum de commande doit être renseigné.</fr>
+	</FR_300>
+	<FR_301>
+		<fr>Pour le marché cible France, et pour toutes les briques GPC appartenant à la classe GPC 50202200 - Boissons Alcoolisées
+hormis les Briques ['10000143' (Fournitures de Fabrication d’Alcool), '10008042' (Kits d’Aromatisation pour Alcools) '10000142' (Kits de Fabrication d’Alcool) ou '10000591' (Assortiments de Boissons Alcoolisées)], si 'Type de Mesure / affichage du prix' est renseigné alors sa valeur doit être 'PER_LITRE' (Par litre).</fr>
+	</FR_301>
+	<FR_302>
+		<fr>Pour le marché cible France, si le code de type d'activité est égal à 'CATCH_ZONE' alors la zone de pêche/capture doit être renseigné.</fr>
+	</FR_302>
+	<FR_304>
+		<fr>Pour le marché cible France, si le pourcentage d'alcool est renseigné et sa valeur est supérieure à 18 degrés alors la taxe 3001000002329 (Cotisation sécurité sociale) doit être renseignée.</fr>
+	</FR_304>
+	<FR_305>
+		<fr>Pour le marché cible France, si l'Etat du produit est Frais, congelé ou surgelé, alors les températures minimale et maximale de stockage doivent être renseignées.</fr>
+	</FR_305>
+	<FR_307>
+		<fr>Pour le marché cible France, L'attribut "EAN 7 poids variable" est obligatoire pour les produits à poids variable en libre service (produit à découper=non ou N/C)</fr>
+	</FR_307>
+	<FR_308>
+		<fr>Pour le marché cible France, l'attribut "EAN 7 poids variable" doit être composé d'exactement 7 chiffres</fr>
+	</FR_308>
+	<FR_313>
+		<fr>Pour le marché cible France, pour tous les produits alimentaires, la donnée produit biologique est obligatoire.</fr>
+	</FR_313>
+	<FR_314>
+		<fr>Pour le marché cible France, si l'unité commerciale est du miel brut, alors la déclaration de provenance doit être renseignée.</fr>
+	</FR_314>
+	<FR_316>
+		<fr>Pour le marché cible France, pour les produits appartenant aux briques GPC concernées, il est obligatoire de renseigner le label MSC ou NO_MSC.</fr>
+	</FR_316>
+	<FR_317>
+		<fr>Pour le marché cible France, pour les produits appartenant aux briques GPC concernées, il est obligatoire de renseigner le label ASC ou NO_ASC.</fr>
+	</FR_317>
+	<FR_318>
+		<fr>Pour le marché cible France, pour les produits appartenant aux briques GPC concernées, il est obligatoire de renseigner le label REARED_OUTSIDE ou NO_REARED_OUTSIDE.</fr>
+	</FR_318>
+	<FR_320>
+		<fr>Pour le marché cible France, pour les produits appartenant aux briques GPC concernées, si les allégations marquées sur l'emballage sont égales à vrai alors le nutriment associé à l'allégation nutritionnel doit être renseigné avec la valeur pesticide ou résidus de pesticides et le type d'allégation nutritionnel est obligatoire.</fr>
+	</FR_320>
+	<FR_322>
+		<fr>Pour le marché cible France, si le code de description de l'unité commerciale est égale à unité de base ou consommateur alors le pays d'origine doit être renseigné.</fr>
+	</FR_322>
+	<FR_323>
+		<fr>Pour le marché cible France, si la date de fin de disponibilité est renseignée sur un niveau logistique, alors elle doit également l'être sur son niveau logistique parent.</fr>
+	</FR_323>
+	<FR_324>
+		<fr>Pour le marché cible France, si l'emballage n'est pas un support, le code des termes et conditions du packaging doit être renseigné.</fr>
+	</FR_324>
+	<FR_325>
+		<fr>Pour le marché cible France, si le code de programme nutritionnel est renseigné, le nutri-score doit être renseigné.</fr>
+	</FR_325>
+	<FR_326>
+		<fr>Pour le marché cible France, si le nutri-score est utilisé, il doit être renseigné avec l'une des valeurs suivantes : 'A', 'B', 'C', 'D', 'E', 'EXEMPT'.</fr>
+	</FR_326>
+	<FR_327>
+		<fr>Pour le marché cible France, si l'unité commerciale est une unité consommateur alors le code d'agence de maintenance des codes taxe doit être renseigné.</fr>
+	</FR_327>
+</codes>
