@@ -3,12 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit.Sdk;
 
 namespace AgRuleDB_Lib.XPathParser;
 internal static class XpUtil
 {
     public static string CanonizeIdentifier(this string s)
         => s.ToLower();
+
+    public static BinaryOperator StringToBinaryOperator(string op) => op.ToLower() switch
+    {
+        "or"    => BinaryOperator.Or,
+        "and"   => BinaryOperator.And,
+        ""      => BinaryOperator.Concat,
+        "to"    => BinaryOperator.To,
+        "+"     => BinaryOperator.Add,
+        "-"     => BinaryOperator.Sub,
+        "*"     => BinaryOperator.Times,
+        "div"   => BinaryOperator.Div,
+        "idiv"  => BinaryOperator.IDiv,
+        "mod"   => BinaryOperator.mod,
+        "union" => BinaryOperator.union,
+        "|"     => BinaryOperator.union,
+        "xxx"   => BinaryOperator.intersect,
+        "dxxx"  => BinaryOperator.except,
+        _       => throw new Exception($"Invalid operator {op}")
+    };
+
 }
 
 
@@ -25,7 +46,7 @@ internal static class FunctionDictionary
     }
 
     public static string Print()
-    {
+    {        
         StringBuilder sb = new StringBuilder();
         foreach (string key in _Dic.Keys)
             sb.AppendLine($"{_Dic[key]} \t {key}");

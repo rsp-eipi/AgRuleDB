@@ -6,6 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="XPathParser\XpGrammar - Copy.cs" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Sprache" Version="2.3.1" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />

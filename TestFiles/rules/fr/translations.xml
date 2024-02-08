@@ -328,9 +328,9 @@ ATTENTION Règle non bloquante, uniquement un warning. S'applique uniquement si 
 	<FR_101>
 		<fr>Si un prix brut est renseigné dans le message priceSync, sa valeur doit être supérieure ou égale à 0.</fr>
 	</FR_101>
-	<FR_102 = à spliter en 2 règles en 3.1 (stateful)>
+	<FR_102>
 		<fr>Si la fiche-produit est synchronisée depuis plus de 6 mois (CIC RECEIVED reçu d'au moins un client), sa modification (CIN CORRECT) est interdite.</fr>
-	</FR_102 = à spliter en 2 règles en 3.1 (stateful)>
+	</FR_102>
 	<FR_103>
 		<fr>Si fournie, la déclaration nutritionnelle doit contenir au minimum la valeur énergétique en kilojoules et en kilocalories et les nutriments suivants : Matières grasses, Acides gras saturés, glucides, sucres, protéines et sel.</fr>
 	</FR_103>
@@ -445,7 +445,7 @@ Les nutriments obligatoires sont : la valeur énergétique (en kilojoules et en 
 	</FR_147>
 	<FR_148>
 		<fr>Pour le marché cible France, si le type de batterie est 'OTHER' alors le poids de la batterie doit être indiqué.</fr>
-	</FR_1487>
+	</FR_148>
 	<FR_149>
 		<fr>Pour le marché cible France, si le produit porte le label bio, alors l'agence de certification doit être renseignée.</fr>
 	</FR_149>

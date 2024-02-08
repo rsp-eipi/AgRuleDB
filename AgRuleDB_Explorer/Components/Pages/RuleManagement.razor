@@ -1,0 +1,63 @@
+﻿@page "/rulemanagement"
+@inject IDialogService DialogService
+
+<PageTitle>Rule Management</PageTitle>
+
+<MudText Typo="Typo.h3" GutterBottom="true">Rule Management</MudText>
+
+<MudDataGrid Items="@Patterns"
+             ReadOnly="true" >
+    <Columns>
+        <HierarchyColumn T="Pattern"  />
+        <PropertyColumn Property="x => x.Title " Title="Rule#" />
+        <PropertyColumn Property="x => x.Rule.Context" />
+        <PropertyColumn Property="x => x.Translation" />
+        <TemplateColumn Title="Active" Sortable="true" SortBy="x => x.IsActive">            
+                <CellTemplate>
+                    <MudStack Row>
+                        <MudSwitch Value="@context.Item.IsActive" Color="Color.Primary"></MudSwitch>
+                    </MudStack>
+                </CellTemplate>                        
+        </TemplateColumn>
+    </Columns>
+    <ChildRowContent>
+        <MudCard>            
+             <MudCardContent>                                
+                    <MudText OnClick="OpenDialog">
+                        @context.Item.Rule.Locations.Count() locations
+                    </MudText>                                         
+                    <MudPaper Class="pa-4 ma-4" Style="@($"background:{Colors.Amber.Lighten4};")">
+                        <MudText Typo="Typo.body2" Style="font-family:sans-serif;">@context.Item.Rule.Test</MudText>
+                    </MudPaper>
+                    <MudText Typo="Typo.caption">@context.Item.Description</MudText>
+                </MudCardContent>
+            </MudCard>
+        </ChildRowContent>
+        <PagerContent>
+            <MudDataGridPager T="Pattern" />
+        </PagerContent>
+    </MudDataGrid>
+
+    <MudDialog @bind-IsVisible="visible" Options="dialogOptions">
+        <TitleContent>
+            <MudText Typo="Typo.h6">
+                <MudIcon Icon="@Icons.Material.Filled.Edit" Class="mr-3" /> Edit rating
+            </MudText>
+        </TitleContent>
+        <DialogContent>
+            <p>How awesome are inline dialogs?</p>
+            
+        </DialogContent>
+        <DialogActions>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Submit" Class="px-10">Close</MudButton>
+        </DialogActions>
+    </MudDialog>
+
+@code {
+    private IEnumerable<Pattern> Patterns = Common.Patterns;
+    private bool visible;
+    private void OpenDialog() => visible = true;
+    private void Submit() => visible = false;
+    private DialogOptions dialogOptions = new() { FullWidth = true };
+
+}

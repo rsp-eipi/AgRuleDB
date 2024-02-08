@@ -1,10 +1,9 @@
 ﻿using Sprache;
-using System.Linq;
-using System;
 using System.Linq.Expressions;
-using System.Xml.Linq;
-using Xunit.Abstractions;
 using static AgRuleDB_Lib.RuleDBService;
+using System.Xml;
+using System.Net.Http.Headers;
+using System.Data;
 
 namespace AgRuleDB_Lib.XPathParser;
 
@@ -15,7 +14,7 @@ internal static class XpGrammar
 {
     static readonly string[] Keywords = new[]
     {
-        "or", "and", "<=", ">=", "<", ">", "=", "!=", "if", "*", "div", "mod" 
+        "or", "and", "<=", ">=", "<", ">", "=", "!=", "if", "*", "div", "mod"
     };
 
     public static Parser<string> XpAny =
@@ -35,32 +34,13 @@ internal static class XpGrammar
             from trailing in Parse.Chars(' ', '\t', '\n', '\r').Many()
             select item;
 
-    // [4] NameStartChar	   ::=   	":" | [A-Z] | "_" | [a-z] | [#xC0-#xD6] | [#xD8-#xF6] | [#xF8-#x2FF] | [#x370-#x37D] | [#x37F-#x1FFF] | [#x200C-#x200D] | [#x2070-#x218F] | [#x2C00-#x2FEF] | [#x3001-#xD7FF] | [#xF900-#xFDCF] | [#xFDF0-#xFFFD] | [#x10000-#xEFFFF]
-    // [4a] NameChar::=   	NameStartChar | "-" | "." | [0-9] | #xB7 | [#x0300-#x036F] | [#x203F-#x2040]
-    // here I will simplify as I don't give a toss about correctness and nobody uses diaeresis in schematron anyway
-    static readonly Parser<XpIdentifier> XpIdentifier =
-                from name in Parse.Identifier(Parse.Letter, Parse.LetterOrDigit.Or(Parse.Chars('_', '.', ':', '-'))).Tokenize()
-                where !Keywords.Contains(name.ToLower())
-                select new XpIdentifier(name);
-
-    static readonly Parser<string> _StringContent =
-            from result in Parse.String("\"\"").Return("\"\"").Or<IEnumerable<char>>(Parse.CharExcept('"').Once()).Text()
-            select result;
-
-    static readonly Parser<string> _String =
-                    from open in Parse.Char('"')
-                    from value in _StringContent.Many()
-                    from close in Parse.Char('"')
-                    select open + string.Concat(value) + close;
-
-    //static readonly Parser<string> _Other = Parse.AnyChar.Except(Parse.Char('(').Then(_ => Parse.Char(':'))).Many().Text();
     static readonly Parser<string> _Other = Parse.AnyChar.Except(Parse.String("(:").Or(Parse.String(":)"))).Many().Text();
 
     static readonly Parser<string> _Comment =
             from open in Parse.String("(:")
             from comment in _Other
             from close in Parse.String(":)")
-            select "";    
+            select "";
 
     static readonly Parser<string> _ContentUnit = _Comment.Or(_Other);
 
@@ -68,161 +48,96 @@ internal static class XpGrammar
         from texts in _ContentUnit.Many()
         select string.Concat(texts);
 
-    static readonly Parser<XpParenthesisExpression> XpParenthesisExpression =
-        from open in Parse.Char('(').Tokenize()
-        from arguments in
-            (from _ in Parse.Char(',').Tokenize().Optional()
-             from arg in Parse.Ref(() => XpExpression)
-             select arg).Many()
-        from close in Parse.Char(')').Tokenize()
-        select new XpParenthesisExpression(arguments.ToArray());
 
-    static readonly Parser<XpFunctionCallExpression> XpFunctionCallExpression =
-            from name in XpIdentifier.Tokenize()
-            from open in Parse.Char('(').Tokenize()
-            from arguments in
-                (from _ in Parse.Char(',').Tokenize().Optional()
-                 from arg in Parse.Ref(() => XpExpression)
-                 select arg).Many()
-            from close in Parse.Char(')').Tokenize()
-            select new XpFunctionCallExpression(name, arguments.ToArray());
+// [78] QName::=   	[http://www.w3.org/TR/REC-xml-names/#NT-QName]Names	/* xgs: xml-version */
+//          [7]   	QName	        ::=   	PrefixedName | UnprefixedName
+//          [8]     PrefixedName    ::=   	Prefix ':' LocalPart
+//          [9]     UnprefixedName  ::=   	LocalPart
+//          [10]    Prefix	        ::=   	NCName
+//          [11]    LocalPart	    ::=   	NCName
+    static readonly Parser<Char> NameChar =
+        from name in Parse.LetterOrDigit.Or(Parse.Chars('_', '-', '.'))
+        select name;
 
+    static readonly Parser<string> NCName = NameChar.AtLeastOnce().Text();
 
-    static readonly Parser<XpExpression> XpElseExpression =
-        from elsekeyword in Parse.String("else").Tokenize()
-        from elseexpression in Parse.Ref(() => XpExpression)
-        select elseexpression;
+    static readonly Parser<QName> QName =
+        from prefix in
+            (from prefixname in NCName
+             from separator in Parse.Char(':')
+             select prefixname
+             ).Optional()
+        from local in NCName
+        select new QName(prefix.IsDefined ? prefix.Get() : string.Empty, local);
 
-    static readonly Parser<XpIfThenElse> XpIfExpression =
-        from ifkeyword in Parse.String("if").Tokenize()
-        from opencondition in Parse.Char('(').Tokenize()
-        from condition in Parse.Ref(() => XpExpression)
-        from closecondition in Parse.Char(')').Tokenize()
-        from thenkeyword in Parse.IgnoreCase("then").Tokenize()
-        from thenexpression in Parse.Ref(() => XpExpression)
-        from elseExpression in XpElseExpression.Optional()
-        select new XpIfThenElse(condition, thenexpression, elseExpression.GetOrDefault());
+    static readonly Parser<QName> QWildCard =
+        from prefix in 
+            (from prefixname in NCName.Or(Parse.String("*").Text())
+             from separator in Parse.Char(':')
+             select prefixname
+             ).Optional()
+        from local in NCName.Or(Parse.String("*").Text())
+        select new QName(prefix.IsDefined ? prefix.Get() : string.Empty, local);
 
+    static readonly Parser<string> Axis =
+        from axis in Parse.String("child::").Or(Parse.String("descendant::")).Or(Parse.String("attribute::"))
+            .Or(Parse.String("self::")).Or(Parse.String("descendant-or-self::")).Or(Parse.String("following-sibling::")).Or(Parse.String("following::"))
+            .Or(Parse.String("namespace::")).Or(Parse.String("parent::")).Or(Parse.String("ancestor::")).Or(Parse.String("preceding-sibling::"))
+            .Or(Parse.String("preceding::")).Or(Parse.String("ancestor-or-self::")).Text()
+        select axis;
 
-    static readonly Parser<XpExpression> XpExpressionTerm =
-          XpFunctionCallExpression
-        .Or<XpExpression>(XpIfExpression)
-        .Or(XpParenthesisExpression)
-        .Or(XpIdentifier);
+    static readonly Parser<PathStep> AttributeAbbrev =
+        from _ in Parse.Char('@')
+        from name in NameTest
+        select new PathStep("attribute::", name);
 
-    static readonly Parser<string> XpBinaryOperator =
-          from op in Parse.Chars('+', '-', '/', '*', '=', '<', '>').AtLeastOnce()
-              .Or(Parse.IgnoreCase("or ")).Or(Parse.IgnoreCase("and "))
-              .Or(Parse.IgnoreCase("<=")).Or(Parse.IgnoreCase(">="))
-              .Or(Parse.IgnoreCase("div ")).Or(Parse.IgnoreCase("!="))
-              .Or(Parse.IgnoreCase("mod "))
-              .Token().Text()
-          select op;
+    static readonly Parser<QName> NameTest = QWildCard;
 
-    static readonly Parser<XpExpression> XpExpression =
-           from compositeexpression in Parse.ChainOperator(XpBinaryOperator, XpExpressionTerm, (op, left, right) => new XpBinaryOperator(left, op, right))
-           select compositeexpression;
+    static readonly Parser<PathStep> DoubleDot =
+        from _dblslash in Parse.String("..")
+        from name in NameTest.Optional()
+        select new PathStep("parent::node()", name.IsDefined ? name.Get() : new QName(string.Empty, string.Empty));
 
+    static readonly Parser<PathStep> DoubleSlash =
+        from _dblslash in Parse.String("//")
+        from name in NameTest.Optional()
+        select new PathStep("descendant-or-self::node()", name.IsDefined ? name.Get() : new QName(string.Empty, string.Empty));
 
-    // [1] XPath::=   	Expr
-    // [2] ParamList      ::=   	Param ("," Param)*	
-    // [3] Param::=   	"$" EQName TypeDeclaration?
-    // [4] FunctionBody::=   	EnclosedExpr
+    static readonly Parser<PathStep> SimpleSlash =
+        from _slash in Parse.Char('/')
+        from name in NameTest.Optional() 
+        select new PathStep("child::", name.IsDefined ? name.Get() : new QName(string.Empty, "root"));
 
-    // [5] EnclosedExpr::=   	"{" Expr? "}"
-    static readonly Parser<EnclosedExpr> EncloseExpr =
-        from _open in Parse.Char('{').Tokenize()
-        from expr in Expr.Optional()
-        from _close in Parse.Char('}').Tokenize()
-        select new EnclosedExpr(expr.GetOrDefault());
+    static readonly Parser<PathStep> NonAbbreviated =
+        from _slash in Parse.Char('/').Optional()
+        from axis in Axis
+        from name in NameTest.Optional()
+        select new PathStep(axis, name.IsDefined ? name.Get() : new QName(string.Empty, string.Empty));
 
+    static readonly Parser<PathStep> PathStep =
+            DoubleSlash
+        .Or(SimpleSlash)
+        .Or(AttributeAbbrev)
+        .Or(DoubleDot);
 
-    // [6] Expr	   ::=   	ExprSingle ("," ExprSingle)* 
-    static readonly Parser<Expr> Expr =
-        from first in ExprSingle
-        from others in
-            (from _ in Parse.Char(',').Tokenize()
-             from exprsingl in ExprSingle
-             select exprsingl).Many()
-        select new Expr(first, others);
-
-    // [7] ExprSingle	   ::=   	ForExpr | LetExpr | QuantifiedExpr| IfExpr| OrExpr
-    static readonly Parser<ExprSingle> ExprSingle =
-        ForExpr
-        .Or<ExprSingle>(IfExpr)
-        .Or(LetExpr);
-
-    // [8] ForExpr	   ::=   	SimpleForClause "return" ExprSingle
-    // [9] SimpleForClause::=   	"for" SimpleForBinding("," SimpleForBinding)*
-    static readonly Parser<ExprSingle> ForExpr =
-        from _for in Parse.String("for").Tokenize()
-        from firstforbindings in Parse.Ref(() => InClause)
-        from otherforbindings in
-            (from _comma in Parse.Char(',').Tokenize()
-             from nextforbinding in Parse.Ref(() => InClause)
-             select nextforbinding).Many()
-        from _return in Parse.String("return").Tokenize()
-        from forexpr in ExprSingle
-        select new ForExpr(firstforbindings, otherforbindings, forexpr);
-
-
-    // [10]   	SimpleForBinding	   ::=   	"$" VarName "in" ExprSingle  --> renamed InClause to serve in [14] QuantifierExpr
-    static readonly Parser<InClause> InClause =
-        from _dollar in Parse.Char('$')
-        from name in EQName // [60] VarName = EQName    -  see [112] for EQName
-        from _in in Parse.String("in").Token
-        from expr in ExprSingle
-        select new InClause(name, expr);
-
-    // [11] LetExpr                 ::=   	SimpleLetClause "return" ExprSingle
-    // [12] SimpleLetClause         ::=   	"let" SimpleLetBinding("," SimpleLetBinding)*
-    static readonly Parser<LetExpr> LetExpr =
-        from _let in Parse.String("let").Tokenize()
-        from bindings in SimpleLetBinding.Many()
-        from _return in Parse.String("return").Tokenize()
-        from returnexpr in ExprSingle
-        select new LetExpr(bindings, returnexpr);
-    
-    // [13] SimpleLetBinding        ::=   	"$" VarName ":=" ExprSingle
-    static readonly Parser<SimpleLetBinding> SimpleLetBinding =
-        from _dollar in Parse.Char('$')
-        from name in EQName // [60] VarName = EQName    -  see [112] for EQName
-        from _collonequal in Parse.String(":=").Token
-        from expr in ExprSingle
-        select new SimpleLetBinding(name, expr);
-
-    // [14] QuantifiedExpr          ::=   	("some" | "every") "$" VarName "in" ExprSingle("," "$" VarName "in" ExprSingle)* "satisfies" ExprSingle
-    static readonly Parser<QuantifiedExpr> QuantifiedExpr =
-        from quantifier in Parse.String("some").Or(Parse.String("every")).Tokenize().Text()
-        from bindings in InClause.Many()
-        from _satisfies in Parse.String("satisfies").Tokenize()
-        from satisfyExpr in ExprSingle
-        select new QuantifiedExpr(quantifier, bindings, satisfyExpr);
-
-    // [15] IfExpr                  ::=   	"if" "(" Expr ")" "then" ExprSingle "else" ExprSingle
-    static readonly Parser<IfExpr> IfExpr =
-        from _if in Parse.String("if").Tokenize()
-        from _open in Parse.Char('(').Tokenize()
-        from testexpr in Expr
-        from _close in Parse.Char(')').Tokenize()
-        from _then in Parse.String("then").Tokenize()
-        from thenexpr in ExprSingle
-        from _else in Parse.String("else").Tokenize()
-        from elseexpr in ExprSingle
-        select new IfExpr(testexpr, thenexpr, elseexpr);
-
+    static readonly Parser<PathExpr> PathExpr =
+        from pathstep in PathStep.Many()
+        select new PathExpr(pathstep);
 
     public static void ParseFromContent(string scriptContent)
     {
-        string uncommentedScript = _Content.Parse(scriptContent);
-        Logger.LogDebug(uncommentedScript);
-        XpExpression parsed = XpExpressionTerm.Parse(uncommentedScript);
-        Logger.LogDebug("---------- parsed ---------------");
-        Logger.LogDebug(parsed.ToString());
+        //string uncommentedScript = _Content.Parse(scriptContent);
+        //Logger.LogInformation(uncommentedScript);
+        //var parsed = PathExpr.Parse(uncommentedScript);        
+        var parsed = PathExpr.Parse("/descendant::figure//");
+        Logger.LogInformation("---------- parsed ---------------");
+        Logger.LogInformation(parsed.ToString());
+        Logger.LogInformation("----------- done  ---------------");
     }
 
     public static void TestXpParser(string scriptContent)
     {
+        string testScript03 = "/descendant::figure//";
 
         string testScript01 = """
 if ((targetMarket/targetMarketCountryCode =  ('249'(: France :) , '250'(: France :) ))
@@ -242,7 +157,7 @@ else true()
             """;
 
         bool useParam = false;
-        string toParse = useParam ? scriptContent : testScript01;
+        string toParse = useParam ? scriptContent : testScript03            ;
 
         ParseFromContent(toParse);
     }

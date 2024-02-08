@@ -1,5 +1,5 @@
 using AgRuleDB_Explorer.Components;
-using Microsoft.FluentUI.AspNetCore.Components;
+using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddFluentUIComponents();
+builder.Services.AddMudServices();
 
 var app = builder.Build();
 
