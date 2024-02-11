@@ -85,40 +85,33 @@ internal static class XpGrammar
             .Or(Parse.String("namespace::")).Or(Parse.String("parent::")).Or(Parse.String("ancestor::")).Or(Parse.String("preceding-sibling::"))
             .Or(Parse.String("preceding::")).Or(Parse.String("ancestor-or-self::")).Text()
         select axis;
+        
 
-    static readonly Parser<PathStep> AttributeAbbrev =
-        from _ in Parse.Char('@')
-        from name in NameTest
-        select new PathStep("attribute::", name);
+    static readonly Parser<FilterExpr> FilterExpr =
+        from _open in Parse.Char('[')
+        from exp in QName
+        from _close in Parse.Char(']')
+        select new FilterExpr(exp.Name);
 
-    static readonly Parser<QName> NameTest = QWildCard;
-
-    static readonly Parser<PathStep> DoubleDot =
-        from _dblslash in Parse.String("..")
-        from name in NameTest.Optional()
-        select new PathStep("parent::node()", name.IsDefined ? name.Get() : new QName(string.Empty, string.Empty));
-
-    static readonly Parser<PathStep> DoubleSlash =
-        from _dblslash in Parse.String("//")
-        from name in NameTest.Optional()
-        select new PathStep("descendant-or-self::node()", name.IsDefined ? name.Get() : new QName(string.Empty, string.Empty));
-
-    static readonly Parser<PathStep> SimpleSlash =
-        from _slash in Parse.Char('/')
-        from name in NameTest.Optional() 
-        select new PathStep("child::", name.IsDefined ? name.Get() : new QName(string.Empty, "root"));
-
-    static readonly Parser<PathStep> NonAbbreviated =
-        from _slash in Parse.Char('/').Optional()
-        from axis in Axis
-        from name in NameTest.Optional()
-        select new PathStep(axis, name.IsDefined ? name.Get() : new QName(string.Empty, string.Empty));
+    static PathSeparator StringToSeparator(IOption<string> s) => 
+        s.IsDefined ? 
+            s.Get() switch { 
+                "//" => PathSeparator.DoubleSlash, 
+                "/" => PathSeparator.Slash, 
+                _ => throw new Exception("Unknown PathSeparator") 
+            } 
+            : PathSeparator.None;
 
     static readonly Parser<PathStep> PathStep =
-            DoubleSlash
-        .Or(SimpleSlash)
-        .Or(AttributeAbbrev)
-        .Or(DoubleDot);
+        from separator in Parse.String("//").Or(Parse.String("/")).Text().Optional()
+        from axis in Axis.Or(Parse.String("@")).Or(Parse.String("..")).Text().Optional()
+        from name in QWildCard.Optional()
+        from filters in FilterExpr.Many()
+        select new PathStep(
+            StringToSeparator(separator), 
+            axis.IsDefined ? axis.Get() : string.Empty, 
+            name.IsDefined ? name.Get() : null,
+            filters);    
 
     static readonly Parser<PathExpr> PathExpr =
         from pathstep in PathStep.Many()
@@ -129,8 +122,9 @@ internal static class XpGrammar
         //string uncommentedScript = _Content.Parse(scriptContent);
         //Logger.LogInformation(uncommentedScript);
         //var parsed = PathExpr.Parse(uncommentedScript);        
-        var parsed = PathExpr.Parse("/descendant::figure//");
-        Logger.LogInformation("---------- parsed ---------------");
+        string expToParse = "/abc/descendant::figure[def]//";
+        var parsed = PathExpr.Parse(expToParse);
+        Logger.LogInformation($"---------- parsed : {expToParse}");
         Logger.LogInformation(parsed.ToString());
         Logger.LogInformation("----------- done  ---------------");
     }

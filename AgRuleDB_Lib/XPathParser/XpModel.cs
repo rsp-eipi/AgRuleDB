@@ -184,7 +184,8 @@ public class UnaryExpression : ExprSingle
 // [25]    	PathExpr 	   ::=    	("/" RelativePathExpr?) | ("//" RelativePathExpr) | RelativePathExpr 	/* xgs: leading-lone-slash */
 // [26]    	RelativePathExpr 	   ::=    	StepExpr (("/" | "//") StepExpr)*
 
-public enum PathSeparator { Slash, DoubleSlash }
+public enum PathSeparator { None, Slash, DoubleSlash }
+
 public class PathExpr(IEnumerable<PathStep> stepExprs)
 {
     public IEnumerable<PathStep> PathSteps { get; set; } = stepExprs;
@@ -193,12 +194,19 @@ public class PathExpr(IEnumerable<PathStep> stepExprs)
 }
 // [27]    	StepExpr 	   ::=    	FilterExpr | AxisStep
 public enum StepDirection { Reverse, Forward }
-public class PathStep(string axis, QName name)
+public class PathStep(PathSeparator separator, string axis, QName? name, IEnumerable<FilterExpr> filters)
 {
+    public PathSeparator PathSeparator { get; set; } = separator;
     public string Axis { get; set; } = axis;
-    public QName Name { get; set; } = name;   
-    public override string ToString() => $"\t{Axis} \t\t\t\t {Name}";
+    public QName? Name { get; set; } = name;
+
+    public IEnumerable<FilterExpr> Filters { get; set; } = filters;
+    public override string ToString() => $"\t{PathSeparator}\t{Axis} \t\t\t\t {Name}";
+        
 }
+
+
+
 // [28]    	AxisStep 	   ::=    	(ReverseStep | ForwardStep) PredicateList
 // [29]    	ForwardStep 	   ::=    	(ForwardAxis NodeTest) | AbbrevForwardStep
 // [30]    	ForwardAxis 	   ::=    	("child" "::") | ("descendant" "::") | ("attribute" "::") | ("self" "::") | ("descendant-or-self" "::") | ("following-sibling" "::") | ("following" "::") | ("namespace" "::")
@@ -210,6 +218,12 @@ public class PathStep(string axis, QName name)
 // [36]    	NameTest 	   ::=    	QName | Wildcard
 // [37]    	Wildcard 	   ::=    	"*" | (NCName ":" "*") | ("*" ":" NCName) 	/* ws: explicit */
 // [38]    	FilterExpr 	   ::=    	PrimaryExpr PredicateList
+
+public class FilterExpr(string s) : ExprSingle
+{
+    public string Expression { get; set; } = s;
+}
+
 // [39]    	PredicateList 	   ::=    	Predicate*
 // [40]    	Predicate 	   ::=    	"// [" Expr "]"
 // [41]    	PrimaryExpr 	   ::=    	Literal | VarRef | ParenthesizedExpr | ContextItemExpr | FunctionCall
