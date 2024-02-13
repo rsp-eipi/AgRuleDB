@@ -11,24 +11,6 @@ internal static class XpUtil
     public static string CanonizeIdentifier(this string s)
         => s.ToLower();
 
-    public static BinaryOperator StringToBinaryOperator(string op) => op.ToLower() switch
-    {
-        "or"    => BinaryOperator.Or,
-        "and"   => BinaryOperator.And,
-        ""      => BinaryOperator.Concat,
-        "to"    => BinaryOperator.To,
-        "+"     => BinaryOperator.Add,
-        "-"     => BinaryOperator.Sub,
-        "*"     => BinaryOperator.Times,
-        "div"   => BinaryOperator.Div,
-        "idiv"  => BinaryOperator.IDiv,
-        "mod"   => BinaryOperator.mod,
-        "union" => BinaryOperator.union,
-        "|"     => BinaryOperator.union,
-        "xxx"   => BinaryOperator.intersect,
-        "dxxx"  => BinaryOperator.except,
-        _       => throw new Exception($"Invalid operator {op}")
-    };
 
 }
 

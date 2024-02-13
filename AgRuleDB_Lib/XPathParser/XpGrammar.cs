@@ -4,6 +4,11 @@ using static AgRuleDB_Lib.RuleDBService;
 using System.Xml;
 using System.Net.Http.Headers;
 using System.Data;
+using System.Globalization;
+using static System.Net.Mime.MediaTypeNames;
+using System.Reflection.Metadata;
+using System.Xml.Linq;
+using System;
 
 namespace AgRuleDB_Lib.XPathParser;
 
@@ -14,7 +19,12 @@ internal static class XpGrammar
 {
     static readonly string[] Keywords = new[]
     {
-        "or", "and", "<=", ">=", "<", ">", "=", "!=", "if", "*", "div", "mod"
+        "or", "and", "<=", ">=", "<", ">", "=", "!=", "*", "+", "-", "?","div", "idiv", "mod", 
+        "for", "if", "then", "else", "in", 
+        "eq", "ne", "lt", "le", "gt", "ge", "is", "/", "//",
+    "attribute", "comment", "document-node", "element", "empty-sequence", "item", "node", "processing-instruction", 
+    "schema-attribute", "schema-element", "text", "typeswitch",
+    "some", "every", "union", "|", "intersect", "except", "instance of", "treat", "castable", "cast"
     };
 
     public static Parser<string> XpAny =
@@ -56,10 +66,13 @@ internal static class XpGrammar
 //          [10]    Prefix	        ::=   	NCName
 //          [11]    LocalPart	    ::=   	NCName
     static readonly Parser<Char> NameChar =
-        from name in Parse.LetterOrDigit.Or(Parse.Chars('_', '-', '.'))
+        from name in Parse.LetterOrDigit.Or(Parse.Chars('_', '-', '.'))        
         select name;
 
-    static readonly Parser<string> NCName = NameChar.AtLeastOnce().Text();
+    static readonly Parser<string> NCName =
+        from name in NameChar.AtLeastOnce().Text()
+        where !Keywords.Contains(name.ToLower())
+        select name;
 
     static readonly Parser<QName> QName =
         from prefix in
@@ -117,41 +130,164 @@ internal static class XpGrammar
         from pathstep in PathStep.Many()
         select new PathExpr(pathstep);
 
-    public static void ParseFromContent(string scriptContent)
-    {
-        //string uncommentedScript = _Content.Parse(scriptContent);
-        //Logger.LogInformation(uncommentedScript);
-        //var parsed = PathExpr.Parse(uncommentedScript);        
-        string expToParse = "/abc/descendant::figure[def]//";
-        var parsed = PathExpr.Parse(expToParse);
-        Logger.LogInformation($"---------- parsed : {expToParse}");
-        Logger.LogInformation(parsed.ToString());
-        Logger.LogInformation("----------- done  ---------------");
-    }
 
-    public static void TestXpParser(string scriptContent)
-    {
-        string testScript03 = "/descendant::figure//";
+    // -----------------------------------------------------
+    //                   Literals
+    // -----------------------------------------------------
 
-        string testScript01 = """
-if ((targetMarket/targetMarketCountryCode =  ('249'(: France :) , '250'(: France :) ))
+    // [43] NumericLiteral::=   	IntegerLiteral | DecimalLiteral | DoubleLiteral
+    // [71] IntegerLiteral     ::=   	Digits
+    // [72] DecimalLiteral	   ::=   	("." Digits) | (Digits "." [0-9]*)
+    // [73] DoubleLiteral::=   	(("." Digits) | (Digits ("." [0-9]*)?)) [eE] [+-]? Digits
+    static readonly Parser<NumericLiteral> NumericLiteral =
+        from op in Parse.Char('-').Token().Optional()
+        from nb in Parse.DecimalInvariant
+        select new NumericLiteral(double.Parse(nb, CultureInfo.InvariantCulture) * ((op.IsDefined) ? -1 : 1));
+
+    // [74]   	StringLiteral	   ::=   	('"' (EscapeQuot | [^"])* '"') | ("'" (EscapeApos | [^'])* "'")
+    // [75] EscapeQuot::=   	'""'
+    // [76] EscapeApos::=   	"''"
+    static readonly Parser<char> DbQuoteStringContent =
+        from result in Parse.String("\"\"").Return('"').Or<char>(Parse.CharExcept('"'))
+        select result;
+
+    static readonly Parser<StringLiteral> DbQuoteStringLiteral =
+        from open in Parse.Char('"')
+        from value in DbQuoteStringContent.Many().Text()
+        from close in Parse.Char('"')
+        select new StringLiteral(value.Replace("\"", "\\\""));
+
+    static readonly Parser<char> SingleQuoteStringContent =
+        from result in Parse.String("''").Return('\'').Or<char>(Parse.CharExcept('\''))
+        select result;
+
+    static readonly Parser<StringLiteral> SingleQuoteStringLiteral =
+        from open in Parse.Char('\'')
+        from value in SingleQuoteStringContent.Many().Text()
+        from close in Parse.Char('\'')
+        select new StringLiteral(value.Replace("\'", "\\\'"));
+
+
+
+    // [44] VarRef      ::=   	"$" VarName
+    // [45] VarName     ::=   	QName
+    static readonly Parser<VarName> VarName =
+        from _varsymbol in Parse.Char('$')
+        from name in QName
+        select new VarName(name.Prefix, name.Name);
+
+    // [46]    	ParenthesizedExpr 	   ::=    	"(" Expr? ")"
+    static readonly Parser<ParenthesizedExpr> ParenthesizedExpr =
+        from _open in Parse.Char('(').Tokenize()
+        from sequence in ExprSequence            
+        from _close in Parse.Char(')').Tokenize()
+        select new ParenthesizedExpr(sequence);
+
+    // [47]    	ContextItemExpr 	   ::=    	"."
+    static readonly Parser<ContextItemExpr> ContextItemExpr =
+        from _dot in Parse.Char('.').Tokenize()
+        select new ContextItemExpr();
+
+    // [48]    	FunctionCall 	   ::=    	QName "(" (ExprSingle ("," ExprSingle)*)? ")" 	/* xgs: reserved-function-names */ 				/* gn: parens */
+    static readonly Parser<FunctionCall> FunctionCall =
+        from name in QName
+        from param in ParenthesizedExpr
+        select new FunctionCall(name, param);
+
+
+
+    // [41] PrimaryExpr::=   	Literal | VarRef | ParenthesizedExpr | ContextItemExpr | FunctionCall
+    static readonly Parser<Expr> PrimaryExpr =
+            NumericLiteral
+        .Or<Expr>(DbQuoteStringLiteral)
+        .Or(SingleQuoteStringLiteral)
+        .Or(VarName)
+        .Or(ParenthesizedExpr)
+        .Or(ContextItemExpr)
+        .Or(FunctionCall)
+        .Or(PathExpr);
+    
+
+    static readonly Parser<string> BinaryOperator =
+        Parse.String("=").Or(Parse.String("!=")).Or(Parse.String("<")).Or(Parse.String("<=")).Or(Parse.String(">")).Or(Parse.String(">="))
+        .Or(Parse.String("eq")).Or(Parse.String("ne")).Or(Parse.String("lt")).Or(Parse.String("le")).Or(Parse.String("gt")).Or(Parse.String("ge"))
+        .Or(Parse.String("is")).Or(Parse.String("<<")).Or(Parse.String(">>"))
+        .Or(Parse.String("and")).Or(Parse.String("or"))
+        .Or(Parse.Chars('+', '-', '*', '/').AtLeastOnce()).Or(Parse.String("div")).Or(Parse.String("mod"))
+        .Tokenize().Text();
+
+    static readonly Parser<Expr> BinaryExpr =
+           from expr in Parse.ChainOperator(BinaryOperator, PrimaryExpr, (op, left, right) => new BinaryExpr(left, op, right))
+           select expr;
+
+
+
+    // [7] IfExpr::=   	"if" "(" Expr ")" "then" ExprSingle "else" ExprSingle
+    static readonly Parser<IfExpr> IfExpr =
+        from _if in Parse.String("if").Tokenize()
+        from condition in ParenthesizedExpr.Tokenize()
+        from _then in Parse.String("then").Tokenize()
+        from thenexpr in Expr
+        from _else in Parse.String("else").Tokenize()
+        from elseexpr in Expr
+        select new IfExpr(condition, thenexpr, elseexpr);
+
+    static readonly Parser<Expr> Expr =
+        IfExpr
+        .Or(BinaryExpr)
+        .Or(PrimaryExpr);    
+
+    static readonly Parser<ExprSequence> ExprSequence =
+        from sequence in
+            (from _comma in Parse.Char(',').Tokenize().Optional()
+             from expr in Parse.Ref(() => Expr)
+             select expr
+            ).Many()
+        select new ExprSequence(sequence);
+
+
+    public static string RemoveComments(string script) => _Content.Parse(script);
+
+
+    private static string testScript01 = """
+if ((targetMarket/targetMarketCountryCode =  ('249' , '250'))
     and (isTradeItemADespatchUnit  = 'true')
     and (gdsnTradeItemClassification/gpcCategoryCode!='10005844') 
     and (gdsnTradeItemClassification/gpcCategoryCode!='10005845')
     and (tradeItemInformation/extension/*:packagingInformationModule/packaging/platformTypeCode))
 then  
-    exists(tradeItemInformation/extension/*:tradeItemHierarchyModule/tradeItemHierarchy/quantityOfCompleteLayersContainedInATradeItem)
+    true()
+else
+exists(tradeItemInformation/extension/*:tradeItemHierarchyModule/tradeItemHierarchy/quantityOfCompleteLayersContainedInATradeItem)
     and (every $node in (tradeItemInformation/extension/*:tradeItemHierarchyModule/tradeItemHierarchy/quantityOfCompleteLayersContainedInATradeItem) 
     satisfies not ((empty($node)) ) ) 
-else true()
 """;
-        string testScript02 = """
-            not(gtin = ('44444444444442', '00000000000000','01111111111116','11111111111113','22222222222226','33333333333339','55555555555555','66666666666668','77777777777771','88888888888884','99999999999997')) and
-            not(nextLowerLevelTradeItemInformation/childTradeItem/gtin = ('44444444444442', '00000000000000','01111111111116','11111111111113','22222222222226','33333333333339','55555555555555','66666666666668','77777777777771','88888888888884','99999999999997'))
+
+    private static string testScript02 = """
+            if (a) then b 
+            else true()
             """;
 
+
+    public static void ParseFromContent(string scriptContent)
+    {
+        //string uncommentedScript = _Content.Parse(scriptContent);
+        //Logger.LogInformation(uncommentedScript);
+        //var parsed = PathExpr.Parse(uncommentedScript);        
+        string expToParse = testScript01;
+        var parsed = Expr.Parse(expToParse);
+        Logger.LogInformation($"---------- parsed : {expToParse}");
+        Logger.LogInformation($"---------- end parsed : {expToParse}");
+        Logger.LogInformation($"-------------------------------------");
+        Logger.LogInformation($"-------------------------------------");
+        Logger.LogInformation(parsed.ToString());
+        Logger.LogInformation("----------- done  ---------------");
+    }
+
+    public static void TestXpParser(string scriptContent)
+    {        
         bool useParam = false;
-        string toParse = useParam ? scriptContent : testScript03            ;
+        string toParse = useParam ? scriptContent : testScript01;
 
         ParseFromContent(toParse);
     }
