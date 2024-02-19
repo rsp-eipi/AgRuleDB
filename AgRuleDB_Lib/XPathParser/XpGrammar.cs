@@ -22,7 +22,7 @@ internal static class XpGrammar
         "or", "and", "<=", ">=", "<", ">", "=", "!=", "*", "+", "-", "?","div", "idiv", "mod", 
         "for", "if", "then", "else", "in", 
         "eq", "ne", "lt", "le", "gt", "ge", "is", "/", "//",
-    "attribute", "comment", "document-node", "element", "empty-sequence", "item", "node", "processing-instruction", 
+    "attribute", "comment", "document-node", "element", "empty-sequence", "item", "node_tocheck", "processing-instruction", 
     "schema-attribute", "schema-element", "text", "typeswitch",
     "some", "every", "union", "|", "intersect", "except", "instance of", "treat", "castable", "cast"
     };
@@ -102,9 +102,9 @@ internal static class XpGrammar
 
     static readonly Parser<FilterExpr> FilterExpr =
         from _open in Parse.Char('[')
-        from exp in QName
+        from expr in Parse.Ref(() => Expr)
         from _close in Parse.Char(']')
-        select new FilterExpr(exp.Name);
+        select new FilterExpr(expr);
 
     static PathSeparator StringToSeparator(IOption<string> s) => 
         s.IsDefined ? 
@@ -221,6 +221,34 @@ internal static class XpGrammar
            select expr;
 
 
+    
+    
+    static readonly Parser<VarBinding> VarBinding =
+        from _comma in Parse.Char(',').Optional()
+        from varname in VarName
+        from _in in Parse.String("in").Tokenize()
+        from expr in PrimaryExpr
+        select new VarBinding(varname, expr);
+
+    // [4] ForExpr::=   	SimpleForClause "return" ExprSingle
+    // [5] SimpleForClause    ::=   	"for" "$" VarName "in" ExprSingle ("," "$" VarName "in" ExprSingle)*
+    static readonly Parser<ForExpr> ForExpr =
+        from _for in Parse.String("for").Tokenize()
+        from bindings in VarBinding.AtLeastOnce()
+        from _return in Parse.String("return").Tokenize()
+        from expr in PrimaryExpr
+        select new ForExpr(bindings, expr);
+
+
+    // [6] QuantifiedExpr::=   	("some" | "every") "$" VarName "in" ExprSingle("," "$" VarName "in" ExprSingle)* "satisfies" ExprSingle
+    static readonly Parser<QuantifiedExpr> QuantifiedExpr =
+        from quantifier in Parse.String("some").Or(Parse.String("every")).Tokenize().Text()
+        from bindings in VarBinding.AtLeastOnce()
+        from _satisfies in Parse.String("satisfies").Tokenize()
+        from expr in PrimaryExpr
+        select new QuantifiedExpr(quantifier, bindings, expr);
+        
+
 
     // [7] IfExpr::=   	"if" "(" Expr ")" "then" ExprSingle "else" ExprSingle
     static readonly Parser<IfExpr> IfExpr =
@@ -232,8 +260,14 @@ internal static class XpGrammar
         from elseexpr in Expr
         select new IfExpr(condition, thenexpr, elseexpr);
 
+    
+
+
+
     static readonly Parser<Expr> Expr =
         IfExpr
+        .Or<Expr>(QuantifiedExpr)
+        .Or(ForExpr)
         .Or(BinaryExpr)
         .Or(PrimaryExpr);    
 
@@ -264,20 +298,26 @@ exists(tradeItemInformation/extension/*:tradeItemHierarchyModule/tradeItemHierar
 """;
 
     private static string testScript02 = """
-            if (a) then b 
+            if ((packagingMaterial/packagingMaterialCompositionQuantity) and (packagingWeight)) 
+            then (sum(for $node in (packagingMaterial/packagingMaterialCompositionQuantity) return $node *($units/unit[@code=current()/$node/@measurementUnitCode]/@coef)) &lt;= (packagingWeight * $units/unit[@code=current()/packagingWeight/@measurementUnitCode]/@coef))
             else true()
             """;
+    private static string testScript03 = """
+        for $a in fn:distinct-values(book/author) return (book/author[. = $a][1], book[author = $a]/title)
+        """;
 
+    private static string testScript04 = "b[. = $blah]";
 
     public static void ParseFromContent(string scriptContent)
     {
         //string uncommentedScript = _Content.Parse(scriptContent);
         //Logger.LogInformation(uncommentedScript);
         //var parsed = PathExpr.Parse(uncommentedScript);        
-        string expToParse = testScript01;
+        string expToParse = testScript03;
         var parsed = Expr.Parse(expToParse);
-        Logger.LogInformation($"---------- parsed : {expToParse}");
-        Logger.LogInformation($"---------- end parsed : {expToParse}");
+        //Logger.LogInformation($"---------- parsed -------------------");
+        //Logger.LogInformation($"{ expToParse}");
+        //Logger.LogInformation($"---------- end parsed ---------------");
         Logger.LogInformation($"-------------------------------------");
         Logger.LogInformation($"-------------------------------------");
         Logger.LogInformation(parsed.ToString());

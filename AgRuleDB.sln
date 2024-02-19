@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgRuleDB_Lib", "AgRuleDB_Li
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestFiles", "TestFiles", "{D0CDE9F9-7F6F-4A25-A2DB-6DF4F798CD67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgRuleDB_Explorer", "AgRuleDB_Explorer\AgRuleDB_Explorer.csproj", "{6631C87C-373C-4869-BABA-AD496130E8FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgRuleDB_Explorer", "AgRuleDB_Explorer\AgRuleDB_Explorer.csproj", "{6631C87C-373C-4869-BABA-AD496130E8FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgRuleDB_Generated", "AgRuleDB_Generated\AgRuleDB_Generated.csproj", "{CF326421-525D-45F5-9D40-4ECD4FE85D35}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{6631C87C-373C-4869-BABA-AD496130E8FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6631C87C-373C-4869-BABA-AD496130E8FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6631C87C-373C-4869-BABA-AD496130E8FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF326421-525D-45F5-9D40-4ECD4FE85D35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF326421-525D-45F5-9D40-4ECD4FE85D35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF326421-525D-45F5-9D40-4ECD4FE85D35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF326421-525D-45F5-9D40-4ECD4FE85D35}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

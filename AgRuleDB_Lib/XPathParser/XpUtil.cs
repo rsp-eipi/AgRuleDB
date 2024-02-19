@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sprache;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,61 @@ internal static class XpUtil
     public static string CanonizeIdentifier(this string s)
         => s.ToLower();
 
+    public static Axis StringToAxis(string axis) =>
+        axis.Replace("::", "") switch
+        {
+            "child" => Axis.Child,
+            "descendant" => Axis.Descendant,
+            "attribute" => Axis.Attribute,
+            "self" => Axis.Self,
+            "descendant-or-self" => Axis.DescendantOrSelf,
+            "following-sibling" => Axis.FollowingSibling,
+            "following" => Axis.Following,
+            "namespace" => Axis.Namespace,
+            "@" => Axis.Attrib,
+            "parent" => Axis.Parent,
+            "ancestor" => Axis.Ancestor,
+            "preceding-sibling" => Axis.PrecedingSibling,
+            "preceding" => Axis.Preceding,
+            "ancestor-or-self" => Axis.AncestorOrSelf,
+            "" => Axis.None,
+            _ => throw new NotImplementedException()
+        };
+
+    public static BinOp StringToBinaryOperator(string op) => op.ToLower() switch
+    {        
+        "=" => BinOp.GenEqual,
+        "!=" => BinOp.GenNotEqual,
+        "<" => BinOp.GenLessThan,
+        "<=" => BinOp.GenLessThanOrEqual,
+        ">" => BinOp.GenGreaterThan,
+        ">=" => BinOp.GenGreaterThanOrEqual,
+        "eq" => BinOp.ValEqual,
+        "neq" => BinOp.ValNotEqual,
+        "lt" => BinOp.ValLessThan,
+        "le" => BinOp.ValLessThanOrEqual,
+        "gt" => BinOp.ValGreaterThan,
+        "ge" => BinOp.ValGreaterThanOrEqual,
+        "is" => BinOp.Is,
+        "<<" => BinOp.NodeBefore,
+        ">>" => BinOp.NodeAfter,
+        "and" => BinOp.And,
+        "or" => BinOp.Or,
+        "+" => BinOp.Add,
+        "-" => BinOp.Sub,
+        "*" => BinOp.Times,
+        "/" => BinOp.Div,
+        "div" => BinOp.IDiv,
+        "mod" => BinOp.Mod,
+        "union" => BinOp.Union,
+        "|" => BinOp.Union,
+        "intersect" => BinOp.Intersect,
+        "except" => BinOp.Except,
+        "," => BinOp.Comma,
+        "concat" => BinOp.Concat,
+        "to" => BinOp.To,
+        _ => throw new Exception($"Invalid operator {op}")
+    };
 
 }
 
