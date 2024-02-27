@@ -5,41 +5,36 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AgRuleDB_Generated;
-/// <summary>
-/// Contains helper functions to create <see cref="IResult&lt;T&gt;"/> instances.
-/// </summary>
-public class Result
+
+public abstract class Result<TDoc, TElt>(bool success) where TDoc : IInput<TDoc, TElt>
+                                                       where TElt : IInputElement<TElt>
 {
-    private readonly XpValue _result;
-    private readonly Context _newContext;
-    private readonly bool   _wasSuccessful;
-    private readonly string _message;
-    
-
-
-    /// <summary>
-    /// Creates a success result.
-    /// </summary>
-    /// <typeparam name="T">The type of the result (value).</typeparam>
-    /// <param name="value">The sucessfully parsed value.</param>
-    /// <param name="remainder">The remainder of the input.</param>
-    /// <returns>The new <see cref="IResult&lt;T&gt;"/>.</returns>
-    public static IResult<T> Success<T>(T value, IInput remainder)
-    {
-        return new Result<T>(value, remainder);
-    }
-
-    /// <summary>
-    /// Creates a failure result.
-    /// </summary>
-    /// <typeparam name="T">The type of the result.</typeparam>
-    /// <param name="remainder">The remainder of the input.</param>
-    /// <param name="message">The error message.</param>
-    ///d <param name="expectations">The parser expectations.</param>
-    /// <returns>The new <see cref="IResult&lt;T&gt;"/>.</returns>
-    public static IResult<T> Failure<T>(IInput remainder, string message, IEnumerable<string> expectations)
-    {
-        return new Result<T>(remainder, message, expectations);
-    }
+    public bool WasSuccessful { get; init; } = success;
+    public bool WasFailed { get => !WasSuccessful; }    
 }
+
+/// <summary>
+/// Sucessful result providing the evaluation Value and the new Context
+/// </summary>
+public class Success<TDoc, TElt>(XpValue<TElt> value, Context<TDoc, TElt> newContext)
+                : Result<TDoc, TElt>(true)
+                where TDoc : IInput<TDoc, TElt>
+                where TElt : IInputElement<TElt>
+{
+    public XpValue<TElt> Value { get; init; } = value;
+    public Context<TDoc, TElt> Context { get; init; } = newContext;
+}
+
+/// <summary>
+/// Failed evaluation
+/// </summary>
+public class Failure<TDoc, TElt>(string message, Context<TDoc, TElt> newContext)
+                : Result<TDoc, TElt>(false)
+                where TDoc : IInput<TDoc, TElt>
+                where TElt : IInputElement<TElt>
+{
+    public string Message { get; init; } = message;
+    public Context<TDoc, TElt> Context { get; init; } = newContext;
+}
+
 

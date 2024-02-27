@@ -305,8 +305,10 @@ exists(tradeItemInformation/extension/*:tradeItemHierarchyModule/tradeItemHierar
     private static string testScript03 = """
         for $a in fn:distinct-values(book/author) return (book/author[. = $a][1], book[author = $a]/title)
         """;
-
+   
     private static string testScript04 = "b[. = $blah]";
+
+    private static string testScript05 = "";
 
     public static void ParseFromContent(string scriptContent)
     {

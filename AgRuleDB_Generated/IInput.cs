@@ -6,17 +6,24 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AgRuleDB_Generated;
-internal interface IInput
+public interface IInput<TDoc, TElt> where TElt : IInputElement<TElt>
 {
-    public NodeSet Root { get; }
-    public NodeSet Move(IInputElement from, Axis axis);
+    public TDoc Input { get; }
+    public TElt Root { get; }
+    public NodeSet<TElt> Move(TElt from, Axis axis, string name);
+    
 }
 
-internal enum ElementType { Node, Attribute }
+public enum InputElementType { Node, Attribute }
 
-internal interface IInputElement
-{
-    public ElementType ElementType { get; }
-    string Name { get; }
-    string Value { get; }
+public interface IInputElement<TElt> 
+{    
+    public InputElementType ElementType { get; }
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+    public string Name { get; }
+    public string Value { get; }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+    public static abstract EqualityComparer<TElt> GetComparer();
 }
+
+
