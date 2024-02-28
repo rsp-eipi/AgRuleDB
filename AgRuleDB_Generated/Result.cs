@@ -16,12 +16,12 @@ public abstract class Result<TDoc, TElt>(bool success) where TDoc : IInput<TDoc,
 /// <summary>
 /// Sucessful result providing the evaluation Value and the new Context
 /// </summary>
-public class Success<TDoc, TElt>(XpValue<TElt> value, Context<TDoc, TElt> newContext)
+public class Success<TDoc, TElt>(XpValue value, Context<TDoc, TElt> newContext)
                 : Result<TDoc, TElt>(true)
                 where TDoc : IInput<TDoc, TElt>
                 where TElt : IInputElement<TElt>
-{
-    public XpValue<TElt> Value { get; init; } = value;
+{    
+    public XpValue Value { get; init; } = value;
     public Context<TDoc, TElt> Context { get; init; } = newContext;
 }
 

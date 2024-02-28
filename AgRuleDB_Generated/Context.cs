@@ -10,7 +10,7 @@ namespace AgRuleDB_Generated;
 /// Variables hold the bindings created during XPath evaluations
 /// </summary>
 /// <typeparam name="TElt"></typeparam>
-public class Variables<TElt> : Dictionary<string, XpValue<TElt>> where TElt : IInputElement<TElt> { }
+public class Variables<TElt> : Dictionary<string, XpValue> where TElt : IInputElement<TElt> { }
 
 /// <summary>
 /// NodeSet is a set of source nodes and one of the possible result value of evaluating an XPath expression
@@ -21,6 +21,12 @@ public class NodeSet<TElt> : List<TElt> where TElt : IInputElement<TElt>
     public NodeSet() : base() { }
     public NodeSet(TElt element) : base([element]) { }
     public NodeSet(IEnumerable<TElt> elements) : base(elements) { }
+
+    public NodeSet<TElt> AddRange(NodeSet<TElt> nodes)
+    {
+        nodes.ForEach(n => this.Add(n));
+        return this;
+    }             
 }
 
 
@@ -55,7 +61,7 @@ public class Context<TDoc, TElt>
                 throw new Exception("Some bindings already exist");
     }
    
-    
+    public Context<TDoc, TElt> Change(NodeSet<TElt> newContextNodeSet) => new Context<TDoc, TElt>(Input, newContextNodeSet, Variables);
 
     
 }

@@ -1,13 +1,10 @@
 ﻿using AgRuleDB_Lib.XPathParser;
-using Sprache;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
+
 
 namespace AgRuleDB_Generated;
+
+
+
 
 /// <summary>
 /// Represents a fragment of XPath expression.
@@ -20,27 +17,43 @@ public delegate Result<TDoc, TElt> Xp<TDoc, TElt>(Context<TDoc, TElt> inputConte
 
 public static class XpLibrary
 {
-    /// <summary>
-    /// Advances the context along some axis.
-    /// </summary>
-    /// <returns>A new <see cref="Context" /> that is advanced following the axis.</returns>
-    /// <exception cref="System.InvalidOperationException">The move couldn't be performed.</exception>
-    public static Xp<TDoc, TElt> Move<TDoc, TElt>(this Xp<TDoc, TElt> xp, Axis axis, string name) 
+    public static Result<TDoc, TElt> Eval<TDoc, TElt>(this Xp<TDoc, TElt> xp, TDoc doc)
+        where TDoc : IInput<TDoc, TElt> where TElt : IInputElement<TElt>
+        => xp(new Context<TDoc, TElt>(doc));    
+
+
+    public static Xp<TDoc, TElt> Move<TDoc, TElt>(Axis axis, string name)
         where TDoc : IInput<TDoc, TElt> where TElt : IInputElement<TElt>
     {
-        if (xp is null) throw new ArgumentNullException(nameof(xp));
-
         return context =>
         {
-            Context<TDoc, TElt> newContext = new();
-            var r = xp(context);
-            switch(r)
+            NodeSet<TElt> resultNodeSet = new NodeSet<TElt>();
+            foreach (var node in context.CurrentContext)
+                resultNodeSet.AddRange(context.Input.Move(node, axis, name));
+            return new Success<TDoc, TElt>(new XpValueNodeSet<TElt>(resultNodeSet), context.Change(resultNodeSet));            
+        };
+    }
+
+    public static Xp<TDoc, TElt> Move<TDoc, TElt>(this Xp<TDoc, TElt> xp, Axis axis, string name)
+        where TDoc : IInput<TDoc, TElt> where TElt : IInputElement<TElt>
+    {
+        return context =>
+        {
+            switch (xp(context))
             {
-                case Success<TDoc, TElt> s:
-                    if (s.Value.XpType != XpType.NodeSet)
-                        return new Failure("Cannot move from an atomic result", context);
-                    foreach(var v in s.Value.)
-                        return new Success<TDoc, TElt>(v);
+                case Success<TDoc, TElt> success:
+                    switch (success.Value)
+                    {
+                        case NodeSet<TElt> nodes:
+                            NodeSet<TElt> resultNodeSet = new NodeSet<TElt>();
+                            foreach (var node in nodes)
+                                resultNodeSet.AddRange(context.Input.Move(node, axis, name));
+                            return new Success<TDoc, TElt>(new XpValueNodeSet<TElt>(resultNodeSet), success.Context.Change(resultNodeSet));
+                        default: return new Failure<TDoc, TElt>("Trying to apply Move to something else than a node", context);
+                    }
+                case Failure<TDoc, TElt> failure:
+                    return failure;
+                default: return new Failure<TDoc, TElt>("Unreachable case", context);
             }
         };
     }
