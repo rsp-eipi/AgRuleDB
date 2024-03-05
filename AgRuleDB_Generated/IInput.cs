@@ -1,17 +1,10 @@
 ﻿using AgRuleDB_Lib.XPathParser;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AgRuleDB_Generated;
 public interface IInput<TDoc, TElt> where TElt : IInputElement<TElt>
-{
-    public TDoc Input { get; }
+{    
     public TElt Root { get; }
-    public NodeSet<TElt> Move(TElt from, Axis axis, string name);
-    
+    public NodeSet<TElt> Move(TElt fromElement, Axis axis, string name);    
 }
 
 public enum InputElementType { Node, Attribute }

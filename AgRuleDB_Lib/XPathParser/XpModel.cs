@@ -1,16 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
-using Sprache;
-using System.Linq.Expressions;
-using System.Security.AccessControl;
-using System.Text;
-using System.Xml;
-using System.Xml.Linq;
-
-namespace AgRuleDB_Lib.XPathParser;
-
+﻿namespace AgRuleDB_Lib.XPathParser;
 
 public abstract class ExprBase { }
-
 
 // [1]    	XPath 	   ::=    	Expr
 // [2]    	Expr 	   ::=    	ExprSingle ("," ExprSingle)*
@@ -20,10 +10,8 @@ public class ExprSequence(IEnumerable<Expr> exprs)  : Expr
     public override string ToString() => Exprs.Count() > 0 ? $"[{String.Join(", ", Exprs)}]" : "[]";
 }
 
-
 // [3]    	ExprSingle 	   ::=    	ForExpr | QuantifiedExpr | IfExpr | OrExpr
 public abstract class Expr { }
-
 
 public class VarBinding(VarName varName, Expr expr)
 {
@@ -169,16 +157,15 @@ public class PathExpr(IEnumerable<PathStep> stepExprs) : Expr
 }
 
 public enum Axis { None, Child, Descendant, Attribute, Self, DescendantOrSelf, FollowingSibling, Following, Namespace, 
-    Attrib, Parent, Ancestor, PrecedingSibling, Preceding, AncestorOrSelf }
+    Parent, Ancestor, PrecedingSibling, Preceding, AncestorOrSelf }
 
 // [27]    	StepExpr 	   ::=    	FilterExpr | AxisStep
 public class PathStep(PathSeparator separator, string axis, QName? name, IEnumerable<FilterExpr> filters)
 {
-    public PathSeparator PathSeparator { get; set; } = separator;
-    public Axis Axis { get; set; } = XpUtil.StringToAxis(axis);
-    public QName? Name { get; set; } = name;
-
-    public IEnumerable<FilterExpr> Filters { get; set; } = filters;
+    public PathSeparator PathSeparator { get; init; } = separator;
+    public Axis Axis { get; init; } = XpUtil.StringToAxis(axis);
+    public QName? Name { get; init; } = name;
+    public IEnumerable<FilterExpr> Filters { get; init; } = filters;
 
     public static string PathSeparatorToString(PathSeparator sep)
         => sep switch
@@ -189,17 +176,17 @@ public class PathStep(PathSeparator separator, string axis, QName? name, IEnumer
             _ => throw new Exception("Unknown separator")
         };
 
-    
+    private string _NameAsString { get => Name is null ? string.Empty : Name.ToString(); }
 
     public string GetAxis() =>
         Axis == Axis.None
             ? PathSeparator switch {
-                PathSeparator.None          => $"""Move(Axis.Child, "{Name}")""",
-                PathSeparator.Slash         => $"""Move(Axis.Child, "{Name}")""",
-                PathSeparator.DoubleSlash   => $"""Move(Axis.DescendantOrSelf, "{Name}")""",
+                PathSeparator.None          => $"""Move(Axis.Child, "{_NameAsString}")""",
+                PathSeparator.Slash         => $"""Move(Axis.Child, "{_NameAsString}")""",
+                PathSeparator.DoubleSlash   => $"""Move(Axis.DescendantOrSelf, "{_NameAsString}")""",
                 _ => throw new Exception("Unknown path separator")
             }
-            : $"""Move(Axis.{Axis}, "{Name}")""";
+            : $"""Move(Axis.{Axis}, "{_NameAsString}")""";
     
 
     public override string ToString() => $"{GetAxis()}{String.Concat(Filters)}";

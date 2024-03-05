@@ -23,7 +23,7 @@ internal static class XpUtil
             "following-sibling" => Axis.FollowingSibling,
             "following" => Axis.Following,
             "namespace" => Axis.Namespace,
-            "@" => Axis.Attrib,
+            "@" => Axis.Attribute,
             "parent" => Axis.Parent,
             "ancestor" => Axis.Ancestor,
             "preceding-sibling" => Axis.PrecedingSibling,

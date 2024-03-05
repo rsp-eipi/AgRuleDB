@@ -15,3 +15,4 @@ RuleDBGenService ruleDB = new RuleDBGenService(new SerilogLoggerFactory(Log.Logg
 
 var container = new ServiceCollection().AddLogging(a => a.AddSerilog()).BuildServiceProvider(true);
 
+ruleDB.RunConsoleTest("");

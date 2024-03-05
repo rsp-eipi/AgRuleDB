@@ -308,21 +308,22 @@ exists(tradeItemInformation/extension/*:tradeItemHierarchyModule/tradeItemHierar
    
     private static string testScript04 = "b[. = $blah]";
 
-    private static string testScript05 = "";
+    private static string testScript05 = "//book";
 
     public static void ParseFromContent(string scriptContent)
     {
         //string uncommentedScript = _Content.Parse(scriptContent);
         //Logger.LogInformation(uncommentedScript);
         //var parsed = PathExpr.Parse(uncommentedScript);        
-        string expToParse = testScript03;
+        string expToParse = testScript01;
         var parsed = Expr.Parse(expToParse);
         //Logger.LogInformation($"---------- parsed -------------------");
         //Logger.LogInformation($"{ expToParse}");
         //Logger.LogInformation($"---------- end parsed ---------------");
         Logger.LogInformation($"-------------------------------------");
         Logger.LogInformation($"-------------------------------------");
-        Logger.LogInformation(parsed.ToString());
+        string? result = parsed?.ToString();
+        Logger.LogInformation(parsed?.ToString());
         Logger.LogInformation("----------- done  ---------------");
     }
 

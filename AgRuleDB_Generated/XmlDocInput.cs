@@ -1,19 +1,27 @@
 ﻿using AgRuleDB_Lib.XPathParser;
-using System.Diagnostics.CodeAnalysis;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace AgRuleDB_Generated;
-public class XmlDocInput(XmlDocument input) : IInput<XmlDocument, XmlElementInput>
+public class XmlDocInput(XmlDocument input) : IInput<XmlDocInput, XmlElementInput>
 {
-    public XmlDocument Input { init; get; } = input;    
+    public XmlDocument Input { get; init; } = input;    
     public XmlElementInput Root { get => new XmlElementInput(Input.DocumentElement!); }
-    public NodeSet<XmlElementInput> Move(XmlElementInput from, Axis axis, string name)
+    public NodeSet<XmlElementInput> Move(XmlElementInput fromElement, Axis axis, string name)
     {
         return axis switch
         {
             Axis.Child => new NodeSet<XmlElementInput>(),
+            Axis.DescendantOrSelf => throw new NotImplementedException(),
             _ => throw new NotImplementedException(),    
         };
+    }
+
+    public static XmlDocInput FromString(string xmlFragment)
+    {
+        XmlDocument doc = new XmlDocument();
+        doc.LoadXml(xmlFragment);
+        return new XmlDocInput(doc);
     }
 }
 

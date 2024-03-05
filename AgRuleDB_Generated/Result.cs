@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AgRuleDB_Generated;
+﻿namespace AgRuleDB_Generated;
 
 public abstract class Result<TDoc, TElt>(bool success) where TDoc : IInput<TDoc, TElt>
                                                        where TElt : IInputElement<TElt>
@@ -16,13 +10,15 @@ public abstract class Result<TDoc, TElt>(bool success) where TDoc : IInput<TDoc,
 /// <summary>
 /// Sucessful result providing the evaluation Value and the new Context
 /// </summary>
-public class Success<TDoc, TElt>(XpValue value, Context<TDoc, TElt> newContext)
+public class Success<TDoc, TElt>(Context<TDoc, TElt> newContext, XpValue? value = null)
                 : Result<TDoc, TElt>(true)
                 where TDoc : IInput<TDoc, TElt>
                 where TElt : IInputElement<TElt>
 {    
-    public XpValue Value { get; init; } = value;
+    public XpValue Result { get; init; } = value ?? new XpValueNodeSet<TElt>(newContext.CurrentContext);
     public Context<TDoc, TElt> Context { get; init; } = newContext;
+    public override string ToString() => $"{Context.RuleInfo}\nSuccess:\n\t{Result}";
+    public static Success<TDoc, TElt> Create(Context<TDoc, TElt> newContext, XpValue? value = null) => new Success<TDoc, TElt>(newContext, value);
 }
 
 /// <summary>
@@ -35,6 +31,7 @@ public class Failure<TDoc, TElt>(string message, Context<TDoc, TElt> newContext)
 {
     public string Message { get; init; } = message;
     public Context<TDoc, TElt> Context { get; init; } = newContext;
+    public override string ToString() => $"Failure: {Message}";
 }
 
 
