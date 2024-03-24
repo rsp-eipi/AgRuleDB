@@ -1,8 +1,8 @@
 ﻿using AgRuleDB_Lib.XPathParser;
 using System.Xml;
-using System.Xml.Linq;
 
-namespace AgRuleDB_Generated;
+namespace AgRuleDB_Lib.XPathRunner;
+
 public class XmlDocInput(XmlDocument input) : IInput<XmlDocInput, XmlElementInput>
 {
     public XmlDocument Input { get; init; } = input;    
@@ -16,7 +16,6 @@ public class XmlDocInput(XmlDocument input) : IInput<XmlDocInput, XmlElementInpu
             _ => throw new NotImplementedException(),    
         };
     }
-
     public static XmlDocInput FromString(string xmlFragment)
     {
         XmlDocument doc = new XmlDocument();

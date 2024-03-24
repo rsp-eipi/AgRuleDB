@@ -1,13 +1,24 @@
-﻿using Sprache;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Text;
-using System.Threading.Tasks;
-using Xunit.Sdk;
 
 namespace AgRuleDB_Lib.XPathParser;
-internal static class XpUtil
+
+public enum BinOp
+{
+    GenEqual, GenNotEqual, GenLessThan, GenLessThanOrEqual, GenGreaterThan, GenGreaterThanOrEqual,
+    ValEqual, ValNotEqual, ValLessThan, ValLessThanOrEqual, ValGreaterThan, ValGreaterThanOrEqual,
+    Is, NodeBefore, NodeAfter, And, Or,
+    Add, Sub, Times, Div, IDiv, Mod,
+    Union, Intersect, Except, Comma, Concat, To
+}
+
+public enum BinOpResultType
+{
+    Boolean, AtopmicValue, Sequence
+}
+
+
+public static class XpUtil
 {
     public static string CanonizeIdentifier(this string s)
         => s.ToLower();
@@ -68,6 +79,56 @@ internal static class XpUtil
         _ => throw new Exception($"Invalid operator {op}")
     };
 
+
+    public static BinOpResultType GetBinOpResultType(this BinOp binOp) => binOp switch
+    {
+        BinOp.Or or 
+        BinOp.And or 
+        BinOp.GenEqual or 
+        BinOp.ValEqual or 
+        BinOp.ValNotEqual or 
+        BinOp.GenNotEqual         
+                            => BinOpResultType.Boolean,
+        _                   => throw new UnreachableException()
+    };
+
+    /// <summary>
+    /// Sets GenType display to true on the first expression of a sequence. 
+    /// This is used when the sequence can be chained with '.' notation since type information is unnecessary after the first expression. 
+    /// </summary>
+    /// <param name="exprs">The expression sequence</param>
+    /// <returns>The same expression sequence with first expression set to display generic type information</returns>
+    public static IEnumerable<Expr> GenTypesOnFirst(this IEnumerable<Expr> exprs)
+    {
+        if (exprs.Any())
+            exprs.First().DisplayGenTypes = true;
+        return exprs;
+    }
+
+    /// <summary>
+    /// Sets GenTypes display to true on all the expressions of a sequence. 
+    /// This is used when expressions are not chained because they are part of a sequence of one or more.
+    /// </summary>
+    /// <param name="exprs">The expression sequence</param>
+    /// <returns>The same expression sequence with all expressions set to display generic type information</returns>
+    public static IEnumerable<Expr> GenTypesOnAll(this IEnumerable<Expr> exprs)
+    {
+        foreach (Expr e in exprs)
+            e.DisplayGenTypes = true;
+        return exprs;
+    }
+
+    /// <summary>
+    /// Force display of GenTypes for the given expression (set DisplayGenTypes to true)
+    /// </summary>
+    /// <param name="expr">Expression for which to set DisplayGenTypes to true</param>
+    /// <returns>The same expression with DisplayGenTypes set</returns>
+    public static Expr GenTypesSet(this Expr expr)
+    {
+        expr.DisplayGenTypes = true;
+        return expr;
+    }
+
 }
 
 
@@ -97,17 +158,17 @@ internal static class FunctionDictionary
 internal static class Tab
 {
     static int _depth = 0;
-    const string _tabString = "  ";
+    const string _tabString = "   ";
 
     public static string TabsNl { get => "\r\n" + Tabs; }
     public static string Tabs { get => string.Concat(Enumerable.Repeat(_tabString, _depth)); }
     static string _Tabs(int depth) => string.Concat(Enumerable.Repeat(_tabString, depth));
 
-    public static string Push() => _Tabs(++_depth);
-    public static string PushNl() => $"\r\n{Push()}";
+    public static string Push { get => _Tabs(++_depth); }
+    public static string PushNl { get => $"\r\n{Push}"; }
 
-    public static string Pop() => _Tabs((_depth > 0) ? --_depth : 0);
-    public static string PopNl() => $"\r\n{Pop()}";
+    public static string Pop { get => _Tabs((_depth > 0) ? --_depth : 0); }
+    public static string PopNl { get => $"\r\n{Pop}"; }
 
     /// <summary>
     /// Reset depth and produces the initial tabbing in a file
@@ -116,6 +177,6 @@ internal static class Tab
     public static string FirstPush()
     {
         _depth = 0;
-        return Push();
+        return Push;
     }
 }

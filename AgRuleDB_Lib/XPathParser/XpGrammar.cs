@@ -259,25 +259,26 @@ internal static class XpGrammar
         from _else in Parse.String("else").Tokenize()
         from elseexpr in Expr
         select new IfExpr(condition, thenexpr, elseexpr);
-
-    
-
-
+   
 
     static readonly Parser<Expr> Expr =
         IfExpr
         .Or<Expr>(QuantifiedExpr)
         .Or(ForExpr)
         .Or(BinaryExpr)
-        .Or(PrimaryExpr);    
+        .Or(PrimaryExpr);
 
-    static readonly Parser<ExprSequence> ExprSequence =
+    static readonly Parser<Expr> ExprSequence =
         from sequence in
             (from _comma in Parse.Char(',').Tokenize().Optional()
              from expr in Parse.Ref(() => Expr)
              select expr
             ).Many()
-        select new ExprSequence(sequence);
+        select sequence.Count() switch
+        {
+            1 => sequence.First(),
+            _ => new ExprSequence(sequence)
+        };
 
 
     public static string RemoveComments(string script) => _Content.Parse(script);
@@ -304,26 +305,30 @@ exists(tradeItemInformation/extension/*:tradeItemHierarchyModule/tradeItemHierar
             """;
     private static string testScript03 = """
         for $a in fn:distinct-values(book/author) return (book/author[. = $a][1], book[author = $a]/title)
-        """;
-   
+        """;    
+
     private static string testScript04 = "b[. = $blah]";
 
-    private static string testScript05 = "//book";
+    private static string testScript05 = "//book eq 5,3";
+
+    private static string testScript06 = "if (3 = 5) then true() else false()";
 
     public static void ParseFromContent(string scriptContent)
     {
         //string uncommentedScript = _Content.Parse(scriptContent);
         //Logger.LogInformation(uncommentedScript);
         //var parsed = PathExpr.Parse(uncommentedScript);        
-        string expToParse = testScript01;
-        var parsed = Expr.Parse(expToParse);
+        
         //Logger.LogInformation($"---------- parsed -------------------");
         //Logger.LogInformation($"{ expToParse}");
         //Logger.LogInformation($"---------- end parsed ---------------");
         Logger.LogInformation($"-------------------------------------");
         Logger.LogInformation($"-------------------------------------");
-        string? result = parsed?.ToString();
-        Logger.LogInformation(parsed?.ToString());
+        string expToParse = testScript06;
+        var parsed = ExprSequence.Parse(expToParse);
+        var rule = new RuleExpr(10, expToParse, parsed);        
+        string result = Tab.FirstPush() + rule.ToString();
+        Console.WriteLine(result);
         Logger.LogInformation("----------- done  ---------------");
     }
 

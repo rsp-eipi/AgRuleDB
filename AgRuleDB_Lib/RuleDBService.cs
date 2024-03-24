@@ -24,8 +24,8 @@ public class RuleDBService
         // loading rules
         string ruleFolder = Path.Combine(projectRootFolder, @"Edifact\SpecEdifact\d20b\");
         string serviceSpecFolder = Path.Combine(projectRootFolder, @"Edifact\SpecEdifact\Service\");
-
-        string testRule = """
+        string testRule01 = "//subject = 8, 6";
+        string testRule02 = """
 if ((targetMarket/targetMarketCountryCode =  ('249'(: France :) , '250'(: France :) ))
     and (isTradeItemADespatchUnit  = 'true')
     and (gdsnTradeItemClassification/gpcCategoryCode!='10005844') 
@@ -38,7 +38,7 @@ then
 else true()
 """;
 
-        XpGrammar.TestXpParser(testRule);
+        XpGrammar.TestXpParser(testRule01);
 
 
     }

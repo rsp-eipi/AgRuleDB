@@ -1,4 +1,4 @@
-﻿namespace AgRuleDB_Generated;
+﻿namespace AgRuleDB_Lib.XPathRunner;
 
 /// <summary>
 /// Variables hold the bindings created during XPath evaluations

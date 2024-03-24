@@ -1,6 +1,5 @@
-﻿using Microsoft.Extensions.Primitives;
+﻿namespace AgRuleDB_Generated;
 
-namespace AgRuleDB_Generated;
 [AttributeUsage(AttributeTargets.All)]
 public class RuleAttribute : Attribute
 {

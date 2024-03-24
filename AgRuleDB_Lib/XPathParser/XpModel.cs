@@ -1,23 +1,43 @@
 ﻿namespace AgRuleDB_Lib.XPathParser;
 
-public abstract class ExprBase { }
+// [3]    	ExprSingle 	   ::=    	ForExpr | QuantifiedExpr | IfExpr | OrExpr
+public abstract class Expr
+{
+    public bool DisplayGenTypes { get; set; } = false;
+    public string GenTypes { get => DisplayGenTypes ? "<D, E>" : ""; }
+}
 
 // [1]    	XPath 	   ::=    	Expr
 // [2]    	Expr 	   ::=    	ExprSingle ("," ExprSingle)*
-public class ExprSequence(IEnumerable<Expr> exprs)  : Expr
+public class ExprSequence(IEnumerable<Expr> exprs) : Expr
 {
     public IEnumerable<Expr> Exprs { get; init; } = exprs;
-    public override string ToString() => Exprs.Count() > 0 ? $"[{String.Join(", ", Exprs)}]" : "[]";
+    public override string ToString() 
+        => Exprs.Any() 
+        ? $"Sequence{GenTypes}({Tab.PushNl}{String.Join($"{Tab.TabsNl}, ", Exprs.GenTypesOnAll())}{Tab.PopNl})" 
+        : $"Sequence{GenTypes}()";
 }
 
-// [3]    	ExprSingle 	   ::=    	ForExpr | QuantifiedExpr | IfExpr | OrExpr
-public abstract class Expr { }
+public class RuleExpr(int id, string description, Expr expr) : Expr
+{
+    public int Id { get; init; } = id;
+    public string Description { get; init; } = description;
+    public Expr Expr { get; init; } = expr;
+    public override string ToString() => $"""""
+            public static readonly Xp<D,E> rule{Id:000} = Rule<D, E>("R{Id:000}", """
+            {Tab.Tabs}{Description}
+            """ //-------------------------------------)            
+            {Tab.Tabs}.{Expr};
+        """"";
 
-public class VarBinding(VarName varName, Expr expr)
+}
+
+
+public class VarBinding(VarName varName, Expr expr) : Expr
 {
     public VarName VarName { get; set; } = varName;
     public Expr Expr { get; set; } = expr;
-    public override string ToString() => $"Bind({VarName}, {Expr})";
+    public override string ToString() => $"Bind{GenTypes}({VarName}, {Expr})";
 }
 
 
@@ -27,8 +47,7 @@ public class ForExpr(IEnumerable<VarBinding> bindings, Expr returnExpr) : Expr
 {
     public IEnumerable<VarBinding> Bindings { get; init; } = bindings;
     public Expr ReturnExpr { get; init; } = returnExpr;
-
-    public override string ToString() => $"ForExpr([{String.Join(',', Bindings)}], {ReturnExpr})";
+    public override string ToString() => $"ForExpr{GenTypes}([{String.Join(',', Bindings.GenTypesOnAll())}], {ReturnExpr})";
 }
 
 // [6]    	QuantifiedExpr 	   ::=    	("some" | "every") "$" VarName "in" ExprSingle ("," "$" VarName "in" ExprSingle)* "satisfies" ExprSingle
@@ -38,70 +57,28 @@ public class QuantifiedExpr(string quantifier, IEnumerable<VarBinding> varBindin
     public Quantifier Quantifier { get; init; } = StringToQuantifier(quantifier);
     public IEnumerable<VarBinding> VarBindings { get; init; } = varBindings;
     public Expr SatisfyExpr { get; init; } = satisfyExpr;
-
     public static Quantifier StringToQuantifier(string s) => s switch
     {
         "every" => Quantifier.All,
         "some" => Quantifier.Any,
         _ => throw new Exception($"Unknown quantifier {s}")
     };
-    public override string ToString() => $"{Quantifier}({String.Join(".", VarBindings)}.Eval({SatisfyExpr}))";
+    public override string ToString() => $"{Quantifier}{GenTypes}({String.Join(".", VarBindings.GenTypesOnFirst())}.Eval({SatisfyExpr}))";
 }
 
 // [7]    	IfExpr 	   ::=    	"if" "(" Expr ")" "then" ExprSingle "else" ExprSingle
 public class IfExpr(ParenthesizedExpr condition, Expr thenExpr, Expr elseExpr) : Expr
 {
-    public ParenthesizedExpr Condition { get; init; } = condition;
-    public Expr ThenExpr { get; init; } = thenExpr;
-    public Expr ElseExpr { get; init; } = elseExpr;
-
-    public override string ToString() => $"""
-            ({Condition})
-            {Tab.Push()}? {ThenExpr}
-            {Tab.TabsNl}: {ElseExpr}{Tab.PopNl()}
-        """;
+    public Expr Condition { get; init; } = condition.Expr.GenTypesSet();
+    public Expr ThenExpr { get; init; } = thenExpr.GenTypesSet();
+    public Expr ElseExpr { get; init; } = elseExpr.GenTypesSet();
+    public override string ToString() => $"IfExpr{GenTypes}({Tab.PushNl}{Condition}{Tab.TabsNl}, {ThenExpr}{Tab.TabsNl}, {ElseExpr}{Tab.PopNl})";            
 }
 
 
 
 
 
-
-
-//// [9]    	AndExpr 	   ::=    	ComparisonExpr ( "and" ComparisonExpr )*
-//public class AndExpr(IEnumerable<ExprSingle> exprs) : BinaryExprSequence(BinaryOperator.And, exprs) { }
-
-//// [10]    	ComparisonExpr 	   ::=    	RangeExpr ( (ValueComp | GeneralComp | NodeComp) RangeExpr )?
-//public class ComparisonExpr(ExprSingle left, IEnumerable<(BinaryOperator op, ExprSingle right)> rights) : BinaryExprSequence(left, rights) { }
-
-//// [11]    	RangeExpr 	   ::=    	AdditiveExpr ( "to" AdditiveExpr )?
-//public class RangeExpr(ExprSingle left, ExprSingle right) : BinaryExprPair(BinaryOperator.To, left, right) { }
-
-//// [12]    	AdditiveExpr 	   ::=    	MultiplicativeExpr ( ("+" | "-") MultiplicativeExpr )*
-//public class AdditiveExpr(ExprSingle left, IEnumerable<(BinaryOperator op, ExprSingle right)> rights) : BinaryExprSequence(left, rights) { }
-
-//// [13]    	MultiplicativeExpr 	   ::=    	UnionExpr ( ("*" | "div" | "idiv" | "mod") UnionExpr )*
-//public class MultiplicativeExpr(BinaryOperator op, IEnumerable<ExprSingle> exprs) : BinaryExprSequence(op, exprs) { }
-
-//// [14]    	UnionExpr 	   ::=    	IntersectExceptExpr ( ("union" | "|") IntersectExceptExpr )*
-//public class UnionExpr(IEnumerable<ExprSingle> exprs) : BinaryExprSequence(BinaryOperator.union, exprs) { }
-
-//// [15]    	IntersectExceptExpr 	   ::=    	InstanceofExpr ( ("intersect" | "except") InstanceofExpr )*
-//public class IntersectExpr(IEnumerable<ExprSingle> exprs) : BinaryExprSequence(BinaryOperator.intersect, exprs) { }
-//public class ExceptExpr(IEnumerable<ExprSingle> exprs) : BinaryExprSequence(BinaryOperator.except, exprs) { }
-
-// -------------- type expressions
-
-
-
-// [16]    	InstanceofExpr 	   ::=    	TreatExpr ( "instance" "of" SequenceType )?
-// [17]    	TreatExpr 	   ::=    	CastableExpr ( "treat" "as" SequenceType )?
-
-// [18]    	CastableExpr 	   ::=    	CastExpr ( "castable" "as" SingleType )?
-
-// [19]    	CastExpr 	   ::=    	UnaryExpr ( "cast" "as" SingleType )?
-
-// [20]    	UnaryExpr 	   ::=    	("-" | "+")* ValueExpr
 public enum UnaryOperator { Plus, Minus }
 public class UnaryExpression : Expr
 {
@@ -123,18 +100,15 @@ public class UnaryExpression : Expr
 // [22]    	GeneralComp 	   ::=    	"=" | "!=" | "<" | "<=" | ">" | ">="
 // [23]    	ValueComp 	   ::=    	"eq" | "ne" | "lt" | "le" | "gt" | "ge"
 // [24]    	NodeComp 	   ::=    	"is" | "<<" | ">>"
-public enum BinOp { GenEqual, GenNotEqual, GenLessThan, GenLessThanOrEqual, GenGreaterThan, GenGreaterThanOrEqual, 
-                    ValEqual, ValNotEqual, ValLessThan, ValLessThanOrEqual, ValGreaterThan, ValGreaterThanOrEqual,
-                    Is,  NodeBefore, NodeAfter, And, Or,
-                    Add, Sub, Times, Div, IDiv, Mod, 
-                    Union, Intersect, Except, Comma, Concat, To}
+
 
 public class BinaryExpr(Expr left, string op, Expr right) : Expr
 {
     public Expr Left { get; init; } = left;
     public BinOp Op { get; init; } = XpUtil.StringToBinaryOperator(op);
     public Expr Right { get; init; } = right;   
-    public override string ToString() => $"Binary({Left}, BinOp.{Op}, {Right})";
+    public override string ToString() 
+        => $"Binary{GenTypes}({Tab.PushNl}{Left.GenTypesSet()}{Tab.TabsNl}, BinOp.{Op}{Tab.TabsNl}, {Right.GenTypesSet()}{Tab.PopNl})";
 
 }
 
@@ -148,19 +122,18 @@ public enum PathSeparator { None, Slash, DoubleSlash }
 
 public class PathExpr(IEnumerable<PathStep> stepExprs) : Expr
 {
-    public IEnumerable<PathStep> PathSteps { get; set; } = stepExprs;
-
-    public string HandleFirst() =>
-        PathSteps.First().PathSeparator == PathSeparator.Slash ? "Root()" : "Context()";
-
-    public override string ToString() => $"{HandleFirst()}.{string.Join('.', PathSteps)}";
+    public IEnumerable<PathStep> PathSteps { get; set; } = stepExprs;    
+    public override string ToString()
+        => PathSteps.First().PathSeparator == PathSeparator.Slash
+        ? $"Root{GenTypes}().{string.Join('.', PathSteps)}"
+        : $"{string.Join('.', PathSteps.GenTypesOnFirst())}";
 }
 
 public enum Axis { None, Child, Descendant, Attribute, Self, DescendantOrSelf, FollowingSibling, Following, Namespace, 
     Parent, Ancestor, PrecedingSibling, Preceding, AncestorOrSelf }
 
 // [27]    	StepExpr 	   ::=    	FilterExpr | AxisStep
-public class PathStep(PathSeparator separator, string axis, QName? name, IEnumerable<FilterExpr> filters)
+public class PathStep(PathSeparator separator, string axis, QName? name, IEnumerable<FilterExpr> filters) : Expr
 {
     public PathSeparator PathSeparator { get; init; } = separator;
     public Axis Axis { get; init; } = XpUtil.StringToAxis(axis);
@@ -181,9 +154,9 @@ public class PathStep(PathSeparator separator, string axis, QName? name, IEnumer
     public string GetAxis() =>
         Axis == Axis.None
             ? PathSeparator switch {
-                PathSeparator.None          => $"""Move(Axis.Child, "{_NameAsString}")""",
-                PathSeparator.Slash         => $"""Move(Axis.Child, "{_NameAsString}")""",
-                PathSeparator.DoubleSlash   => $"""Move(Axis.DescendantOrSelf, "{_NameAsString}")""",
+                PathSeparator.None          => $"""Move{GenTypes}(Axis.Child, "{_NameAsString}")""",
+                PathSeparator.Slash         => $"""Move{GenTypes}(Axis.Child, "{_NameAsString}")""",
+                PathSeparator.DoubleSlash   => $"""Move{GenTypes}(Axis.DescendantOrSelf, "{_NameAsString}")""",
                 _ => throw new Exception("Unknown path separator")
             }
             : $"""Move(Axis.{Axis}, "{_NameAsString}")""";
@@ -215,6 +188,8 @@ public class PathStep(PathSeparator separator, string axis, QName? name, IEnumer
 public class FilterExpr(Expr expr) : Expr
 {
     public Expr Expression { get; set; } = expr;
+
+    // Filter expressions shall follow another expression such as a step or a sequence, therefore, there is no need for a GenTypes
     public override string ToString() => $".Filter({Expression})";
 }
 
@@ -232,13 +207,13 @@ public abstract class Literal<TValue>(TValue value) : Expr
 // "foo bar"
 public class StringLiteral(string value) : Literal<string>(value)
 {
-    public override string ToString() => $"\"{Value}\"";
+    public override string ToString() => $"Lift{GenTypes}(\"{Value}\")";
 }
 
 // [43]    	NumericLiteral 	   ::=    	IntegerLiteral | DecimalLiteral | DoubleLiteral
 public class NumericLiteral(double value) : Literal<double>(value)
 {
-    public override string ToString() => Value.ToString();
+    public override string ToString() => $"Lift{GenTypes}({Value})";
 }
 
 
@@ -247,16 +222,15 @@ public class NumericLiteral(double value) : Literal<double>(value)
 // [45]    	VarName 	   ::=    	QName
 public class VarName(string prefix, string name) : QName(prefix, name) 
 {
-    public override string ToString() => $"""Var("@{Name}")""";
+    public override string ToString() => $"""Var{GenTypes}("@{Name}")""";
 }
 
 
 // [46]    	ParenthesizedExpr 	   ::=    	"(" Expr? ")"
-public class ParenthesizedExpr(ExprSequence expr) : Expr 
+public class ParenthesizedExpr(Expr expr) : Expr 
 { 
-    ExprSequence Exprs = expr;
-
-    public override string ToString() => $"({Exprs})";
+    public Expr Expr { get; init; } = expr;
+    public override string ToString() => $"({Expr})";
 }
 
 // [47]    	ContextItemExpr 	   ::=    	"."
@@ -266,9 +240,8 @@ public class ContextItemExpr : Expr { }
 public class FunctionCall(QName name, ParenthesizedExpr param) : Expr
 {
     QName Name {  get; set; } = name;
-    ParenthesizedExpr Param { get; set; } = param;
-
-    public override string ToString() => $"Call(\"{Name}\", {Param})";
+    Expr Param { get; set; } = param.Expr;
+    public override string ToString() => $"Call{GenTypes}(\"{Name}\", {Param})";
 }
 
 // [49]    	SingleType 	   ::=    	AtomicType "?"?

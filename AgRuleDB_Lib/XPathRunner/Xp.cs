@@ -1,6 +1,7 @@
 ﻿using AgRuleDB_Lib.XPathParser;
+using System.Diagnostics;
 
-namespace AgRuleDB_Generated;
+namespace AgRuleDB_Lib.XPathRunner;
 
 /// <summary>
 /// Represents a fragment of XPath expression.
@@ -52,8 +53,7 @@ public static class XpLibrary
     /// </summary>    
     public static Xp<TDoc, TElt> Move<TDoc, TElt>(Axis axis, string name) 
         where TDoc : IInput<TDoc, TElt> where TElt : IInputElement<TElt>
-    {
-        return context =>
+        => context =>
         {
             NodeSet<TElt> resultNodeSet = new NodeSet<TElt>();
             foreach (var node in context.CurrentContext)
@@ -63,7 +63,7 @@ public static class XpLibrary
             }
             return new Success<TDoc, TElt>(context.Change(resultNodeSet));
         };
-    }
+    
 
     /// <summary>
     /// Move context to the child nodes of given name
@@ -78,29 +78,87 @@ public static class XpLibrary
         where TDoc : IInput<TDoc, TElt> where TElt : IInputElement<TElt>
         => context => Move<TDoc, TElt>(Axis.Attribute, name)(context);
 
-    #endregion
+    public static Xp<TDoc, TElt> Binary<TDoc, TElt>(Xp<TDoc, TElt> left, BinOp binOp, Xp<TDoc, TElt> right)
+        where TDoc : IInput<TDoc, TElt> where TElt : IInputElement<TElt>
+        => context =>
+        {
+            var leftResult = left(context);
+            if (leftResult.WasFailed) return leftResult;            
+            var rightResult = right(context);
+            if (rightResult.WasFailed) return rightResult;
+            var leftValue = leftResult.XpValue;
+            var rightValue = rightResult.XpValue;
+            switch (binOp.GetBinOpResultType())
+            {
+                case BinOpResultType.Boolean:
+                    bool b = binOp switch
+                    {
+                        BinOp.GenEqual => rightValue.Equals(leftValue),
+                        BinOp.GenNotEqual => !rightValue.Equals(leftValue),
+                        BinOp.Or => leftValue.AsBool || rightValue.AsBool,
+                        BinOp.And => leftValue.AsBool && rightValue.AsBool,
+                        BinOp.ValEqual => leftValue is XpValueAtomic && rightValue is XpValueAtomic,
+                        _ => throw new UnreachableException()
+                    };
+                    return new Success<TDoc, TElt>(context, new XpValueBool(b));
+                default :
+                    throw new UnreachableException();
+                                    
+            };            
+        };
+    
+
+    // here is another case where C# lakes discriminated union types...
+    //public static Xp<TDoc, TElt> Lit<TDoc, TElt>(string s) where TDoc : IInput<TDoc, TElt> where TElt : IInputElement<TElt>
+    //    => context => new Success<TDoc, TElt>(context, new XpValueString(s));
+    //public static Xp<TDoc, TElt> Lit<TDoc, TElt>(int i) where TDoc : IInput<TDoc, TElt> where TElt : IInputElement<TElt>
+    //    => context => new Success<TDoc, TElt>(context, new XpValueInt(i));
+    //public static Xp<TDoc, TElt> Lit<TDoc, TElt>(int i) where TDoc : IInput<TDoc, TElt> where TElt : IInputElement<TElt>
+    //    => context => new Success<TDoc, TElt>(context, new XpValueInt(i));
+
+    public static Xp<TDoc, TElt> Lift<TDoc, TElt>(XpValue v) where TDoc : IInput<TDoc, TElt> where TElt : IInputElement<TElt>
+        => context => new Success<TDoc, TElt>(context, v);
+        
+
+    public static Xp<TDoc, TElt> Sequence<TDoc, TElt>(params Xp<TDoc, TElt>[] items)
+        where TDoc : IInput<TDoc, TElt> where TElt : IInputElement<TElt>
+    => context =>
+        {
+            var results = from item in items select item(context);
+            return (results.Any(r => r.WasFailed)) 
+                ? results.First(r => r.WasFailed)
+                : new Success<TDoc, TElt>(context, results.AsValue());
+        };
+    
+
+
+
+            #endregion
 
     #region Extension methods
-    // ---------------------------------  Extension Methods
-    // Here are two C# limitations:
-    // 1) Extension methods require the extended type to appear as a first parameter. 
-    // As a result, we can't have a same method definition be used for both extension and primitive method in a combinator library
-    // A way to overcome this limitation would be to generate the missing code but current metaprogramming is still too immature
-    // for this to actually simplify things. 
-    // 2) It is not possible to define constant (names) for delegates with generic types without specifying the type parameter at constant definition. 
-    // what would be great is a const<TDoc, TElt> Xp<TDoc, TElt> SomeName = .... but nope.
-    // Thus the need to create a new anonymous function when calling Compose.
-    //
-    // Conclusion : everything hereafter is plain boilerplate. I'll probably automate at some later point. 
+            // ---------------------------------  Extension Methods
+            // Here are two C# limitations:
+            //
+            // 1) Extension methods require the extended type to appear as a first parameter. 
+            // As a result, we can't have a same method definition be used for both extension and primitive
+            // method in a combinator library. A way to overcome this limitation would be to generate the
+            // missing code but current metaprogramming is still too immature for this to actually simplify things. 
+            //
+            // 2) It is not possible to define constant (names) for delegates with generic types without
+            // specifying the type parameter at constant definition. What would be great is
+            // a const<TDoc, TElt> Xp<TDoc, TElt> SomeName = .... but nope.
+            // Thus the need to create a new anonymous function when calling Compose.
+            //
+            // Conclusion : everything hereafter is plain boilerplate. I'll probably automate at some later point. 
 
 
-    /// <summary>
-    /// Basic composition operator
-    /// </summary>    
-    /// <param name="first">The first function to apply</param>
-    /// <param name="second">The second function to apply</param>
-    /// <returns>A function that applies the first function and, if successful, apply the second function</returns>    
-    public static Xp<TDoc, TElt> Compose<TDoc, TElt>(this Xp<TDoc, TElt> first, Xp<TDoc, TElt> second)
+            /// <summary>
+            /// Basic composition operator
+            /// </summary>    
+            /// <param name="first">The first function to apply</param>
+            /// <param name="second">The second function to apply</param>
+            /// <returns>A function that applies the first function and, if successful, apply the second function</returns>    
+            public static Xp<TDoc, TElt> Compose<TDoc, TElt>(this Xp<TDoc, TElt> first, Xp<TDoc, TElt> second)
         where TDoc : IInput<TDoc, TElt> where TElt : IInputElement<TElt>
         => context => first(context) switch
         {
@@ -145,7 +203,14 @@ public static class XpLibrary
     public static Xp<TDoc, TElt> Attribute<TDoc, TElt>(this Xp<TDoc, TElt> xp, string name)
         where TDoc : IInput<TDoc, TElt> where TElt : IInputElement<TElt>
         => xp.Compose(context => Attribute<TDoc, TElt>(name)(context));
-        
-    
+
+    public static Xp<TDoc, TElt> Binary<TDoc, TElt>(this Xp<TDoc, TElt> xp, Xp<TDoc, TElt> left, BinOp binOp, Xp<TDoc, TElt> right)
+        where TDoc : IInput<TDoc, TElt> where TElt : IInputElement<TElt>
+        => xp.Compose(context => Binary(left, binOp, right)(context));
+
+    public static Xp<TDoc, TElt> Sequence<TDoc, TElt>(this Xp<TDoc, TElt> xp, params Xp<TDoc, TElt>[] items)
+        where TDoc : IInput<TDoc, TElt> where TElt : IInputElement<TElt>
+        => xp.Compose(context => Sequence(items)(context));
+
     #endregion
 }

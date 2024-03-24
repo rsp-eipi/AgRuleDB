@@ -24,7 +24,7 @@ public class RuleDBGenService
     public void RunConsoleTest(string projectRootFolder)
     {        
         XDocInput input = XDocInput.FromString(TestDocumentBooks);
-        var result = Rules<XDocInput, XElementInput>.rule4(new Context<XDocInput, XElementInput>(input));
+        var result = Rules<XDocInput, XElementInput>.rule05(new Context<XDocInput, XElementInput>(input));
 
         Console.WriteLine(result);
         Console.WriteLine("-------------- Done --------------");               

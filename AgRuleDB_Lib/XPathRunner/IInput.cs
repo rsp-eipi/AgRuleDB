@@ -1,6 +1,6 @@
 ﻿using AgRuleDB_Lib.XPathParser;
 
-namespace AgRuleDB_Generated;
+namespace AgRuleDB_Lib.XPathRunner;
 public interface IInput<TDoc, TElt> where TElt : IInputElement<TElt>
 {    
     public TElt Root { get; }

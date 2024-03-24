@@ -1,35 +1,84 @@
-﻿namespace AgRuleDB_Generated;
+﻿using System.Collections;
+using System.Diagnostics;
+
+namespace AgRuleDB_Lib.XPathRunner;
 
 // XPath implements loads of types with very strange casting rules
 // https://www.w3.org/TR/xquery-operators/#casting
 // not everything is covered here, we can add to these as needed
-public enum XpType { None, Node, Sequence, Int, String, Bool, DateTime }
-public abstract record XpValue(XpType XpType);
+public enum XpType { None, Error, Node, Sequence, Int, String, Bool, DateTime }
+public abstract record XpValue(XpType XpType)
+{
+    // see https://www.w3.org/TR/xpath20/#dt-ebv
+    public virtual bool AsBool { get => false; }
+    public static implicit operator XpValue(string input) => new XpValueString(input);
+    public static implicit operator XpValue(int input) => new XpValueInt(input);
+    public static implicit operator XpValue(bool input) => new XpValueBool(input);
+}
 public abstract record XpValueAtomic(XpType XpType) : XpValue(XpType);
 public record XpValueNone() : XpValue(XpType.None);
-public record XpValueInt(int Value) : XpValueAtomic(XpType.Int);
+public record XpValueError(string Value) : XpValue(XpType.Error);
+public record XpValueInt(int Value) : XpValueAtomic(XpType.Int)
+{
+    public override bool AsBool => Value != 0;
+}
 public record XpValueString(string Value) : XpValueAtomic(XpType.String)
 {
     // If its operand is a singleton value of type xs:string, xs:anyURI, xs:untypedAtomic, or a type derived from one of these,
     // fn:boolean returns false if the operand value has zero length; otherwise it returns true https://www.w3.org/TR/xpath20/#dt-ebv
-    public static implicit operator bool(XpValueString s) => s.Value.Length > 0;
+    public override bool AsBool => !string.IsNullOrEmpty(Value);
+    public static implicit operator XpValueString(string input) => new XpValueString(input);    
 }
-public record XpValueBool(bool Value) : XpValueAtomic(XpType.Bool);
+public record XpValueBool(bool Value) : XpValueAtomic(XpType.Bool)
+{
+    public override bool AsBool => Value;    
+}
 public record XpValueDateTime(DateTime Value) : XpValueAtomic(XpType.DateTime);
 public record XpValueNode<TElt>(TElt Value) : XpValue(XpType.Node) where TElt : IInputElement<TElt>;
 public record XpValueNodeSet<TElt>(NodeSet<TElt> Value) : XpValue(XpType.Node) where TElt : IInputElement<TElt>
 {
     public override string ToString() => $"{Value}";
 }
-public record XpValueSequence(XpValue[] Value) : XpValue(XpType.Sequence)
-{    
+public record XpValueSequence<TElt>(ValueSequence<TElt> Value) : XpValue(XpType.Sequence) where TElt : IInputElement<TElt>
+{
     // If its operand is an empty sequence, fn:boolean returns false https://www.w3.org/TR/xpath20/#dt-ebv
     // If its operand is a sequence whose first item is a node, fn:boolean returns true https://www.w3.org/TR/xquery-operators/#func-boolean
-    public static implicit operator bool(XpValueSequence sequence) 
-        => sequence.Value.Length > 0 
-        && sequence.Value[0].GetType().IsGenericType 
-        && sequence.Value[0].GetType().GetGenericTypeDefinition() == typeof(XpValueNode<>);    
+    public override bool AsBool 
+        => Value.Count() > 0
+        && Value.First().GetType().IsGenericType
+        && Value.First().GetType().GetGenericTypeDefinition() == typeof(XpValueNode<>);
 }
+
+public class ValueSequence<TElt> : IEnumerable<XpValue> where TElt : IInputElement<TElt>
+{
+    private List<XpValue> _sequence = new List<XpValue>();
+    public ValueSequence(IEnumerable<XpValue> values) => this.Append(values);
+    public ValueSequence(XpValue value) => this.Append(value);
+    public void Append(IEnumerable<XpValue> values)
+    {
+        foreach (XpValue v in values)
+            this.Append(v);
+    }
+    public void Append(XpValue value)
+    {
+        switch (value)
+        {
+            case XpValueNone: break;
+            case XpValueAtomic xpValueAtomic: _sequence.Add(xpValueAtomic); break;
+            case XpValueNode<TElt> node: _sequence.Add(node); break;
+            case XpValueNodeSet<TElt> nodeset:
+                foreach (var item in nodeset.Value)
+                    _sequence.Add(new XpValueNode<TElt>(item));
+                break;
+            default: throw new UnreachableException();
+        }
+    }   
+    public IEnumerator<XpValue> GetEnumerator() => _sequence.GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() => _sequence.GetEnumerator();
+}
+
+
+
 
 /// Note : I initially tried to implement the XpValue as a Dynamic value (c# dynamic or, e.g., any PHP or JS variable). This makes it easier to write individual functions
 /// but it makes it impossible to use typed-based pattern matching. Also, anytime the value needs to be accessed, a cast would have been called. 

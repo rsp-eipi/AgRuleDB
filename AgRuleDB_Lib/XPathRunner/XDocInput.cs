@@ -1,9 +1,7 @@
 ﻿using AgRuleDB_Lib.XPathParser;
 using System.Xml.Linq;
-using System.Xml;
-using System;
 
-namespace AgRuleDB_Generated;
+namespace AgRuleDB_Lib.XPathRunner;
 
 public class XDocInput(XDocument input) : IInput<XDocInput, XElementInput>
 {
